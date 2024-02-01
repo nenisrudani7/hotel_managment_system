@@ -1,0 +1,59 @@
+.navbar-light .navbar-nav .nav-link{
+    color: black;
+    font-size: 22px;
+}
+.navbar-light .navbar-brand{
+    color: black;
+    font-size: 30px;
+}
+header{
+    /* height:10vh;
+    min-height: 400px; */
+    background-size: cover;
+}
+/* /media Query/ */
+@media only screen and (max-width:600px){
+    header{
+        background-position: 20% 33%;
+      }
+}
+
+/*-------------- code for loading screen */
+.box{
+    background-color:black;
+    top: 0;
+    left: 0;
+    z-index: 9999;
+    height: 100%;
+    width: 100%;
+    position: fixed;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 4s;
+}
+.spinner-grow{
+    height:3.50rem;
+    width: 3.50rem;
+}
+/* ----infinity corosaul */
+ .scroller {
+    overflow: hidden;
+}
+
+.scroller_inner {
+    display: flex;
+    animation: scroll 10s linear infinite; /* Adjust the duration as needed */
+ }
+
+@keyframes scroll {
+    to {
+        transform: translateX(-100%);
+    }
+} 
+
+.img-circle{
+    border-radius: 50%;
+    width:9.375rem;
+    height: 9.375rem;
+}
