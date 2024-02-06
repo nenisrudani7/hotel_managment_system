@@ -20,52 +20,175 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>about</title>
     <style>
-        .carousel {
-            position: relative;
-        }
-
-        .carousel-inner {
-            position: relative;
-            width: 100%;
-            overflow: hidden;
-        }
+      
     </style>
 </head>
 
 <body>
-    <div class="container">
-        <div class="navbar navbar-inverse" role="navigation"> <!navbar-inverse is black, navbar-default is grey>
-
-
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                        <span class="sr-only">Toggle navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    <a class="navbar-brand">Derby Days 2014</a>
+    <div class="box2" style="width: 100%;">
+        <header>
+          <div id="carouselExampleCaptions" class="carousel slide">
+            <div class="carousel-indicators">
+              <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active"
+                aria-current="true" aria-label="Slide 1"></button>
+              <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1"
+                aria-label="Slide 2"></button>
+              <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2"
+                aria-label="Slide 3"></button>
+            </div>
+            <div class="carousel-inner">
+              <div class="carousel-item active">
+                <img src="h6.jpg" class="d-block w-100" alt="...">
+                <div class="carousel-caption d-none d-md-block">
+                  <h1>CAFE IN HOTEL</h1>
+                  <p>Awaken your senses</p>
                 </div>
-
-                <div class="navbar-collapse collapse">
-                    <ul class="nav navbar-nav navbar-right">
-                        <li><a href="#">Home</a></li>
-                        <li><a href="#">About</a></li>
-                        <li><a href="#">Donate</a></li>
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Events <b class="caret"></b></a>
-                            <ul class="dropdown-menu">
-                                <li><a href="#">Penny Wars</a></li>
-                                <li><a href="#">Wonderful Wednesday</a></li>
-                                <li><a href="#">Lip Sync</a></li>
-                                <li><a href="#">Concert</a></li>
-                            </ul>
-                        </li>
-                        <li><a href="#">FAQ</a></li>
-                    </ul>
-                </div><!--/.nav-collapse -->
+              </div>
+              <div class="carousel-item">
+                <img src="BAR.jpg" class="d-block w-100" alt="">
+                <div class="carousel-caption d-none d-md-block">
+                  <h1>BAR</h1>
+                  <p>Shake the stress off</p>
+                </div>
+              </div>
+              <div class="carousel-item">
+                <img src="gym.jpg" class="d-block w-100" alt="...">
+                <div class="carousel-caption d-none d-md-block">
+                  <h1>GYM</h1>
+                  <p>Fitter, healthier, happier</p>
+                </div>
+              </div>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions"
+              data-bs-slide="prev">
+              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+              <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions"
+              data-bs-slide="next">
+              <span class="carousel-control-next-icon" aria-hidden="true"></span>
+              <span class="visually-hidden">Next</span>
+            </button>
+          </div>
+          <!-- -----navbar -->
+          <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top bg-transparent">
+            <div class="container">
+              <a class="navbar-brand fw-bold" href="#">Fu<span style="color: red;">S</span>ion</a>
+              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+              </button>
+              <!-- -----navbar -->
+              <div class="collapse navbar-collapse text-white" id="navbarSupportedContent">
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                  <li class="nav-item">
+                    <a class="nav-link text-white me-2 " href="#">HOME</a>
+                  </li>
+      
+                  <li class="nav-item"> 
+                      <a class="nav-link text-white me-2 " href="#">ROOMS <i class="fa fa-caret-down"></i>
+                        <div class="dropdown">
+                          <button class="dropbtn">
+                         
+                          <div class="dropdown-content">
+                            <a href="#">Link 1</a>
+                            <a href="#">Link 2</a>
+                            <a href="#">Link 3</a>
+                          </div>
+                        </button>
+                        </div>
+                        </a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link text-white me-2 " href="gallery.html">GALLARY</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link text-white me-2" href="about.html">ABOUT</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link text-white me-2" href="#">CONTACT</a>
+                  </li>
+                </ul>
+      
+              </div>
+            </div>
+          </nav>
         </div>
-    </div>
+        <br>
+        <br>
+        <!-- ---------------------our rooms----------------------- -->
+      
+        <h1 class="text-center" style="text-decoration: underline; font-family:serif;">Our Rooms</h1>
+        <br>
+        <br>
+        <div class="container g-3 mt-6">
+          <div class="row ">
+            <div class="col-md-12  text-center col-lg-4">
+              <div class="card" style="width:25rem">
+                <img class="card-img-top" src="h2.jpg" alt="Standard Room">
+                <div class="card-body text-center">
+                  <h4 class="card-title">Standard Room</h4>
+                  <p class="card-text" style="color:#5c7893">₹1000/per day</p>
+                  <a href="#" class="btn btn-primary">Book now</a>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-12 text-center  col-lg-4 ">
+              <div class="card" style="width:25rem">
+                <img class="card-img-top" src="h7.jpg" alt="Family Room">
+                <div class="card-body text-center">
+                  <h4 class="card-title">Family Room</h4>
+                  <p class="card-text" style="color:#5c7893">₹1500/per day</p>
+                  <a href="#" class="btn btn-primary">Book now</a>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-12 text-center col-lg-4">
+              <div class="card" style="width:25rem">
+                <img class="card-img-top" src="delux_room.jpg" alt="Delux Room">
+                <div class="card-body text-center">
+                  <h4 class="card-title">Delux Room</h4>
+                  <p class="card-text" style="color:#5c7893">₹2000/per day</p>
+                  <a href="#" class="btn btn-primary">Book now</a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <br>
+          <div class="row ">
+            <div class="col-md-6 col-lg-4">
+              <div class="card" style="width:25rem">
+                <img class="card-img-top" src="king-room.jpg" alt="Standard Room">
+                <div class="card-body text-center">
+                  <h4 class="card-title">king Room</h4>
+                  <p class="card-text" style="color:#5c7893">₹1999/per day</p>
+                  <a href="#" class="btn btn-primary">Book now</a>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6 col-lg-4 ">
+              <div class="card" style="width:25rem">
+                <img class="card-img-top" src="queen-room.jpg" alt="Family Room">
+                <div class="card-body text-center">
+                  <h4 class="card-title">Queen Room</h4>
+                  <p class="card-text" style="color:#5c7893">₹1999/per day</p>
+                  <a href="#" class="btn btn-primary">Book now</a>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6 col-lg-4">
+              <div class="card" style="width:25rem">
+                <img class="card-img-top" src="quadroom.jpg" alt="Delux Room">
+                <div class="card-body text-center">
+                  <h4 class="card-title">Quad Room</h4>
+                  <p class="card-text" style="color:#5c7893">₹2000/per day</p>
+                  <a href="#" class="btn btn-primary">Book now</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
 
 </body>
 
