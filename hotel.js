@@ -29,3 +29,20 @@ function addAnimation() {
 }
 
 addAnimation();
+// for navbar--------
+window.onscroll = function() {
+    var navbar = document.querySelector(".navbar");
+    var navbarLinks = document.querySelectorAll(".navbar .nav-link");
+    if (document.body.scrollTop > 50 || document.documentElement.scrollTop > 50) {
+      navbar.classList.remove("bg-transparent");
+      navbarLinks.forEach(function(link) {
+        div.style.color = "black";
+      });
+    } else {
+      navbar.classList.add("bg-transparent");
+      navbarLinks.forEach(function(link) {
+        div.style.color = "black";
+      });
+    }
+  };
+  
