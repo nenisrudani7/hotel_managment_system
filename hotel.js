@@ -1,4 +1,4 @@
-// > 
+// for loading screen// > 
 const loader = document.querySelector(".box");
 window.addEventListener('load', () =>{
     loader.style.opacity = '0';
@@ -27,22 +27,32 @@ function addAnimation() {
         });
     });
 }
+// ----------------this code impact on infinity corosoul 
+// addAnimation();
+// // for navbar--------
+// window.onscroll = function() {
+//     var navbar = document.querySelector(".navbar");h
+//     var navbarLinks = document.querySelectorAll(".navbar .nav-link");
+//     if (document.body.scrollTop > 50 || document.documentElement.scrollTop > 50) {
+//       navbar.classList.remove("bg-transparent");
+//       navbarLinks.forEach(function(link) {
+//       div.style.color = "black";
+//       });
+//     } else {
+//       navbar.classList.add("bg-transparent");
+//       navbarLinks.forEach(function(link) {
+//         div.style.color = "black";
+//       });
+//     }
+//   };
 
-addAnimation();
-// for navbar--------
-window.onscroll = function() {
-    var navbar = document.querySelector(".navbar");h
-    var navbarLinks = document.querySelectorAll(".navbar .nav-link");
-    if (document.body.scrollTop > 50 || document.documentElement.scrollTop > 50) {
-      navbar.classList.remove("bg-transparent");
-      navbarLinks.forEach(function(link) {
-      ul.style.color = "black";
-      });
+  window.addEventListener('scroll', () =>{
+    const navbar = document.querySelector('navbar');
+    if (window.scrollY > 0) {
+      navbar.classList.add('navbar-scrolled');
     } else {
-      navbar.classList.add("bg-transparent");
-      navbarLinks.forEach(function(link) {
-        ul.style.color = "black";
-      });
+      navbar.classList.remove('navbar-scrolled');
     }
-  };
+  });
+  
   
