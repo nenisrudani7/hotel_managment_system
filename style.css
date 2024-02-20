@@ -1,6 +1,5 @@
-.navbar-scrolled {
-  background-color: #f10000; 
-  color: black;/* Change to your desired color */
+.header-scrolled {
+  background-color: #f10000; /* Change to your desired color */
 }
 .navbar-light .navbar-nav .nav-link{
     color: black;
@@ -16,11 +15,12 @@ header{
     background-size: cover;
 }
 /* /media Query/ */
-@media only screen and (max-width:600px){
-    header{
-        background-position: 20% 33%;
-      }
+@media only screen and (max-width: 600px) {
+  header {
+      background-position: 20% 33%; /* Corrected syntax */
+  }
 }
+
 
 
 

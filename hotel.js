@@ -47,11 +47,12 @@ function addAnimation() {
 //   };
 
   window.addEventListener('scroll', () =>{
-    const navbar = document.querySelector('navbar');
+    const navbar = document.querySelector('header');
     if (window.scrollY > 0) {
-      navbar.classList.add('navbar-scrolled');
-    } else {
-      navbar.classList.remove('navbar-scrolled');
+      navbar.classList.add('header-scrolled');
+    } 
+    else {
+      navbar.classList.remove('header-scrolled');
     }
   });
   
