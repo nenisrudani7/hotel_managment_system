@@ -121,7 +121,75 @@
 
   <h1 class="text-center" style="text-decoration: underline; font-family:serif;">Our Rooms</h1>
   <br>
-  <br>
+  <!-- model sign -in -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <!-- Your login form goes here -->
+       
+        <div class="modal-header bg-dark">
+          <h5 class="modal-title text-white" id="exampleModalLabel">Login</h5>
+          <button type="button" class="btn-close bg-white" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <!-- Your login form -->
+          <form class="text-center" style="margin-top: 5rem;">
+            <!-- Email input -->
+            <div class=" container-fluid form-outline mb-4 w-55 ml-auto">
+              <input type="email" id="form2Example1" class="form-control" />
+              <label class="form-label" for="form2Example1">Email address</label>
+            </div>
+          
+            <!-- Password input -->
+            <div class=" container-fluid form-outline mb-4 w-55">
+              <input type="password" id="form2Example2" class="form-control " />
+              <label class="form-label" for="form2Example2">Password</label>
+            </div>
+          
+            <!-- 2 column grid layout for inline styling -->
+            <div class="row mb-4">
+              <div class="col d-flex justify-content-center">
+                <!-- Checkbox -->
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" value="" id="form2Example31" checked />
+                  <label class="form-check-label" for="form2Example31"> Remember me </label>
+                </div>
+              </div>
+          
+              <div class="col">
+                <!-- Simple link -->
+                <a href="#!">Forgot password?</a>
+              </div>
+            </div>
+          
+            <!-- Submit button -->
+            <button type="button" class="btn btn-primary btn-block mb-4">Sign in</button>
+          
+            <!-- Register buttons -->
+            <div class="text-center">
+              <p>Not a member? <a href="#!">Register</a></p>
+              <p>or sign up with:</p>
+              <button type="button" class="btn btn-link btn-floating mx-1">
+                <i class="fab fa-facebook-f"></i>
+              </button>
+          
+              <button type="button" class="btn btn-link btn-floating mx-1">
+                <i class="fab fa-google"></i>
+              </button>
+          
+              <button type="button" class="btn btn-link btn-floating mx-1">
+                <i class="fab fa-twitter"></i>
+              </button>
+          
+              <button type="button" class="btn btn-link btn-floating mx-1">
+                <i class="fab fa-github"></i>
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
   <div class="container g-3 mt-6">
     <div class="row ">
       <div class="col-md-12  text-center col-lg-4">
@@ -130,7 +198,9 @@
           <div class="card-body text-center">
             <h4 class="card-title">Standard Room</h4>
             <p class="card-text" style="color:#5c7893">₹1000/per day</p>
-            <a href="#" class="btn btn-danger">Book now</a>
+            <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">
+              Book Now
+            </button>
           </div>
         </div>
       </div>
@@ -140,7 +210,9 @@
           <div class="card-body text-center">
             <h4 class="card-title">Family Room</h4>
             <p class="card-text" style="color:#5c7893">₹1500/per day</p>
-            <a href="#" class="btn btn-danger">Book now</a>
+            <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">
+              Book Now
+            </button>
           </div>
         </div>
       </div>
@@ -150,7 +222,9 @@
           <div class="card-body text-center">
             <h4 class="card-title">Delux Room</h4>
             <p class="card-text" style="color:#5c7893">₹2000/per day</p>
-            <a href="#" class="btn btn-danger">Book now</a>
+            <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">
+              Book Now
+            </button>
           </div>
         </div>
       </div>
@@ -164,7 +238,9 @@
           <div class="card-body text-center">
             <h4 class="card-title">king Room</h4>
             <p class="card-text" style="color:#5c7893">₹1999/per day</p>
-            <a href="#" class="btn btn-danger">Book now</a>
+            <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">
+              Book Now
+            </button>
           </div>
         </div>
       </div>
@@ -174,7 +250,9 @@
           <div class="card-body text-center">
             <h4 class="card-title">Queen Room</h4>
             <p class="card-text" style="color:#5c7893">₹1999/per day</p>
-            <a href="#" class="btn btn-danger">Book now</a>
+            <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">
+              Book Now
+            </button>
           </div>
         </div>
       </div>
@@ -184,7 +262,9 @@
           <div class="card-body text-center">
             <h4 class="card-title">Quad Room</h4>
             <p class="card-text" style="color:#5c7893">₹2000/per day</p>
-            <a href="#" class="btn btn-danger">Book now</a>
+            <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">
+              Book Now
+            </button>
           </div>
         </div>
       </div>
