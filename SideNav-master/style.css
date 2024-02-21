@@ -1,0 +1,61 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  min-height: 100vh;
+  background-color: #fff;
+}
+
+.side-navbar {
+  width: 180px;
+  height: 100%;
+  position: fixed;
+  margin-left: -300px;
+ background-color: #101010;
+  transition: 0.5s;
+}
+li a{
+  list-style: none;
+  text-decoration: none;
+  color:#fff;
+}
+.nav-link:active,
+.nav-link:focus,
+.nav-link:hover {
+  background-color: rgb(201, 155, 6);
+}
+
+.my-container {
+  transition: 0.4s;
+}
+
+.active-nav {
+  margin-left: 0;
+}
+
+/* for main section */
+.active-cont {
+  margin-left: 180px;
+}
+
+#menu-btn {
+  background-color:grey;
+  color: #fff;
+  margin-left: -22px;
+}
+
+.my-container input {
+  border-radius: 2rem;
+  padding: 2px 20px;
+}
+
+.preloader{
+  width: 100%;
+  height: 100vh;
+  background:#fff url();
+   position: fixed;
+  z-index: 100;
+}
