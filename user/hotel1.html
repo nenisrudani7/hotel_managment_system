@@ -130,28 +130,71 @@
         </div>
         <div class="modal-body">
           <!-- Your login form -->
-          <form class="text-center" style="margin-top: 5rem;">
-            
+         <h4>Step 1:Your Details</h4><br><br>
+            <form id="signupForm" method="post">
+              <div class="mb-3">
+                  <label for="name" class="form-label">Name</label>
+                  <input type="text" class="form-control" id="name" name="name">
+                  <span id="name_err"></span>
+              </div>
+              <div class="mb-3">
+                  <label for="email" class="form-label">Email address</label>
+                  <input type="email" class="form-control" id="email" name="email">
+                  <span id="email_err"></span>
+              </div>
+              <div class="mb-3">
+                <label for="mo" class="form-label">Mobile Number:</label>
+                <input type="email" class="form-control" id="mo" name="mo">
+                <span id="mo_err"></span>
+            </div>
+          <h4>Step 2:Properity details</h4><br><br>
+          <label for="room-type">Room-type:&nbsp;</label>
+         <select id="type">
+          <option value="Standerd">Standard-Room</option>
+          <option value="Family">Famliy-Room</option>
+          <option value="Delux">Delux-Room</option>
+          <option value="king">King-Room</option>
+          <option value="Oueen">Oueen-Room</option>
+          <option value="Quad">Quad-Room</option>
+         </select>
+          <br><br>
+          <label for="total_p">Total Persion:</label>
+          <input type="number" id="p2" name="p2" required><br><br>
+          <label for="check-in">Check-in Date:&nbsp;&nbsp;</label>
+          <input type="date" id="d1" name="d1" required><br><br>
+  
+          <label for="check-out">Check-out Date</label>
+          <input type="date" id="d2" name="d2" required><br><br>
+         
+
+          <label for="special-requests">Special Requests</label>
+        <textarea id="special-requests" name="special-requests" rows="1"></textarea><br><br>
+        <label for="toal">Total amount:$1000 /per-day.</label><br><br>
 
             <!-- Submit button -->
-            <button type="button" id="j1" name="j1" class="btn btn-primary btn-block mb-4">Book Now!</button>
-          
-           
-
-
-
-
-
-
-
-
-
+            <button type="button" id="j1" name="j1" class="btn btn-primary btn-block mb-4">Confirm Book!</button>
             </div>
-
         </div>
       </div>
     </div>
   </div>
+  <!------------------------Scripth for auto date------------->
+  <script>
+  var d = new Date()
+  var yr = d.getFullYear();
+  var month = d.getMonth()+1
+
+  if(month<10){
+      month='0'+month
+
+  }
+  var date = d.getDate();
+  if(date<10){
+      date='0'+date
+  }
+  var c_date=yr+"-"+month+"-"+date;
+  document.getElementById('d1').value=c_date;
+  document.getElementById('d2').value=D_date;</script>
   <!-- ---------------------our rooms----------------------- -->
 
   <h1 class="text-center" style="text-decoration: underline; font-family:serif;">Our Rooms</h1>
