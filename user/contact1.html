@@ -81,14 +81,14 @@
   <div class="row justify-content-center">
     <div class="col-md-6">
       <h2 class="mb-4">Contact Us</h2>
-      <form>
+      <form id="contactForm" onsubmit="return validateForm()">
         <div class="mb-3">
           <label for="name" class="form-label">Your Name</label>
           <input type="text" class="form-control" id="name" placeholder="Enter your name" required>
         </div>
         <div class="mb-3">
-            <label for="name" class="form-label">Phone</label>
-            <input type="text" class="form-control" id="name" placeholder="Enter your phone no." required>
+            <label for="phone" class="form-label">Phone</label>
+            <input type="text" class="form-control" id="phone" placeholder="Enter your phone no." required>
           </div>
         <div class="mb-3">
           <label for="email" class="form-label">Email address</label>
@@ -103,6 +103,35 @@
     </div>
   </div>
 </div>
+
+<script>
+  function validateForm() {
+    var name = document.getElementById('name').value.trim();
+    var phone = document.getElementById('phone').value.trim();
+    var email = document.getElementById('email').value.trim();
+    var message = document.getElementById('message').value.trim();
+
+    if (name === '' || phone === '' || email === '' || message === '') {
+      alert('Please fill in all fields.');
+      return false;
+    }
+
+    // Phone number validation (assuming a simple 10-digit number)
+    if (!/^\d{10}$/.test(phone)) {
+      alert('Please enter a valid 10-digit phone number.');
+      return false;
+    }
+
+    // Email validation (basic pattern matching)
+    if (!/^\S+@\S+\.\S+$/.test(email)) {
+      alert('Please enter a valid email address.');
+      return false;
+    }
+
+    return true; // Form is valid
+  }
+</script>
+
 <!-- ------------------footer---------------------- -->
 <div class="bloc1 my-5" style="width: 100%;">
 
