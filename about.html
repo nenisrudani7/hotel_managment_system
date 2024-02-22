@@ -19,6 +19,84 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>about</title>
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.3/dist/jquery.validate.min.js"></script>
+   <script>
+      $(document).ready(function () {
+                $.validator.addMethod("fnregex", function (value, element) {
+                    var regex = /^[a-zA-Z ]+$/;
+                    return regex.test(value);
+                }, "Please enter a valid full name with only letters");
+    
+                $.validator.addMethod("emailregex", function (value, element) {
+                    // Basic email validation regex
+                    var regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                    return regex.test(value);
+                }, "Please enter a valid email address");
+    
+                $.validator.addMethod("passwordregex", function (value, element) {
+                    // Basic password validation regex (at least 8 characters including at least one uppercase, one lowercase, one number, and one special character)
+                    var regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+                    return regex.test(value);
+                }, "Password must be at least 8 characters and include at least one uppercase letter, one lowercase letter, one number, and one special character");
+    
+                $("#signupForm").validate({
+                    rules: {
+                        name: {
+                            required: true,
+                            minlength: 2,
+                            maxlength: 50,
+                            fnregex: true
+                        },
+                        email: {
+                            required: true,
+                            email: true,
+                            emailregex: true
+                        },
+                        password: {
+                            required: true,
+                            minlength: 8,
+                            passwordregex: true
+                        },
+                        confirm_password: {
+                            required: true,
+                            equalTo: "#password"
+                        }
+                    },
+                    messages: {
+                        name: {
+                            required: "Please enter your full name",
+                            minlength: "Full name must be at least 2 characters",
+                            maxlength: "Full name cannot exceed 50 characters",
+                            fnregex: "Please enter a valid full name with only letters"
+                        },
+                        email: {
+                            required: "Please enter your email address",
+                            email: "Please enter a valid email address",
+                            emailregex: "Please enter a valid email address"
+                        },
+                        password: {
+                            required: "Please enter a password",
+                            minlength: "Password must be at least 8 characters",
+                            passwordregex: "Password must include at least one uppercase letter, one lowercase letter, one number, and one special character"
+                        },
+                        confirm_password: {
+                            required: "Please confirm your password",
+                            equalTo: "Passwords do not match"
+                        }
+                    },
+                    errorPlacement: function (error, element) {
+                        var name = element.attr('name');
+                        if (name === "name" || name === "email" || name === "password" || name === "confirm_password") {
+                            $('#' + name + '_err').html(error);
+                        }
+                    },
+                });
+            });
+        </script>
   <style>
     body {
       background-color:#ffffff;
@@ -187,7 +265,7 @@
                 <a class="nav-link text-white me-2" href="contact.html">CONTACT</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link text-white me-2" href="signin.html"><button type="button" class="btn btn-danger">Sign In</button></a>
+                <a class="nav-link text-white me-2" "><button type="button" class="btn btn-danger">Sign In</button></a>
               </li>
             </ul>
 
