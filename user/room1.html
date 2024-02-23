@@ -68,7 +68,8 @@
                 <a class="nav-link text-white me-2" href="contact1.html">CONTACT</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link text-white me-2" href="booking.html" ><i class="fa-solid fa-book-bookmark"></i></a>
+                <a class="nav-link text-white me-2"><button type="button" class="btn btn-danger" data-bs-toggle="modal"
+                    data-bs-target="#exampleModal1">MY-ROOM</button></a>
               </li>
             </ul>
 
@@ -78,6 +79,52 @@
       <br>
       <br>
       <br>
+        <!-- ------mode2---------------- -->
+  <div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabe" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <!-- Your login form goes here -->
+
+        <div class="modal-header bg-dark">
+          <h5 class="modal-title text-white" id="exampleModalLabel">Book The Room!</h5>
+          <button type="button" class="btn-close bg-white" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body"><br><br>
+          <center>
+            <h4>My-Booking</h4>
+          </center><br><br>
+          <form id="signupForm" method="post">
+            <div class="mb-3">
+              <label for="name" class="form-label">Name</label>
+              <input type="text" class="form-control" id="name" name="name">
+              <span id="name_err"></span>
+            </div>
+            <label for="room-type">Room-type:&nbsp;</label>
+         <select id="type">
+          <option value="Standerd">Standard-Room</option>
+          <option value="Family">Famliy-Room</option>
+          <option value="Delux">Delux-Room</option>
+          <option value="king">King-Room</option>
+          <option value="Oueen">Oueen-Room</option>
+          <option value="Quad">Quad-Room</option>
+         </select>
+          <br><br>
+          <label for="total_p">Total Persion:</label>
+          <input type="number" id="p2" name="p2" required><br><br>
+          <label for="check-in">Check-in Date:&nbsp;&nbsp;</label>
+          <input type="date" id="d1" name="d1" required><br><br>
+  
+          <label for="check-out">Check-out Date</label>
+          <input type="date" id="d2" name="d2" required><br><br>
+         
+
+          
+        <label for="toal">Total amount:$1000 /per-day.</label><br><br>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
     
 <!-- ------model---------------- -->
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
