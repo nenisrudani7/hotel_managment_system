@@ -17,3 +17,6 @@ header{
         background-position: 20% 33%;
       }
 }
+.error{
+    color: red;
+  }
