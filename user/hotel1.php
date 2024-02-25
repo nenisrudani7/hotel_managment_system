@@ -112,15 +112,17 @@
                   data-bs-target="#exampleModal1">MY-ROOM</button></a>
             </li>
             <li class="nav-item">
-              <a class="nav-link dropdown-toggle text-white me-2" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><button type="button" class="btn btn-danger" data-bs-toggle="modal">ME</button></a>
+              <a class="nav-link dropdown-toggle text-white me-2" id="navbarDropdown" role="button"
+                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><button type="button"
+                  class="btn btn-danger" data-bs-toggle="modal">ME</button></a>
               <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                 <a class="nav-link text-white me-2"><button type="button" class="btn btn-danger" data-bs-toggle="modal"
-                  data-bs-target="#exampleModal2">Profile</button></a>
-                
+                    data-bs-target="#exampleModal2">Profile</button></a>
+
                 <div class="dropdown-divider"></div>
                 <a class="nav-link text-white me-2"><button type="button" class="btn btn-danger" data-bs-toggle="modal"
-                  data-bs-target="#exampleModal3">Log-Out</button></a>
-            </div>
+                    data-bs-target="#exampleModal3">Log-Out</button></a>
+              </div>
             </li>
           </ul>
         </div>
@@ -143,15 +145,15 @@
         </div>
         <div class="modal-body">
           <!-- Your login form -->
-          
+
           <form id="signupForm" method="post">
             <div class="mb-3">
               <label for="name" class="form-label">Name</label>
               <input type="text" class="form-control" id="name" name="name">
               <span id="name_err"></span>
             </div>
-          
-         
+
+
 
             <!-- Edit button -->
             <button type="button" id="j1" name="j1" class="btn btn-primary btn-block mb-4">Edit</button>
@@ -173,10 +175,11 @@
           <button type="button" class="btn-close bg-white" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          
 
-            <!-- Edit button -->
-           <center> <button type="button" id="j1" name="j1" class="btn btn-primary btn-block mb-4">Log-Out</button></center>
+
+          <!-- Edit button -->
+          <center> <button type="button" id="j1" name="j1" class="btn btn-primary btn-block mb-4">Log-Out</button>
+          </center>
         </div>
       </div>
     </div>
@@ -209,28 +212,29 @@
               <span id="name_err"></span>
             </div>
 
-          <h4>Step 2:Properity details</h4><br><br>
-     
-          <div class="mb-3"><label for="room-type">Room-type:&nbsp;</label>
-            <select id="type">
-              <option value="Standerd">Standard-Room</option>
-              <option value="Family">Famliy-Room</option>
-              <option value="Delux">Delux-Room</option>
-              <option value="king">King-Room</option>
-              <option value="Oueen">Oueen-Room</option>
-              <option value="Quad">Quad-Room</option>
-            </select></div>
-          <label for="total_p">Total Persion:</label>
-          <input type="number" id="p2" name="p2" required><br><br>
-          <label for="check-in">Check-in Date:&nbsp;&nbsp;</label>
-          <input type="date" id="d1" name="d1" required><br><br>
-  
-          <label for="check-out">Check-out Date</label>
-          <input type="date" id="d2" name="d2" required><br><br>
-         
+            <h4>Step 2:Properity details</h4><br><br>
 
-          
-        <label for="toal">Total amount:$1000 /per-day.</label><br><br>
+            <div class="mb-3"><label for="room-type">Room-type:&nbsp;</label>
+              <select id="type">
+                <option value="Standerd">Standard-Room</option>
+                <option value="Family">Famliy-Room</option>
+                <option value="Delux">Delux-Room</option>
+                <option value="king">King-Room</option>
+                <option value="Oueen">Oueen-Room</option>
+                <option value="Quad">Quad-Room</option>
+              </select>
+            </div>
+            <label for="total_p">Total Persion:</label>
+            <input type="number" id="p2" name="p2" required><br><br>
+            <label for="check-in">Check-in Date:&nbsp;&nbsp;</label>
+            <input type="date" id="d1" name="d1" required><br><br>
+
+            <label for="check-out">Check-out Date</label>
+            <input type="date" id="d2" name="d2" required><br><br>
+
+
+
+            <label for="toal">Total amount:$1000 /per-day.</label><br><br>
         </div>
       </div>
     </div>
@@ -252,53 +256,68 @@
           <form id="signupForm" method="post">
             <div class="mb-3">
               <label for="name" class="form-label">Name</label>
-              <input type="text" class="form-control" id="name" name="name">
-              <span id="name_err"></span>
+              <input type="text" class="form-control" id="n21" name="n21">
+              <span id="name_err" class="text-danger"></span>
             </div>
             <div class="mb-3">
               <label for="email" class="form-label">Email address</label>
               <input type="email" class="form-control" id="email" name="email">
-              <span id="email_err"></span>
+              <span id="email_err" class="text-danger"></span>
             </div>
             <div class="mb-3">
               <label for="mo" class="form-label">Mobile Number:</label>
-              <input type="email" class="form-control" id="mo" name="mo">
-              <span id="mo_err"></span>
+              <input type="text" class="form-control" id="mo" name="mo">
+              <span id="mo_err" class="text-danger"></span>
             </div>
-            <h4>Step 2:Properity details</h4><br><br>
-            <div class="mb-3"><label for="room-type">Room-type:&nbsp;</label>
-            <select id="type">
-              <option value="Standerd">Standard-Room</option>
-              <option value="Family">Famliy-Room</option>
-              <option value="Delux">Delux-Room</option>
-              <option value="king">King-Room</option>
-              <option value="Oueen">Oueen-Room</option>
-              <option value="Quad">Quad-Room</option>
-            </select></div>
-            <label for="total_p">Total Persion:</label>
-            <input type="number" id="p2" name="p2" required><br><br>
-            <div class="mb-3"><label for="check-in">Check-in Date:</label>
-            <input type="date" id="a1" name="a1" required></div>
-
-            <div class="mb-3"><label for="check-out">Check-out Date</label>
-            <input type="date" id="a2" name="a2" required></div>
-
-
-           <div class="mb-3"> <label for="special-requests">Special Requests:</label>
-            <textarea id="special-requests" name="special-requests" rows="1"></textarea></div>
-
+            <h4>Step 2: Property details</h4><br><br>
+            <div class="mb-3">
+              <label for="room-type">Room-type:&nbsp;</label>
+              <select id="type" class="form-control">
+                <option value="Standard">Standard-Room</option>
+                <option value="Family">Family-Room</option>
+                <option value="Deluxe">Deluxe-Room</option>
+                <option value="King">King-Room</option>
+                <option value="Queen">Queen-Room</option>
+                <option value="Quad">Quad-Room</option>
+              </select>
+            </div>
+            <label for="total_p">Total Person:</label>
+            <input type="number" id="p2" name="p2" class="form-control" required><br><br>
+            <div class="mb-3">
+              <label for="check-in">Check-in Date:</label>
+              <input type="date" id="a1" name="a888" class="form-control" required>
+              <span id="a1_err" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+              <label for="check-out">Check-out Date</label>
+              <input type="date" id="a2" name="a2" class="form-control" required>
+              <span id="a2_err" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+              <label for="special-requests">Special Requests:</label>
+              <textarea id="special-requests" name="special-requests" class="form-control" rows="1"></textarea>
+            </div>
             <label for="ptm">Payment Method:</label>
-            <input type="radio" name="p2" id="p2" >&nbsp;&nbsp;Case:<br><br>
-
-            <label for="toal">Total amount:$1000 /per-day.</label><br><br>
-
+            <input type="radio" name="payment_method" id="p2" value="cash" required>&nbsp;&nbsp;Cash<br><br>
+            <label for="total">Total amount: $1000 /per-day.</label><br><br>
             <!-- Submit button -->
-            <button type="button" id="j1" name="j1" class="btn btn-primary btn-block mb-4">Confirm Book!</button>
+            <button type="button" id="confirmBookBtn" class="btn btn-primary btn-block mb-4">Confirm Book!</button>
+          </form>
+
         </div>
       </div>
     </div>
   </div>
   </div>
+  <!------------------------Scripth for validation------------->
+
+
+
+
+
+
+
+  
   <!------------------------Scripth for auto date------------->
   <script>
     var d = new Date()
@@ -314,7 +333,7 @@
       date = '0' + date
     }
     var c_date = yr + "-" + month + "-" + date;
-    document.getElementById('a1').value = c_date;
+    document.getElementById('a888').value = c_date;
     document.getElementById('d2').value = D_date;</script>
   <!-- ---------------------our rooms----------------------- -->
 
@@ -634,8 +653,8 @@
   <script src="hotel.js"></script>
   <script src="vali.js"></script>
   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
   <!--  -->
 
