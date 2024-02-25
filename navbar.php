@@ -162,7 +162,7 @@
                         <input type="password" class="form-control" id="confirm_password" name="confirm_password">
                         <span id="confirm_password_err"></span>
                     </div>
-                    <button type="submit" class="btn btn-primary">Sing Up</button>
+                    <button type="submit" href="hotel1.html" class="btn btn-primary">Sing Up</button>
                 </form>
         </div>
       </div>

@@ -41,7 +41,7 @@
 
       <nav class="navbar navbar-expand-lg navbar-light bg-dark fixed-top ">
         <div class="container">
-          <a class="navbar-brand fw-bold" href="hotel.html">Fu<span style="color: red;">S</span>ion</a>
+          <a class="navbar-brand fw-bold" href="hotel.php">Fu<span style="color: red;">S</span>ion</a>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
             data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
             aria-label="Toggle navigation">
@@ -51,21 +51,21 @@
           <div class="collapse navbar-collapse text-white" id="navbarSupportedContent">
             <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
               <li class="nav-item">
-                <a class="nav-link text-white me-2 " href="hotel1.html">HOME</a>
+                <a class="nav-link text-white me-2 " href="hotel1.php">HOME</a>
               </li>
 
               <li class="nav-item">
-                <a class="nav-link text-white me-2 " href="room1.html">ROOMS</i>
+                <a class="nav-link text-white me-2 " href="room1.php">ROOMS</i>
                 </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link text-white me-2 " href="gallery1.html">GALLERY</a>
+                <a class="nav-link text-white me-2 " href="gallery1.php">GALLERY</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link text-white me-2" href="about1.html">ABOUT</a>
+                <a class="nav-link text-white me-2" href="about1.php">ABOUT</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link text-white me-2" href="contact1.html">CONTACT</a>
+                <a class="nav-link text-white me-2" href="contact1.php">CONTACT</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link text-white me-2"><button type="button" class="btn btn-danger" data-bs-toggle="modal"
@@ -178,7 +178,7 @@
           <label for="total_p">Total Persion:</label>
           <input type="number" id="p2" name="p2" required><br><br>
           <label for="check-in">Check-in Date:&nbsp;&nbsp;</label>
-          <input type="date" id="d1" name="d1" required><br><br>
+          <input type="date" id="a1" name="a1" required><br><br>
   
           <label for="check-out">Check-out Date</label>
           <input type="date" id="d2" name="d2" required><br><br>
@@ -233,10 +233,10 @@
           <label for="total_p">Total Persion:</label>
           <input type="number" id="p2" name="p2" required><br><br>
           <div class="mb-3"><label for="check-in">Check-in Date:</label>
-          <input type="date" id="j1" name="71" required></div>
+          <input type="date" id="c1" name="c1" required></div>
 
           <div class="mb-3"><label for="check-out">Check-out Date</label>
-          <input type="date" id="j2" name="j2" required></div>
+          <input type="date" id="a2" name="a2" required></div>
 
 
          <div class="mb-3"> <label for="special-requests">Special Requests:</label>
@@ -269,7 +269,7 @@
     date = '0' + date
   }
   var c_date = yr + "-" + month + "-" + date;
-  document.getElementById('j1').value = c_date;
+  document.getElementById('c1').value = c_date;
   document.getElementById('d2').value = D_date;</script>
 
 <!-- ---------------------our rooms----------------------- -->
@@ -370,7 +370,7 @@
         <!-- Grid column -->
         <div class="col-md-3 col-lg-3 col-xl-3 mx-auto mt-3">
           <h6 class="text-uppercase mb-4 font-weight-bold">
-            <a class="navbar-brand fw-bold" href="hotel.html">Fu<span style="color: red;">S</span>ion</a>
+            <a class="navbar-brand fw-bold" href="hotel.php">Fu<span style="color: red;">S</span>ion</a>
           </h6>
           <p>
             Here you can use rows and columns to organize your footer
@@ -386,19 +386,19 @@
         <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mt-3">
           <h6 class="text-uppercase mb-4 font-weight-bold">QUICK MENU</h6>
           <p>
-            <a  href="hotel.html" class="text-white">Home</a>
+            <a  href="hotel.php" class="text-white">Home</a>
           </p>
           <p>
-            <a  href="room1.html" class="text-white">Rooms</a>
+            <a  href="room1.php" class="text-white">Rooms</a>
           </p>
           <p>
-            <a href="gallery1.html" class="text-white">Gallary</a>
+            <a href="gallery1.php" class="text-white">Gallary</a>
           </p>
           <p>
-            <a   href="about1.html" class="text-white">About</a>
+            <a   href="about1.php" class="text-white">About</a>
           </p>
           <p>
-            <a  href="contact1.html" class="text-white">Contect</a>
+            <a  href="contact1.php" class="text-white">Contect</a>
           </p>
         </div>
         <!-- Grid column -->
