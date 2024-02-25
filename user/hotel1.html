@@ -111,8 +111,17 @@
               <a class="nav-link text-white me-2"><button type="button" class="btn btn-danger" data-bs-toggle="modal"
                   data-bs-target="#exampleModal1">MY-ROOM</button></a>
             </li>
-
-
+            <li class="nav-item">
+              <a class="nav-link dropdown-toggle text-white me-2" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><button type="button" class="btn btn-danger" data-bs-toggle="modal">ME</button></a>
+              <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                <a class="nav-link text-white me-2"><button type="button" class="btn btn-danger" data-bs-toggle="modal"
+                  data-bs-target="#exampleModal2">Profile</button></a>
+                
+                <div class="dropdown-divider"></div>
+                <a class="nav-link text-white me-2"><button type="button" class="btn btn-danger" data-bs-toggle="modal"
+                  data-bs-target="#exampleModal3">Log-Out</button></a>
+            </div>
+            </li>
           </ul>
         </div>
       </div>
@@ -122,8 +131,57 @@
   <br>
   <br>
 
+  <!-- ------mode3---------------- -->
+  <div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <!-- Your login form goes here -->
+
+        <div class="modal-header bg-dark">
+          <h5 class="modal-title text-white" id="exampleModalLabel">Your Profile</h5>
+          <button type="button" class="btn-close bg-white" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <!-- Your login form -->
+          
+          <form id="signupForm" method="post">
+            <div class="mb-3">
+              <label for="name" class="form-label">Name</label>
+              <input type="text" class="form-control" id="name" name="name">
+              <span id="name_err"></span>
+            </div>
+          
+         
+
+            <!-- Edit button -->
+            <button type="button" id="j1" name="j1" class="btn btn-primary btn-block mb-4">Edit</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
 
 
+  <!-- ------mode4---------------- -->
+  <div class="modal fade" id="exampleModal3" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <!-- Your login form goes here -->
+
+        <div class="modal-header bg-dark">
+          <h5 class="modal-title text-white" id="exampleModalLabel">Thank you for Sing-in</h5>
+          <button type="button" class="btn-close bg-white" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          
+
+            <!-- Edit button -->
+           <center> <button type="button" id="j1" name="j1" class="btn btn-primary btn-block mb-4">Log-Out</button></center>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
 
 
 
@@ -150,22 +208,18 @@
               <input type="text" class="form-control" id="name" name="name">
               <span id="name_err"></span>
             </div>
-<<<<<<< HEAD
+
           <h4>Step 2:Properity details</h4><br><br>
-          <label for="room-type">Room-type:&nbsp;</label>
-         <select id="type" class="mb-3">
-=======
-            <label for="room-type">Room-type:&nbsp;</label>
-         <select id="type">
->>>>>>> b330cc3fc4ad692d80e41b2e5d84ed85a45e55d4
-          <option value="Standerd">Standard-Room</option>
-          <option value="Family">Famliy-Room</option>
-          <option value="Delux">Delux-Room</option>
-          <option value="king">King-Room</option>
-          <option value="Oueen">Oueen-Room</option>
-          <option value="Quad">Quad-Room</option>
-         </select>
-          <br><br>
+     
+          <div class="mb-3"><label for="room-type">Room-type:&nbsp;</label>
+            <select id="type">
+              <option value="Standerd">Standard-Room</option>
+              <option value="Family">Famliy-Room</option>
+              <option value="Delux">Delux-Room</option>
+              <option value="king">King-Room</option>
+              <option value="Oueen">Oueen-Room</option>
+              <option value="Quad">Quad-Room</option>
+            </select></div>
           <label for="total_p">Total Persion:</label>
           <input type="number" id="p2" name="p2" required><br><br>
           <label for="check-in">Check-in Date:&nbsp;&nbsp;</label>
@@ -212,7 +266,7 @@
               <span id="mo_err"></span>
             </div>
             <h4>Step 2:Properity details</h4><br><br>
-            <label for="room-type">Room-type:&nbsp;</label>
+            <div class="mb-3"><label for="room-type">Room-type:&nbsp;</label>
             <select id="type">
               <option value="Standerd">Standard-Room</option>
               <option value="Family">Famliy-Room</option>
@@ -220,19 +274,18 @@
               <option value="king">King-Room</option>
               <option value="Oueen">Oueen-Room</option>
               <option value="Quad">Quad-Room</option>
-            </select>
-            <br><br>
+            </select></div>
             <label for="total_p">Total Persion:</label>
             <input type="number" id="p2" name="p2" required><br><br>
-            <label for="check-in">Check-in Date:&nbsp;&nbsp;</label>
-            <input type="date" id="d1" name="d1" required><br><br>
+            <div class="mb-3"><label for="check-in">Check-in Date:</label>
+            <input type="date" id="j1" name="71" required></div>
 
-            <label for="check-out">Check-out Date</label>
-            <input type="date" id="d2" name="d2" required><br><br>
+            <div class="mb-3"><label for="check-out">Check-out Date</label>
+            <input type="date" id="j2" name="j2" required></div>
 
 
-            <label for="special-requests">Special Requests</label>
-            <textarea id="special-requests" name="special-requests" rows="1"></textarea><br><br>
+           <div class="mb-3"> <label for="special-requests">Special Requests:</label>
+            <textarea id="special-requests" name="special-requests" rows="1"></textarea></div>
 
             <label for="ptm">Payment Method:</label>
             <input type="radio" name="p2" id="p2" >&nbsp;&nbsp;Case:<br><br>
@@ -261,7 +314,7 @@
       date = '0' + date
     }
     var c_date = yr + "-" + month + "-" + date;
-    document.getElementById('d1').value = c_date;
+    document.getElementById('j1').value = c_date;
     document.getElementById('d2').value = D_date;</script>
   <!-- ---------------------our rooms----------------------- -->
 
@@ -580,6 +633,9 @@
   <!-- End of .container -->
   <script src="hotel.js"></script>
   <script src="vali.js"></script>
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
   <!--  -->
 

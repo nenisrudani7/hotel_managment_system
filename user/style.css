@@ -92,5 +92,10 @@ header{
   
   .navbar a:hover, .dropdown:hover .dropbtn {
     background-color: transparent;
-
   }
+ 
+    .dropdown-menu {
+        min-width: 200px;
+        background-color:transparent;
+    }
+
