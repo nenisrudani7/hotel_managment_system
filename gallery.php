@@ -46,6 +46,10 @@
 
 <body>
  <?php include 'navbar.php'?>
+ <br>
+ <br>
+ <br>
+ 
 <!-- gallry start -->
     <header class="btn-light text-dark text-center py-5">
       <div class="container">
