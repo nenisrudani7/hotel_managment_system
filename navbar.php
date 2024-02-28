@@ -6,18 +6,14 @@
     <title>navbar</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-  <!--external css file-->
-  <link href="style.css" rel="stylesheet">
+
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
     integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p"
     crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"
     integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF"
     crossorigin="anonymous"></script>
-  <!-- for icons -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
-    integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
-    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
@@ -95,7 +91,51 @@
                     },
                 });
             });
+
         </script>
+       <script>
+         $(document).ready(function () {
+            $.validator.addMethod("email", function (value, element) {
+                var regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                return regex.test(value);
+            }, "Please enter a valid email address");
+
+            $.validator.addMethod("password", function (value, element) {
+                var regex = /^(?=.[a-z])(?=.[A-Z])(?=.\d)(?=.[@$!%?&])[A-Za-z\d@$!%?&]{8,}$/;
+                return regex.test(value);
+            }, "Password must be at least 8 characters and include at least one uppercase letter, one lowercase letter, one number, and one special character");
+
+            $("#loginForm").validate({
+                rules: {
+                    email: {
+                        required: true,
+                        email: true
+                    },
+                    password: {
+                        required: true,
+                        minlength: 8
+                    }
+                },
+                messages: {
+                    email: {
+                        required: "Please enter your email address",
+                        email: "Please enter a valid email address"
+                    },
+                    password: {
+                        required: "Please enter your password",
+                        minlength: "Password must be at least 8 characters"
+                    }
+                },
+                errorPlacement: function (error, element) {
+                    var name = element.attr('name');
+                    if (name === "email" || name === "password") {
+                        error.addClass('invalid-feedback');
+                        error.appendTo(element.parent());
+                    }
+                },
+            });
+        });
+    </script>
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-light bg-dark fixed-top ">
@@ -124,19 +164,21 @@
               <a class="nav-link text-white me-2" href="contact.php">CONTACT</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link text-white me-2" ><button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">SIGN-IN</button></a>
+              <a class="nav-link text-white me-2" ><button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">LOGIN</button></a>
+             
             </li>
           </ul>
         </div>
       </div>
     </nav>
-    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <!-- model of ragister page -->
+    <div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
         <!-- Your login form goes here -->
        
         <div class="modal-header bg-dark">
-          <h5 class="modal-title text-white" id="exampleModalLabel">Login</h5>
+          <h5 class="modal-title text-white" id="exampleModalLabel1">REGISTATION</h5>
           <button type="button" class="btn-close bg-white" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
@@ -162,7 +204,44 @@
                         <input type="password" class="form-control" id="confirm_password" name="confirm_password">
                         <span id="confirm_password_err"></span>
                     </div>
-                    <button type="submit" href="hotel1.html" class="btn btn-primary">Sing Up</button>
+                    <button type="submit" href="hotel1.html" class="btn btn-danger">REGISTRATION</button>
+                </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- --------------------MODEL OF RAGISTERFORM -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <!-- Your login form goes here -->
+       
+        <div class="modal-header bg-dark">
+          <h5 class="modal-title text-white" id="exampleModalLabel1">LOG-IN</h5>
+          <button type="button" class="btn-close bg-white" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <!-- Your login form -->
+          <form id="loginForm" method="post">
+                    <div class="mb-3">
+                        <label for="email" class="form-label">Email address</label>
+                        <input type="email" class="form-control" id="email" name="email">
+                        <div id="email_err" class="invalid-feedback"></div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="password" class="form-label">Password</label>
+                        <input type="password" class="form-control" id="password" name="password">
+                        <div id="password_err" class="invalid-feedback"></div>
+                    </div>
+                    <div class="mb-3 form-check">
+                        <input type="checkbox" class="form-check-input" id="rememberMe" name="rememberMe">
+                        <label class="form-check-label" for="rememberMe">Remember me</label>
+                    </div>
+                    <button type="submit" class="btn btn-danger">Login</button>
+                    <BR></BR>
+                    <p>
+                      create account → </p>
+                      <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal1">REGISTATION</button>
                 </form>
         </div>
       </div>
@@ -170,3 +249,34 @@
   </div>
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   
