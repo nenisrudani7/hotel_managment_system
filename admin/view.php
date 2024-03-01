@@ -63,8 +63,7 @@ if ($result) {
                             <th>Email</th>
                             <th>Number</th>
                             <th>Address</th>
-                            <th>Booking ID</th>
-                            <th>Room ID</th>
+                            <th>Max person</th>
                             <th>Booking Date</th>
                             <th>Check-In Date</th>
                             <th>Check-Out Date</th>
@@ -81,8 +80,7 @@ if ($result) {
                     <td>" . $row["email"] . "</td>
                     <td>" . $row["number"] . "</td>
                     <td>" . $row["add"] . "</td>
-                    <td>" . $row["booking_id"] . "</td>
-                    <td>" . $row["room_id"] . "</td>
+                    <td>" . $row["max_person"] . "</td>
                     <td>" . $row["booking_date"] . "</td>
                     <td>" . $row["check_in"] . "</td>
                     <td>" . $row["check_out"] . "</td>

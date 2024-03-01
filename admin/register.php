@@ -58,33 +58,28 @@
                                     <div class="panel-body">
                                         <div class="form-group">
                                             <label for="firstName">First Name</label>
-                                            <input type="text" class="form-control" id="firstName" name="f_name"
-                                                placeholder="Enter First Name" required>
+                                            <input type="text" class="form-control" id="firstName" name="f_name" placeholder="Enter First Name" required>
                                             <span id="name_err" class="text-danger"></span>
                                         </div>
                                         <br>
                                         <div class="form-group">
                                             <label for="lastName">Last Name</label>
-                                            <input type="text" class="form-control" id="lastName" name="l_name"
-                                                placeholder="Enter Last Name" required>
+                                            <input type="text" class="form-control" id="lastName" name="l_name" placeholder="Enter Last Name" required>
                                         </div>
                                         <br>
                                         <div class="form-group">
                                             <label for="email">Email Address</label>
-                                            <input type="email" class="form-control" id="email" name="email"
-                                                placeholder="Enter Email Address" required>
+                                            <input type="email" class="form-control" id="email" name="email" placeholder="Enter Email Address" required>
                                         </div>
                                         <br>
                                         <div class="form-group">
                                             <label for="contactNumber">Contact Number</label>
-                                            <input type="tel" class="form-control" id="contactNumber" name="number"
-                                                placeholder="Enter Contact Number" required>
+                                            <input type="tel" class="form-control" id="contactNumber" name="number" placeholder="Enter Contact Number" required>
                                         </div>
                                         <br>
                                         <div class="form-group">
                                             <label for="address">Residential Address</label>
-                                            <input type="text" class="form-control" id="address" name="add"
-                                                placeholder="Enter Residential Address" required>
+                                            <input type="text" class="form-control" id="address" name="add" placeholder="Enter Residential Address" required>
                                         </div>
                                     </div>
                                 </div>
@@ -122,17 +117,25 @@
                                     </div><br>
 
                                     <div class="form-group">
-                                        <label for="checkInDate">Check-In Date</label>
-                                        <input type="date" class="form-control" id="checkInDate" name="checkInDate"
-                                            placeholder="Enter Check-In Date" required>
+                                        <label for="max_person">max_person</label>
+                                        <input type="text" class="form-control" id="max_person" name="max_person" placeholder="how many person" required>
                                     </div>
+                                    <br>
+
+                                    <div class="form-group">
+                                        <label for="checkInDate">Check-In Date</label>
+                                        <input type="date" class="form-control" id="checkInDate" name="checkInDate" placeholder="Enter Check-In Date" required>
+                                    </div>
+
                                     <br>
                                     <div class="form-group">
                                         <label for="checkOutDate">Check-Out Date</label>
-                                        <input type="date" class="form-control" id="checkOutDate" name="checkOutDate"
-                                            placeholder="Enter Check-Out Date" required>
+                                        <input type="date" class="form-control" id="checkOutDate" name="checkOutDate" placeholder="Enter Check-Out Date" required>
                                     </div>
                                     <br>
+                                    <label for="price">Price:</label>
+                                    <span id="price"></span>
+
                                 </div>
                             </div>
                         </div>
@@ -154,21 +157,21 @@
     <script src="js/script.js"></script>
 
     <script>
-        $(document).ready(function () {
+        $(document).ready(function() {
             // Define custom validation method for address
-            $.validator.addMethod("validAddress", function (value, element) {
+            $.validator.addMethod("validAddress", function(value, element) {
 
                 var regex = /^[a-zA-Z0-9,\s-]+$/;
                 return regex.test(value);
             }, "Please enter a valid address");
 
 
-            $.validator.addMethod("emailregex", function (value, element) {
+            $.validator.addMethod("emailregex", function(value, element) {
                 var regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
                 return regex.test(value);
             }, "Please enter a valid email address");
 
-            $.validator.addMethod("noDigits", function (value, element) {
+            $.validator.addMethod("noDigits", function(value, element) {
                 return this.optional(element) || !/\d/.test(value);
             }, "Digits are not allowed.");
 
@@ -252,6 +255,6 @@
 
 </html>
 <?php include('include/conn.php');
-    include('reg-i.php');
-    include('include/drop.php');
+include('reg-i.php');
+include('include/drop.php');
 ?>
