@@ -1,5 +1,5 @@
 .navbar-scrolled {
-  background-color: #f10000; /* Change to your desired color */
+  background-color: #000000; /* Change to your desired color */
 }
 .navbar-light .navbar-nav .nav-link{
     color: black;
@@ -92,8 +92,10 @@ header{
   
   .navbar a:hover, .dropdown:hover .dropbtn {
     background-color: transparent;
+  }
+ 
+    .dropdown-menu {
+        min-width: 200px;
+        background-color:transparent;
+    }
 
-  }
-  .error{
-    color: red;
-  }
