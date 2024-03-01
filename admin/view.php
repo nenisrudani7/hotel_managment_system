@@ -38,23 +38,23 @@
                     <div class="container mt-5">
                         <h2 class="mb-3">Customer Details</h2>
                         <?php
-// Include database connection
-include_once('include/conn.php');
+                        // Include database connection
+                        include_once('include/conn.php');
 
-// SQL query to join customer and booking tables
-$query = "SELECT c.c_id, c.c_name, c.email, c.number, c.add, b.booking_id, b.room_id, b.booking_date, b.check_in, b.check_out 
+                        // SQL query to join customer and booking tables
+                        $query = "SELECT c.c_id, c.c_name, c.email, c.number, c.add, b.booking_id,b.max_person,b.total_price, b.room_id, b.booking_date, b.check_in, b.check_out 
           FROM customer c
           JOIN booking b ON c.c_id = b.customer_id";
 
-// Execute the query
-$result = mysqli_query($conn, $query);
+                        // Execute the query
+                        $result = mysqli_query($conn, $query);
 
-// Check if the query executed successfully
-if ($result) {
-    // Check if there are any rows returned
-    if (mysqli_num_rows($result) > 0) {
-        // Output table with Bootstrap styles
-        echo "<div class='table-responsive'>
+                        // Check if the query executed successfully
+                        if ($result) {
+                            // Check if there are any rows returned
+                            if (mysqli_num_rows($result) > 0) {
+                                // Output table with Bootstrap styles
+                                echo "<div class='table-responsive'>
                 <table class='table table-bordered table-striped'>
                     <thead class='thead-dark'>
                         <tr>
@@ -67,14 +67,15 @@ if ($result) {
                             <th>Booking Date</th>
                             <th>Check-In Date</th>
                             <th>Check-Out Date</th>
+                            <th>toal price</th>
                             <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>";
 
-        // Output data of each row
-        while ($row = mysqli_fetch_assoc($result)) {
-            echo "<tr>
+                                // Output data of each row
+                                while ($row = mysqli_fetch_assoc($result)) {
+                                    echo "<tr>
                     <td>" . $row["c_id"] . "</td>
                     <td>" . $row["c_name"] . "</td>
                     <td>" . $row["email"] . "</td>
@@ -84,43 +85,45 @@ if ($result) {
                     <td>" . $row["booking_date"] . "</td>
                     <td>" . $row["check_in"] . "</td>
                     <td>" . $row["check_out"] . "</td>
-                    <td><a href='edit_booking.php?id=" . $row["booking_id"]. "' class='btn btn-primary'>Edit</a></td>
+                    <td>" . $row["check_out"] . "</td>
+                    <td>" . $row["total_price"] . "</td>
+                    <td><a href='edit_booking.php?id=" . $row["booking_id"] . "' class='btn btn-primary'>Edit</a></td>
                   </tr>";
-        }
-        echo "</tbody></table></div>";
-    } else {
-        echo "No records found";
-    }
-} else {
-    echo "Error: " . mysqli_error($conn);
-}
+                                }
+                                echo "</tbody></table></div>";
+                            } else {
+                                echo "No records found";
+                            }
+                        } else {
+                            echo "Error: " . mysqli_error($conn);
+                        }
 
-// Close database connection
-mysqli_close($conn);
-?>
+                        ?>
 
 
-                        </div>
                     </div>
-
-                </body>
-
-                </html>
-
-
-
         </div>
-        </main>
-        <a href="#" class="theme-toggle">
-            <i class="fa-regular fa-moon"></i>
-            <i class="fa-regular fa-sun"></i>
-        </a>
-    </div>
-    </div>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="js/script.js"></script>
+
+</body>
+
+</html>
+
+
+
+</div>
+</main>
+<a href="#" class="theme-toggle">
+    <i class="fa-regular fa-moon"></i>
+    <i class="fa-regular fa-sun"></i>
+</a>
+</div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="js/script.js"></script>
 
 
 </body>
 
 </html>
+
+<?php

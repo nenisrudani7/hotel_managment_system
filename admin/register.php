@@ -92,23 +92,15 @@
                                 </div>
                                 <div class="panel-body">
                                     <div class="form-group">
-                                        <label for="room_type"> Room Type:</label>
+                                        <label for="roomType">Room Type:</label>
                                         <select class="form-select" name="roomType" id="roomType">
                                             <option selected disabled>Select Room Type</option>
                                             <?php
-                                            include_once('include/conn.php');
-
-                                            $sql = "SELECT * FROM room_type";
-                                            $result = $conn->query($sql);
-
-                                            if ($result->num_rows > 0) {
-                                                while ($row = $result->fetch_assoc()) {
-                                                    echo "<option value='" . $row['room_type_id'] . "'>" . $row['room_type'] . "</option>";
-                                                }
-                                            }
+                                            include_once('fetch_room_types.php'); // Include the PHP file to fetch room types
                                             ?>
                                         </select>
-                                    </div><br>
+                                    </div>
+                                    <br>
                                     <div class="form-group">
                                         <label for="roomNo">Room No</label>
                                         <select class="form-select" id="roomNo" name="roomNo" required>
@@ -117,8 +109,8 @@
                                     </div><br>
 
                                     <div class="form-group">
-                                        <label for="max_person">max_person</label>
-                                        <input type="text" class="form-control" id="max_person" name="max_person" placeholder="how many person" required>
+                                        <label for="max_person">Max Persons</label>
+                                        <input type="number" class="form-control" id="max_person" name="max_person" placeholder="Enter the number of persons" required>
                                     </div>
                                     <br>
 
@@ -133,12 +125,16 @@
                                         <input type="date" class="form-control" id="checkOutDate" name="checkOutDate" placeholder="Enter Check-Out Date" required>
                                     </div>
                                     <br>
-                                    <label for="price">Price:</label>
-                                    <span id="price"></span>
+
+                                    <div class="form-group">
+                                        <label for="price">Price:</label>
+                                        <h1><span id="price" name="price"></span</h1>
+                                    </div>
 
                                 </div>
                             </div>
                         </div>
+
                     </div>
                     <div class="container btn-light text-dark py-5">
                         <input type="submit" value="Submit" href="#" name="submit">
@@ -257,4 +253,9 @@
 <?php include('include/conn.php');
 include('reg-i.php');
 include('include/drop.php');
+include('drop1.php');
 ?>
+<script>
+
+</script>
+
