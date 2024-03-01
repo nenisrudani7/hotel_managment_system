@@ -1,3 +1,8 @@
+<!-- <?php 
+// $url = $_SERVER['REQUEST_URL'];
+// $url = parse_url($url, PHP_URL_PATH);
+// $arr_url = explode("/" , $url);  	
+?> -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -171,16 +176,16 @@
         </div>
       </div>
     </nav>
-    <!-- model of ragister page -->
+    <!-- model of login form -->
     <div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
         <!-- Your login form goes here -->
-       
         <div class="modal-header bg-dark">
-          <h5 class="modal-title text-white" id="exampleModalLabel1">REGISTATION</h5>
+          <h5 class="modal-title text-white" id="exampleModalLabel1">LOG-IN</h5>
           <button type="button" class="btn-close bg-white" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
+      
         <div class="modal-body">
           <!-- Your login form -->
            <form id="signupForm" method="post">
@@ -204,7 +209,7 @@
                         <input type="password" class="form-control" id="confirm_password" name="confirm_password">
                         <span id="confirm_password_err"></span>
                     </div>
-                    <button type="submit" href="hotel1.html" class="btn btn-danger">REGISTRATION</button>
+                    <button type="submit" href="user/hotel1.php" class="btn btn-danger">REGISTRATION</button>
                 </form>
         </div>
       </div>
@@ -237,7 +242,7 @@
                         <input type="checkbox" class="form-check-input" id="rememberMe" name="rememberMe">
                         <label class="form-check-label" for="rememberMe">Remember me</label>
                     </div>
-                    <button type="submit" class="btn btn-danger">Login</button>
+                    <button type="submit" href="user/hotel1.php" class="btn btn-danger">Login</button>
                     <BR></BR>
                     <p>
                       create account → </p>
