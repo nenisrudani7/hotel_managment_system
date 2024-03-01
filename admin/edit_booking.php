@@ -17,50 +17,7 @@
             height: 100vh;
         }
     </style>
-</head><?php
-include_once('include/conn.php');
-
-if (isset($_GET['id'])) {
-    $booking_id = $_GET['id'];
-
-    $query = "SELECT * FROM booking WHERE booking_id = $booking_id";
-
-    $result = mysqli_query($conn, $query);
-
-    if ($result) {
-        if (mysqli_num_rows($result) > 0) {
-            $booking = mysqli_fetch_assoc($result);
-        } else {
-            echo "Booking not found.";
-            exit;
-        }
-    } else {
-        echo "Error: " . mysqli_error($conn);
-        exit;
-    }
-} else {
-    echo "Booking ID is missing.";
-    exit;
-}
-
-// Check if form is submitted
-if (isset($_POST['submit'])) {
-    $booking_id = $_POST['booking_id'];
-    $checkInDate = $_POST['checkInDate'];
-    $checkOutDate = $_POST['checkOutDate'];
-    
-    // Update query
-    $query = "UPDATE booking SET check_in = '$checkInDate', check_out = '$checkOutDate' WHERE booking_id = $booking_id";
-
-    if (mysqli_query($conn, $query)) {
-        // Redirect to view.php after successful update
-        header("Location: view.php");
-        exit;
-    } else {
-        echo "Error updating booking: " . mysqli_error($conn);
-    }
-}
-?>
+</head>
 
 <body>
     <div class="wrapper">
@@ -68,32 +25,80 @@ if (isset($_POST['submit'])) {
         <div class="main">
             <?php include('include/nav.php') ?>
             <main class="content px-3 py-2">
-                <div class="container-fluid">
-                    <div class="mb-3">
-                        <h4>Admin Dashboard</h4>
-                    </div>
-                </div>
-
+            
                 <div class="container mt-5">
                     <h1>Edit Booking</h1>
-                    <form action="edit_booking.php" method="post">
-                        <!-- Hidden input field to pass booking ID -->
-                        <input type="hidden" name="booking_id" value="<?php echo $booking['booking_id']; ?>">
+                    <?php
+                    include_once('include/conn.php');
 
-                        <!-- Other form fields for editing booking details -->
-                        <div class="mb-3">
-                            <label for="checkInDate" class="form-label">Check-In Date</label>
-                            <input type="date" class="form-control" id="checkInDate" name="checkInDate" value="<?php echo $booking['check_in']; ?>" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="checkOutDate" class="form-label">Check-Out Date</label>
-                            <input type="date" class="form-control" id="checkOutDate" name="checkOutDate" value="<?php echo $booking['check_out']; ?>" required>
-                        </div>
-                        <!-- Add more fields as needed -->
+                    // Fetch booking details along with customer information
+                    $query = "SELECT b.booking_id, b.check_in, b.check_out, b.max_person, b.total_price, c.c_name, c.email, c.number, c.add 
+          FROM booking b
+          INNER JOIN customer c ON b.customer_id = c.c_id";
 
-                        <!-- Submit button -->
-                        <button type="submit" name="submit" class="btn btn-primary">Update Booking</button>
-                    </form>
+                    $result = mysqli_query($conn, $query);
+
+                    if ($result && mysqli_num_rows($result) > 0) {
+                        while ($row = mysqli_fetch_assoc($result)) {
+
+                            echo '<form class="row g-3" action="update_booking.php" method="POST">';
+                            echo '<input type="hidden" name="booking_id" value="' . $row['booking_id'] . '">';
+                    
+                            // Display booking details
+                            echo '<div class="col-md-6">';
+                            echo '<label for="checkInDate" class="form-label">Check-In Date:</label>';
+                            echo '<input type="date" id="checkInDate" class="form-control" name="checkInDate" value="' . $row['check_in'] . '">';
+                            echo '</div>';
+                    
+                            echo '<div class="col-md-6">';
+                            echo '<label for="checkOutDate" class="form-label">Check-Out Date:</label>';
+                            echo '<input type="date" id="checkOutDate" class="form-control" name="checkOutDate" value="' . $row['check_out'] . '">';
+                            echo '</div>';
+                    
+                            echo '<div class="col-md-6">';
+                            echo '<label for="maxPerson" class="form-label">Max Persons:</label>';
+                            echo '<input type="text" id="maxPerson" class="form-control" name="maxPerson" value="' . $row['max_person'] . '">';
+                            echo '</div>';
+                    
+                            echo '<div class="col-md-6">';
+                            echo '<label for="price" class="form-label">Price:</label>';
+                            echo '<input type="text" id="price" class="form-control" name="price" value="' . $row['total_price'] . '">';
+                            echo '</div>';
+                    
+                            // Display customer information
+                            echo '<div class="col-md-6">';
+                            echo '<label for="fName" class="form-label">First Name:</label>';
+                            echo '<input type="text" id="fName" class="form-control" name="cname" value="' . $row['c_name'] . '">';
+                            echo '</div>';
+                    
+                            echo '<div class="col-md-6">';
+                            echo '<label for="email" class="form-label">Email:</label>';
+                            echo '<input type="email" id="email" class="form-control" name="email" readonly value="' . $row['email'] . '">';
+                            echo '</div>';
+                    
+                            echo '<div class="col-md-6">';
+                            echo '<label for="number" class="form-label">Phone Number:</label>';
+                            echo '<input type="tel" id="number" class="form-control" name="number" value="' . $row['number'] . '">';
+                            echo '</div>';
+                    
+                            echo '<div class="col-md-6">';
+                            echo '<label for="address" class="form-label">Address:</label>';
+                            echo '<input type="text" id="address" class="form-control" name="address" value="' . $row['add'] . '">';
+                            echo '</div>';
+                    
+                            // Add a submit button to update the booking
+                            echo '<div class="col-12">';
+                            echo '<button type="submit" class="btn btn-primary" name="submit">Update Booking</button>';
+                            echo '</div>';
+                    
+                            echo '</form>';
+                        }
+                    } else {
+                        echo "No booking details found.";
+                    }
+
+                    mysqli_close($conn);
+                    ?>
 
 
                 </div>

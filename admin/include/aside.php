@@ -2,8 +2,8 @@
   <!-- Content For Sidebar -->
   <div class="h-100">
     <div class="sidebar-logo">
-      <a href="#">
-        <h1>Admin</h1>
+      <a href="profile.php">
+        <h1 class="">Admin</h1>
       </a>
     </div>
     <br />

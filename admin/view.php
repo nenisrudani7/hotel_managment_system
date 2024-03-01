@@ -18,25 +18,7 @@
         <div class="main">
             <?php include('include/nav.php') ?>
             <main class="content px-3 py-2">
-                <div class="container-fluid">
-                    <div class="mb-3">
-                        <h4>Admin Dashboard</h4>
-                    </div>
-                </div>
-
-                <!DOCTYPE html>
-                <html lang="en">
-
-                <head>
-                    <meta charset="UTF-8">
-                    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-                    <title>Customer Details</title>
-                </head>
-
-                <body>
-
                     <div class="container mt-5">
-                        <h2 class="mb-3">Customer Details</h2>
                         <?php
                         // Include database connection
                         include_once('include/conn.php');
@@ -84,7 +66,6 @@
                     <td>" . $row["max_person"] . "</td>
                     <td>" . $row["booking_date"] . "</td>
                     <td>" . $row["check_in"] . "</td>
-                    <td>" . $row["check_out"] . "</td>
                     <td>" . $row["check_out"] . "</td>
                     <td>" . $row["total_price"] . "</td>
                     <td><a href='edit_booking.php?id=" . $row["booking_id"] . "' class='btn btn-primary'>Edit</a></td>
