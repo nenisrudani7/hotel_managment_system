@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    
+    <style>
+        .error{
+            color: red;
+        }
+    </style>
+    <script src="jquery-3.7.1.min.js"></script>
+    <script src="jquery.validate.js"></script>
+</head>
+<body>
+    <form id="signupForm" method="post">
+        <div class="mb-3">
+          <label for="name" class="form-label">Name</label>
+          <input type="text" class="form-control" id="n21" name="n21">
+          <span id="name_err" class="text-danger"></span>
+        </div>
+        <div class="mb-3">
+          <label for="email" class="form-label">Email address</label>
+          <input type="email" class="form-control" id="email" name="email">
+          <span id="email_err" class="text-danger"></span>
+        </div>
+        <div class="mb-3">
+          <label for="mo" class="form-label">Mobile Number:</label>
+          <input type="text" class="form-control" id="mo" name="mo">
+          <span id="mo_err" class="text-danger"></span>
+        </div>
+        <h4>Step 2: Property details</h4><br><br>
+        <div class="mb-3">
+          <label for="room-type">Room-type:&nbsp;</label>
+          <select id="type" class="form-control" name="type">
+            <option value="">Select Room Type</option>
+            <option value="Standard">Standard-Room</option>
+            <option value="Family">Family-Room</option>
+            <option value="Deluxe">Deluxe-Room</option>
+            <option value="King">King-Room</option>
+            <option value="Queen">Queen-Room</option>
+            <option value="Quad">Quad-Room</option>
+          </select>
+          <span id="type_err" class="text-danger"></span>
+        </div>
+        <label for="total_p">Total Person:</label>
+        <input type="number" id="p2" name="p2" class="form-control" required min="1">
+        <span id="p2_err" class="text-danger"></span><br><br>
+        <div class="mb-3">
+          <label for="check-in">Check-in Date:</label>
+          <input type="date" id="a1" name="a1" class="form-control" required>
+          <span id="a1_err" class="text-danger"></span>
+        </div>
+        <div class="mb-3">
+          <label for="check-out">Check-out Date</label>
+          <input type="date" id="a2" name="a2" class="form-control" required>
+          <span id="a2_err" class="text-danger"></span>
+        </div>
+        <div class="mb-3">
+          <label for="special-requests">Special Requests:</label>
+          <textarea id="special-requests" name="special-requests" class="form-control" rows="1"></textarea>
+        </div>
+        <label for="ptm">Payment Method:</label>
+        <input type="radio" name="payment_method" id="payment_method_cash" value="cash" required>&nbsp;&nbsp;Cash<br><br>
+        <label for="total">Total amount: $1000 /per-day.</label><br><br>
+        <!-- Submit button -->
+        <button type="submit" id="confirmBookBtn" class="btn btn-primary btn-block mb-4">Confirm Book!</button>
+    </form>
+
+    <script>
+        $(document).ready(function() {
+            $("#signupForm").validate({
+                rules: {
+                    n21: {
+                        required: true,
+                        noDigits: true
+                    },
+                    email: {
+                        required: true,
+                        email: true,
+                        emailregex: true
+                    },
+                    mo: {
+                        required: true,
+                        digits: true
+                    },
+                    type: {
+                        required: true
+                    },
+                    p2: {
+                        required: true,
+                        digits: true,
+                        min: 1
+                    },
+                    a1: {
+                        required: true
+                    },
+                    a2: {
+                        required: true,
+                        greaterThanDate: "#a1"
+                    },
+                    payment_method: {
+                        required: true
+                    }
+                },
+                messages: {
+                    n21: {
+                        required: "Please enter your name",
+                        noDigits: "Name cannot contain digits"
+                    },
+                    email: {
+                        required: "Please enter your email address",
+                        email: "Please enter a valid email address",
+                        emailregex: "Please enter a valid email address"
+                    },
+                    mo: {
+                        required: "Please enter your mobile number",
+                        digits: "Please enter only digits"
+                    },
+                    type: {
+                        required: "Please select a room type"
+                    },
+                    p2: {
+                        required: "Please enter the total number of persons",
+                        digits: "Please enter only digits",
+                        min: "Please enter a valid number of persons (minimum 1)"
+                    },
+                    a1: {
+                        required: "Please enter the check-in date"
+                    },
+                    a2: {
+                        required: "Please enter the check-out date",
+                        greaterThanDate: "Check-out date must be greater than check-in date"
+                    },
+                    payment_method: {
+                        required: "Please select a payment method"
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>
