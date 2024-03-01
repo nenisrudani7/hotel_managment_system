@@ -1,8 +1,12 @@
 <?php 
-    include 'include/conn.php';
-    $sql = "SELECT * FROM room WHERE status = '1'";
-    $query = $conn->query($sql);
+include 'include/conn.php';
+$sql = "SELECT COUNT(*) AS null_status_rooms FROM room WHERE status IS NULL";
+$result = $conn->query($sql);
 
-    echo "$query->num_rows";
-
+if ($result) {
+    $row = $result->fetch_assoc();
+    echo $row['null_status_rooms'];
+} else {
+    echo "Error: " . $conn->error;
+}
 ?>

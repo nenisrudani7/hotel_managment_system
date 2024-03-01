@@ -28,10 +28,10 @@
         
         <div class="main container-fluid">
         <?php include('include/nav.php') ?>
-            <form method="post" action="" style="margin-top: 20px; text-align: start;">
+            <form method="post" action="addroom.php" style="margin-top: 20px; text-align: start;">
                 <div class="form-group">
                     <label for="exampleInputEmail1">Enter room Type</label>
-                    <input type="text" class="form-control" placeholder="Enter room Name" name="cname">
+                    <input type="text" class="form-control" placeholder="Enter room Name" name="rname">
                 </div>
                 <div class="form-group">
                     <label for="exampleInputEmail1">price</label>
@@ -49,9 +49,6 @@
                     <label for="exampleInputEmail1" style="text-align: start !important;">Upload image</label>
                     <input type="file" class="form-control"   placeholder="upload image" name="f1">
                 </div> 
-
-
-
 
                 <button type="submit" class="btn btn-primary" style="margin-top: 50px;">submit</button>
             </form>
@@ -71,7 +68,7 @@ $(document).ready(function() {
     // Add validation rules and error messages to the form
     $('form').validate({
         rules: {
-            cname: {
+            rname: {
                 required: true
             },
             price: {
@@ -90,7 +87,7 @@ $(document).ready(function() {
             }
         },
         messages: {
-            cname: {
+            rname: {
                 required: "Please enter the room name"
             },
             price: {
@@ -106,7 +103,6 @@ $(document).ready(function() {
             f1: {
                 required: "Please upload an image with JPEG, JPG, or JFIG extension",
                 accept: "Please upload a valid image file with JPEG, JPG, or JFIG extension",
-            
 
             }
         },
@@ -118,3 +114,28 @@ $(document).ready(function() {
 });
 </script>
 </html>
+
+<?php
+include('include/conn.php');
+
+
+$room_type = $_POST['rname'];
+$price = $_POST['price'];
+$offer = $_POST['offer'];
+$description = $_POST['a_d'];
+$image = $_POST['f1']; 
+$room_type_query = "INSERT INTO room_type (room_type, price, offers, `description`, f1) 
+                    VALUES ('$room_type', '$price', '$offer', '$description', '$image')";
+
+if (mysqli_query($conn, $room_type_query)) {
+    ?>
+    <script>
+        alert('Data inserted successfully into room_type table');
+    </script>
+    <?php
+} else {
+    echo "Error: " . mysqli_error($conn);
+}
+
+?>
+
