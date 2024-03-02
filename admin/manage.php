@@ -18,31 +18,29 @@
         <div class="main">
             <?php include('include/nav.php') ?>
             <main class="content px-3 py-2">
-                    <div class="container mt-5">
-                        <?php
-                        // Include database connection
-                        include_once('include/conn.php');
+                <div class="container mt-5">
+                <?php
+// Include database connection
+include_once('include/conn.php');
 
-                        // SQL query to join customer and booking tables
-                        $query = "SELECT c.c_id, c.c_name, c.email, c.number, c.add, 
-                        b.booking_id, b.max_person, b.total_price, b.booking_date, b.check_in, b.check_out,r.status,
-                        r.room_no, rt.room_type
-                 FROM customer c
-                 JOIN booking b ON c.c_id = b.customer_id
-                 JOIN room r ON b.room_id = r.room_id
-                 JOIN room_type rt ON r.room_type_id = rt.room_type_id;
-                 
-                 ";
+// SQL query to join customer, booking, room, and room_type tables
+$query = "SELECT c.c_id, c.c_name, c.email, c.number, c.add, 
+            b.booking_id, b.max_person, b.total_price, b.booking_date, b.check_in, b.check_out,r.status,
+            r.room_no, rt.room_type
+        FROM customer c
+        JOIN booking b ON c.c_id = b.customer_id
+        JOIN room r ON b.room_id = r.room_id
+        JOIN room_type rt ON r.room_type_id = rt.room_type_id";
 
-                        // Execute the query
-                        $result = mysqli_query($conn, $query);
+// Execute the query
+$result = mysqli_query($conn, $query);
 
-                        // Check if the query executed successfully
-                        if ($result) {
-                            // Check if there are any rows returned
-                            if (mysqli_num_rows($result) > 0) {
-                                // Output table with Bootstrap styles
-                                echo "<div class='table-responsive'>
+// Check if the query executed successfully
+if ($result) {
+    // Check if there are any rows returned
+    if (mysqli_num_rows($result) > 0) {
+        // Output table with Bootstrap styles
+        echo "<div class='table-responsive'>
                 <table class='table table-bordered table-striped'>
                     <thead class='thead-dark'>
                         <tr>
@@ -51,35 +49,40 @@
                             <th>Booking Status</th>
                             <th>Check-In-Date</th>
                             <th>Check-Out-Date</th>
+                            <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>";
 
-                                // Output data of each row
-                                while ($row = mysqli_fetch_assoc($result)) {
-                                    echo "<tr>
-                    <td>" . $row["room_no"] . "</td>
-                    <td>" . $row["room_type"] . "</td>
-                    <td>" . $row["status"] . "</td>
+        // Output data of each row
+        while ($row = mysqli_fetch_assoc($result)) {
 
-                    <td>" . $row["check_in"] . "</td>
-                    <td>" . $row["check_out"] . "</td>
+            ?>
+            <tr>
+                <td><?php echo  $row["room_no"] ?></td>
+                <td><?php echo  $row["room_type"] ?></td>
+                <td><?php  if ($row["status"] == 1) {
+                echo "<button class='btn btn-success'>Booked</button>";
+            } ?></td>
+                <td><?php echo $row['check_in'] ?></td>
+                <td><?php echo $row['check_out'] ?></td>
+            </tr>
+            <?php
+           
+            // Show "Booked" button if status is 1
+            ;
+        }
+        echo "</tbody></table></div>";
+    } else {
+        echo "No records found";
+    }
+} else {
+    echo "Error: " . mysqli_error($conn);
+}
+?>
 
-                    <td><a href='edit_booking.php?id=" . $row["booking_id"] . "' class='btn btn-primary'>Edit</a></td>
-                  </tr>";
-                                }
-                                echo "</tbody></table></div>";
-                            } else {
-                                echo "No records found";
-                            }
-                        } else {
-                            echo "Error: " . mysqli_error($conn);
-                        }
 
-                        ?>
-
-
-                    </div>
+                </div>
         </div>
 
 </body>

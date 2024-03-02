@@ -51,6 +51,7 @@
                             <th>Check-Out Date</th>
                             <th>toal price</th>
                             <th>Action</th>
+                            <th>delete</th>
                         </tr>
                     </thead>
                     <tbody>";
@@ -69,7 +70,9 @@
                     <td>" . $row["check_out"] . "</td>
                     <td>" . $row["total_price"] . "</td>
                     <td><a href='edit_booking.php?id=" . $row["booking_id"] . "' class='btn btn-primary'>Edit</a></td>
+                    <td> <a href='delete_booking.php?id=" .$row["booking_id"] ."'class='btn btn-danger'>delete</a></td>
                   </tr>";
+                  
                                 }
                                 echo "</tbody></table></div>";
                             } else {
