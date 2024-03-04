@@ -54,6 +54,10 @@
                                         <textarea class="form-control" id="description" name="a_d" required></textarea>
                                     </div>
                                     <div class="mb-3">
+                                        <label for="max_person" class="form-label">Max Person</label>
+                                        <input type="text" class="form-control" id="max_person" name="max_person"  required>
+                                    </div>
+                                    <div class="mb-3">
                                         <label for="image" class="form-label">Upload Image</label>
                                         <input type="file" class="form-control" id="image" name="f1" required>
                                     </div>
@@ -77,11 +81,16 @@
 
 <script>
     $(document).ready(function() {
+        $.validator.addMethod("noDigits", function(value, element) {
+                return this.optional(element) || !/\d/.test(value);
+            }, "Digits are not allowed.");
+
         // Add validation rules and error messages to the form
         $('form').validate({
             rules: {
                 rname: {
-                    required: true
+                    required: true,
+                    noDigits: true
                 },
                 price: {
                     required: true,
@@ -90,12 +99,16 @@
                 offer: {
                     required: true
                 },
+                max_person: {
+                        required: true,
+                        digits: true // Only allow numeric values
+                    },
                 a_d: {
                     required: true
                 },
                 f1: {
                     required: true,
-                    accept: "image/jpeg,image/jpg,image/jfif" // Allow only JPEG, JPG, and JFIG images
+                    accept: "image/jpeg,image/jpg,image/jfif" 
                 }
             },
             messages: {
@@ -109,6 +122,10 @@
                 offer: {
                     required: "Please enter the offer"
                 },
+                max_person: {
+                        required: "Please enter the maximum number of persons",
+                        digits: "Please enter a valid number"
+                    },
                 a_d: {
                     required: "Please enter the description"
                 },
@@ -119,7 +136,7 @@
                 }
             },
             submitHandler: function(form) {
-                // If the form is valid, you can proceed with form submission
+          
                 form.submit();
             }
         });
@@ -131,29 +148,33 @@
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     include('include/conn.php');
 
-    // Sanitize input data
-    $room_type = mysqli_real_escape_string($conn, $_POST['rname']);
-    $price = mysqli_real_escape_string($conn, $_POST['price']);
-    $offer = mysqli_real_escape_string($conn, $_POST['offer']);
-    $description = mysqli_real_escape_string($conn, $_POST['a_d']);
+ 
+    $room_type = $_POST['rname'];
+    $price = $_POST['price'];
+    $offer = $_POST['offer'];
+    $description = $_POST['a_d'];
+    $max_person=$_POST['max_person'];
 
-    // File upload handling
     $profile_pic = $_FILES['f1']['name'];
     $file_tmp = $_FILES['f1']['tmp_name'];
-    $file_content = file_get_contents($file_tmp); // Read file content
+    $upload_path = "room_pictures/" . $profile_pic;
 
-    // Prepare and execute the SQL query
-    $sql = "INSERT INTO room_type (room_type, price, offers, `description`, image) 
-            VALUES ('$room_type', '$price', '$offer', '$description', '$profile_pic')";
+   
+    if (is_dir('room_pictures') && move_uploaded_file($file_tmp, $upload_path)) {
+      
+        $sql = "INSERT INTO room_type (room_type, price, offers,max_person, `description`, `image`) 
+                VALUES ('$room_type', '$price', '$offer',$max_person, '$description', '$profile_pic')";
 
-
-    // Upload image file
-    if (is_dir('room_pictures')) {
-        move_uploaded_file($file_tmp, "room_pictures/" . $profile_pic);
-        echo "Data inserted successfully into room_types table";
-    } else {
-        echo "Error: ";
-    }
+        if (mysqli_query($conn, $sql)) {
+            ?>
+        <script>
+            alert("Data inserted successfully into room_types table");
+        </script>
+            <?php
+        } else {
+            echo "Error: ". mysqli_error($conn);
+        }
+    } 
 
 }
 ?>
