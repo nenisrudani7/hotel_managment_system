@@ -61,7 +61,7 @@
             <div class="container mt-5">
                 <div class="row">
                     <!-- Room details card -->
-                    <div class="col-md-6">
+                    <div class="col-xxl-12 col-xl-12 col-sm-12 col-md-12">
                         <div class="card">
                             <img class="card-img-top" src="img/<?php echo $room['image']; ?>" alt="<?php echo $room['room_type']; ?>">
                             <div class="card-body">
@@ -150,17 +150,26 @@
                                                 <input type="number" class="form-control" id="max_person" name="max_person" placeholder="Enter the number of persons" required>
                                             </div>
                                             <br>
-                                            <div class="form-group">
-                                                <label for="checkInDate">Check-In Date</label>
-                                                <input type="date" class="form-control" id="checkInDate" name="checkInDate" placeholder="Enter Check-In Date" required>
+                                            <div class="row">
+                                                <div class="col-6">
+                                                    <div class="form-group">
+                                                        <label for="checkInDate">Check-In Date</label>
+                                                        <input type="date" class="form-control" id="checkInDate" name="checkInDate" placeholder="Enter Check-In Date" required>
+                                                    </div>
+                                                </div>
+                                                <div class="col-6">
+                                                    <div class="form-group">
+                                                        <label for="checkOutDate">Check-Out Date</label>
+                                                        <input type="date" class="form-control" id="checkOutDate" name="checkOutDate" placeholder="Enter Check-Out Date" required>
+                                                    </div>
+                                                </div>
                                             </div>
                                             <br>
+                                            <h2>Payment System</h2>
                                             <div class="form-group">
-                                                <label for="checkOutDate">Check-Out Date</label>
-                                                <input type="date" class="form-control" id="checkOutDate" name="checkOutDate" placeholder="Enter Check-Out Date" required>
-                                            </div>
-                                            <br>
-
+                                                <label for="amount">Amount:</label>
+                                                <input type="text" class="form-control" id="amount" name="amount">
+                                            </div>  
                                         </div>
                                     </div>
                                 </div>
@@ -168,8 +177,7 @@
                             <div class="container btn-light text-dark py-5">
                                 <div class="row">
                                     <div class="col-md-6">
-
-                                        <h1><input type="submit" value="submit" href="#" name="submit"></h1>
+                                        <h1><input type="submit" class="col-xxl-12" value="submit" href="#" name="submit"></h1>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
@@ -182,7 +190,6 @@
                                             <h1><span id="totalPrice" name="totalPrice">₹0.00</span></h1>
                                         </div>
                                     </div>
-
                                 </div>
                             </div>
 
@@ -236,9 +243,9 @@
                         var maxPersons = $('#max_person').val();
                         if (maxPersons && !isNaN(maxPersons)) {
                             var totalPrice = price * parseInt(maxPersons);
-                                // Apply fixed offer discount
-                                var offerDiscount = 50; // Example: Fixed discount of ₹50
-                                totalPrice -= offerDiscount;
+                            // Apply fixed offer discount
+                            var offerDiscount = 50; // Example: Fixed discount of ₹50
+                            totalPrice -= offerDiscount;
 
                             $('#totalPrice').text('₹' + totalPrice.toFixed(2));
                         }
@@ -371,3 +378,7 @@
 </body>
 
 </html>
+
+<?php
+include('online_booking_insert_data.php');
+?>

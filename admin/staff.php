@@ -13,164 +13,75 @@
 </head>
 
 <body>
-<div class="wrapper">
+  <div class="wrapper">
     <?php include('include/aside.php') ?>
     <div class="main">
-    <?php include('include/nav.php') ?>
+      <?php include('include/nav.php') ?>
       <main class="content px-3 py-2">
         <div class="container-fluid">
           <div class="mb-3">
-            <h4>Admin Dashboard</h4>
+            <a  href="add_staff.php" >
+              
+              <button type="button"class="btn btn-dark mx-10">Add Staff</button>
+            </a>
+
           </div>
         </div>
 
         <!-- Main Wrapper -->
         <div class="table-responsive">
-    <table class="table table-hover">
-      <thead>
-        <tr>
-          <th class="col-2 col-md-1">Sr NO</th>
-          <th class="col-2 col-md-1">name</th>
-          <th class="col-3 col-md-1">staff</th>
-          <th class="col-3 col-md-2">Contact Number</th>
-          <th class="col-3 col-md-1">Shift</th>
-          <th class="col-3 col-md-2">Joining Date</th>
-          <th class="col-3 col-md-2">Change Shift</th>
-          <th class="col-3 col-md-2">action</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>1</td>
-          <td>abcd</td>
-          <td>
-            manager
-          </td>
-          <td>
-            87800-57480
-          </td>
-          <td>
-            Day-Shift
-          </td>
-          <td>
-            6,march-2023
-          </td>
-          <td>
-            <input type="button" value="Change-shift" class="btn-warning">
-          </td>
-          <td>
-            <div>
-              <button type="button" class="btn btn-info">edit</button>
-              <button type="button" class="btn btn-warning">view</button>
-              <button type="button" class="btn btn-danger">delete</button>
-            </div>
-          </td>
-        </tr>
-      <tr>
-        <td>1</td>
-          <td>x-y-z</td>
-          <td>
-            cook
-          </td>
-          <td>
-            87800-23124
-          </td>
-          <td>
-            full-time
-          </td>
-          <td>
-            10,march-2023
-          </td>
-          <td>
-            <input type="button" value="Change-shift" class="btn-warning">
-          </td>
-          <td>
-            <div>
-              <button type="button" class="btn btn-info">edit</button>
-              <button type="button" class="btn btn-warning">view</button>
-              <button type="button" class="btn btn-danger">delete</button>
-            </div>
-          </td>
-      </tr>
-      <tr>
-        <td>1</td>
-          <td>x-y-z</td>
-          <td>
-            cook
-          </td>
-          <td>
-            87800-23124
-          </td>
-          <td>
-            full-time
-          </td>
-          <td>
-            10,march-2023
-          </td>
-          <td>
-            <input type="button" value="Change-shift" class="btn-warning">
-          </td>
-          <td>
-            <div>
-              <button type="button" class="btn btn-info">edit</button>
-              <button type="button" class="btn btn-warning">view</button>
-              <button type="button" class="btn btn-danger">delete</button>
-            </div>
-          </td>
-      </tr><tr>
-        <td>1</td>
-          <td>x-y-z</td>
-          <td>
-            cook
-          </td>
-          <td>
-            87800-23124
-          </td>
-          <td>
-            full-time
-          </td>
-          <td>
-            10,march-2023
-          </td>
-          <td>
-            <input type="button" value="Change-shift" class="btn-warning">
-          </td>
-          <td>
-            <div>
-              <button type="button" class="btn btn-info">edit</button>
-              <button type="button" class="btn btn-warning">view</button>
-              <button type="button" class="btn btn-danger">delete</button>
-            </div>
-          </td>
-      </tr><tr>
-        <td>1</td>
-          <td>x-y-z</td>
-          <td>
-            cook
-          </td>
-          <td>
-            87800-23124
-          </td>
-          <td>
-            full-time
-          </td>
-          <td>
-            10,march-2023
-          </td>
-          <td>
-            <input type="button" value="Change-shift" class="btn-warning">
-          </td>
-          <td>
-            <div>
-              <button type="button" class="btn btn-info">edit</button>
-              <button type="button" class="btn btn-warning">view</button>
-              <button type="button" class="btn btn-danger">delete</button>
-            </div>
-          </td>
-      </tr>
-    </tbody>
-    </table>
-  </div>
+          <table class="table table-hover">
+            <thead>
+              <tr>
+                <th>Sr NO</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Contact Number</th>
+                <th>Department</th>
+                <th>Address</th>
+                <th>Salary</th>
+                <th>Image</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <?php
+              // Include database connection
+              include_once('include/conn.php');
+
+              // Fetch staff data from the database
+              $query = "SELECT * FROM staff";
+              $result = mysqli_query($conn, $query);
+
+              // Check if there are any staff records
+              if (mysqli_num_rows($result) > 0) {
+                // Loop through each staff record and display it in a table row
+                while ($row = mysqli_fetch_assoc($result)) {
+                  echo "<tr>";
+                  echo "<td>" . $row['staff_id'] . "</td>";
+                  echo "<td>" . $row['name'] . "</td>";
+                  echo "<td>" . $row['email'] . "</td>";
+                  echo "<td>" . $row['phone'] . "</td>";
+                  echo "<td>" . $row['Department'] . "</td>";
+                  echo "<td>" . $row['address'] . "</td>";
+                  echo "<td>" . $row['salary'] . "</td>";
+                  echo "<td><img src='{$row['image']}' alt='Staff Image' width='50'></td>";
+                  echo "<td>
+                          <div class='btn-group' role='group'>
+                            <button type='button' class='btn btn-info'>Edit</button>
+                            <button type='button' class='btn btn-warning'>View</button>
+                            <button type='button' class='btn btn-danger'>Delete</button>
+                          </div>
+                        </td>";
+                  echo "</tr>";
+                }
+              } else {
+                echo "<tr><td colspan='12'>No staff records found</td></tr>";
+              }
+              ?>
+            </tbody>
+          </table>
+        </div>
       </main>
       <a href="#" class="theme-toggle">
         <i class="fa-regular fa-moon"></i>
@@ -178,9 +89,9 @@
       </a>
     </div>
   </div>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="js/script.js"></script>
- 
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="js/script.js"></script>
+
 
 </body>
 
