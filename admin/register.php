@@ -1,3 +1,26 @@
+<?php
+
+session_start();
+
+if (!isset($_SESSION['stulogin']) || $_SESSION['stulogin'] !== true) {
+
+  header("location: signup.php");
+}
+
+$username = $_SESSION['a_name'];
+
+include 'include/conn.php';
+
+$query = "SELECT * FROM user WHERE a_name = '$username'";
+
+$result = $conn->query($query);
+
+if ($result->num_rows > 0) {
+
+  $userData = $result->fetch_assoc();
+
+?>
+
 <!DOCTYPE html>
 <html lang="en" data-bs-theme="dark">
 
@@ -259,3 +282,12 @@ include('drop1.php');
 
 </script>
 
+<?php 
+
+} else {
+
+  echo "User data not found.";
+
+}
+
+?>

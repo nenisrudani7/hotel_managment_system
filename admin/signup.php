@@ -1,3 +1,28 @@
+<?php
+$login = false;
+$showError = false;
+if($_SERVER["REQUEST_METHOD"] == "POST"){
+    include 'include/conn.php';
+    $username = $_POST["name"];
+    $password = $_POST["password"]; 
+    
+    $sql = "SELECT * FROM user WHERE a_name = '$username' AND password = '$password' ";
+    $result = mysqli_query($conn, $sql);
+    $num = mysqli_num_rows($result);
+    if ($num == 1){
+        $login = true;
+        session_start();
+        $_SESSION['stulogin'] = true;
+        $_SESSION['a_name'] = $username;
+        header("location: index.php");
+    } 
+    else{
+        $showError = "Invalid Credentials";
+    }
+}
+    
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -24,22 +49,14 @@
                                 <div class="row justify-content-center">
                                     <div class="col-md-10 col-lg-6 col-xl-5 order-2 order-lg-1">
 
-                                        <p class="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">Sign up</p>
+                                        <p class="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">Sign in</p>
 
-                                        <form id="registrationForm" class="mx-1 mx-md-4">
-                                            <div class="d-flex flex-row align-items-center mb-4">
-                                                <i class="fas fa-user fa-lg me-3 fa-fw"></i>
-                                                <div class="form-outline flex-fill mb-0">
-                                                    <input type="text" id="form3Example1c" name="name" class="form-control" />
-                                                    <label class="form-label" for="form3Example1c">Your Name</label>
-                                                </div>
-                                            </div>
-
+                                        <form id="signin" class="mx-1 mx-md-4" method="post" action="">
                                             <div class="d-flex flex-row align-items-center mb-4">
                                                 <i class="fas fa-envelope fa-lg me-3 fa-fw"></i>
                                                 <div class="form-outline flex-fill mb-0">
-                                                    <input type="email" id="form3Example3c" name="email" class="form-control" />
-                                                    <label class="form-label" for="form3Example3c">Your Email</label>
+                                                    <input type="name" id="form3Example3c" name="name" class="form-control" />
+                                                    <label class="form-label" for="form3Example3c">name</label>
                                                 </div>
                                             </div>
 
@@ -51,17 +68,10 @@
                                                 </div>
                                             </div>
 
-                                            <div class="d-flex flex-row align-items-center mb-4">
-                                                <i class="fas fa-key fa-lg me-3 fa-fw"></i>
-                                                <div class="form-outline flex-fill mb-0">
-                                                    <input type="password" id="form3Example4cd" name="confirm_password" class="form-control" />
-                                                    <label class="form-label" for="form3Example4cd">Repeat your password</label>
-                                                </div>
-                                            </div>
-
+                                            
 
                                             <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
-                                                <button type="submit" class="btn btn-primary btn-lg">Register</button>
+                                                <button type="submit" class="btn btn-primary btn-lg">sign in</button>
                                             </div>
                                         </form>
 
@@ -97,12 +107,8 @@
             }, "Digits are not allowed.");
 
 
-            $("#registrationForm").validate({
+            $("#signin").validate({
                 rules: {
-                    name: {
-                        required: true,
-                        noDigits: true
-                    },
                     email: {
                         required: true,
                         email: true,
@@ -111,10 +117,6 @@
                   
                 },
                 messages: {
-                    name: {
-                        required: "Please enter your first name",
-                        noDigits: "First name cannot contain digits"
-                    },
                     email: {
                         required: "Please enter your email address",
                         email: "Please enter a valid email address",
@@ -124,3 +126,5 @@
             });
         });
     </script>
+
+    

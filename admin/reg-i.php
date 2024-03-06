@@ -64,3 +64,80 @@ if (isset($_POST['submit'])) {
     mysqli_close($conn); // Close the database connection
 }
 ?>
+
+
+
+<script>
+    $(document).ready(function() {
+        // Define custom validation method for address
+        $.validator.addMethod("validAddress", function(value, element) {
+            var regex = /^[a-zA-Z0-9,\s-]+$/;
+            return regex.test(value);
+        }, "Please enter a valid address");
+
+        $.validator.addMethod("emailregex", function(value, element) {
+            var regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return regex.test(value);
+        }, "Please enter a valid email address");
+
+        $.validator.addMethod("noDigits", function(value, element) {
+            return this.optional(element) || !/\d/.test(value);
+        }, "Digits are not allowed.");
+
+        // Apply validation to the form
+        $("#add_staff").validate({
+            rules: {
+                name: {
+                    required: true
+                },
+                email: {
+                    required: true,
+                    email: true,
+                    emailregex: true
+                },
+                phone: {
+                    required: true,
+                    digits: true
+                },
+                address: {
+                    required: true,
+                    validAddress: true
+                },
+                salary: {
+                    required: true,
+                    number: true
+                },
+                image: {
+                    required: true,
+                    extension: "jpg|jpeg|png"
+                }
+            },
+            messages: {
+                name: {
+                    required: "Please enter your name"
+                },
+                email: {
+                    required: "Please enter your email address",
+                    email: "Please enter a valid email address",
+                    emailregex: "Please enter a valid email address"
+                },
+                phone: {
+                    required: "Please enter your phone number",
+                    digits: "Please enter only digits"
+                },
+                address: {
+                    required: "Please enter your address",
+                    validAddress: "Please enter a valid address"
+                },
+                salary: {
+                    required: "Please enter the salary",
+                    number: "Please enter a valid number"
+                },
+                image: {
+                    required: "Please select an image file",
+                    extension: "Please upload an image file of type: JPG, JPEG, PNG"
+                }
+            }
+        });
+    });
+</script>
