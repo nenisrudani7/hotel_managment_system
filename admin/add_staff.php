@@ -88,8 +88,8 @@
     <script>
         $(document).ready(function() {
             $("#add_staff").validate({
-                rules: {
-                    name: {
+                rules:{
+                    name:{
                         required: true
                     },
                     email: {
