@@ -57,8 +57,23 @@
                                     echo "<p><strong>Customer Name:</strong> " . $row['c_name'] . "</p>";
                                     echo "<p><strong>Check-in Date:</strong> " . $row['check_in'] . "</p>";
                                     echo "<p><strong>Check-out Date:</strong> " . $row['check_out'] . "</p>";
-                                    // Display more details as needed
-
+                                    
+                                    // Display advance payment form
+                                    echo "<form action='process_advance_payment.php' method='post'>";
+                                    echo "<div class='mb-3'>";
+                                    echo "<label for='advance_payment' class='form-label'>Advance Payment Amount</label>";
+                                    echo "<input type='number' class='form-control' id='advance_payment' name='advance_payment'>";
+                                    echo "</div>";
+                                    echo "<input type='hidden' name='booking_id' value='" . $row['booking_id'] . "'>";
+                                    echo "<button type='submit' class='btn btn-primary'>Submit Advance Payment</button>";
+                                    echo "</form>";
+                                    
+                                    // Disable check-in button after check-in
+                                    if ($row['check_in_status'] == 1) {
+                                        echo "<button class='btn btn-primary' disabled>Check-in</button>";
+                                    } else {
+                                        echo "<a href='process_checkin.php?room_id=" . $room_id . "' class='btn btn-primary'>Check-in</a>";
+                                    }
                                 } else {
                                     echo "No records found for the provided room ID.";
                                 }
