@@ -34,7 +34,7 @@
                             $room_id = $_GET['room_id'];
 
                             // Query to retrieve room information along with booking details and customer details
-                            $query = "SELECT r.*, rt.room_type, b.*, c.*
+                            $query = "SELECT r.*, rt.room_type, rt.price AS room_price, b.*, c.*
                                       FROM room r
                                       JOIN room_type rt ON r.room_type_id = rt.room_type_id
                                       LEFT JOIN booking b ON r.room_id = b.room_id
@@ -54,10 +54,11 @@
                                     // Display the retrieved data
                                     echo "<p><strong>Room Number:</strong> " . $row['room_no'] . "</p>";
                                     echo "<p><strong>Room Type:</strong> " . $row['room_type'] . "</p>";
+                                    echo "<p><strong>Price per Night:</strong> $" . $row['room_price'] . "</p>";
                                     echo "<p><strong>Customer Name:</strong> " . $row['c_name'] . "</p>";
                                     echo "<p><strong>Check-in Date:</strong> " . $row['check_in'] . "</p>";
                                     echo "<p><strong>Check-out Date:</strong> " . $row['check_out'] . "</p>";
-                                    
+
                                     // Display advance payment form
                                     echo "<form action='process_advance_payment.php' method='post'>";
                                     echo "<div class='mb-3'>";
@@ -65,9 +66,10 @@
                                     echo "<input type='number' class='form-control' id='advance_payment' name='advance_payment'>";
                                     echo "</div>";
                                     echo "<input type='hidden' name='booking_id' value='" . $row['booking_id'] . "'>";
+                                    echo "<input type='hidden' name='room_price' value='" . $row['room_price'] . "'>";
                                     echo "<button type='submit' class='btn btn-primary'>Submit Advance Payment</button>";
                                     echo "</form>";
-                                    
+
                                     // Disable check-in button after check-in
                                     if ($row['check_in_status'] == 1) {
                                         echo "<button class='btn btn-primary' disabled>Check-in</button>";
