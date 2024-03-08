@@ -193,7 +193,7 @@ if ($result->num_rows > 0) {
 
         if (is_dir('room_pictures') && move_uploaded_file($file_tmp, $upload_path)) {
 
-            $sql = "INSERT INTO room (room_type, price, offers,max_person, `description`, `image`) 
+            $sql = "INSERT INTO room_type(room_type, price, offers,max_person, `description`, `image`) 
                 VALUES ('$room_type', '$price', '$offer',$max_person, '$description', '$profile_pic')";
 
             if (mysqli_query($conn, $sql)) {

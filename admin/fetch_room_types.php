@@ -10,7 +10,7 @@ if ($result->num_rows > 0) {
     // Loop through each row in the result set
     while ($row = $result->fetch_assoc()) {
         // Append the option with room type ID as value and room price as data-price attribute
-        $options .= "<option value='" . $row['room_type_id'] . "' name='roomno' data-price='" . $row['price'] . "'>" . $row['room_type'] . "</option>";
+        $options .= "<option value='" . $row['room_type_id'] . "' name='room_no'>" . $row['room_type'] . "</option>";
     }
 } else {
     // Handle if no room types found
