@@ -148,11 +148,11 @@ if ($result->num_rows > 0) {
                                         <input type="date" class="form-control" id="checkOutDate" name="checkOutDate" placeholder="Enter Check-Out Date" required>
                                     </div>
                                     <br>
-
+<!-- 
                                     <div class="form-group">
                                         <label for="price">Price:</label>
                                         <h1><span id="price" name="price"></span</h1>
-                                    </div>
+                                    </div> -->
 
                                 </div>
                             </div>

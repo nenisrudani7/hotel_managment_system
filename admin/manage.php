@@ -44,9 +44,11 @@ if ($result->num_rows > 0) {
 
                         // SQL query to join room, room_type tables
                         $query = "SELECT r.room_id, r.room_no, rt.room_type, r.check_in_status, r.check_out_status, r.status, b.check_in, b.check_out
-                        FROM room r
-                        JOIN room_type rt ON r.room_type_id = rt.room_type_id
-                        LEFT JOIN booking b ON r.room_id = b.room_id";
+FROM room r
+JOIN room_type rt ON r.room_type_id = rt.room_type_id
+LEFT JOIN booking b ON r.room_id = b.room_id
+GROUP BY r.room_id;
+";
 
                         // Execute the query
                         $result = mysqli_query($conn, $query);
@@ -71,27 +73,42 @@ if ($result->num_rows > 0) {
                                 <tbody>";
 
                                 // Output data of each row
+                       
                                 while ($row = mysqli_fetch_assoc($result)) {
-                        ?>
+                                ?>
                                     <tr>
                                         <td><?php echo $row["room_no"] ?></td>
                                         <td><?php echo $row["room_type"] ?></td>
-                                        <td><?php
+                                        <td>
+                                            <?php
                                             if ($row["status"] == 1) {
                                                 echo "<button class='btn btn-success'>Booked</button>";
                                             } else {
                                                 echo "<a href='register.php' class='btn btn-primary'>Book Room</a>";
                                             }
-                                            ?></td>
-                                        <td><?php if ($row["check_in_status"] == 1) {
+                                            ?>
+                                        </td>
+                                        <td>
+                                            <?php
+                                            if ($row["status"] == 1 && $row["check_in_status"] == 0) {
                                                 echo "<a href='check_in.php?room_id=" . $row["room_id"] . "' class='btn btn-primary'>Check-in</a>";
-                                            } ?></td>
-                                        <td><?php if ($row["check_out_status"] == 1) {
-                                                echo "<a href='#' class='btn btn-primary'>Check-out</a>";
-                                            } ?></td>
+                                            }elseif($row["status"] == 1 && $row["check_in_status"] == 1){
+                                                echo "<button href='check_in.php?room_id=" . $row["room_id"] . "' class='btn btn-primary' disabled>Check-in</button>";
+                                            }
+                                            ?>
+                                        </td>
+                                        <td>
+                                            <?php
+                                            if ($row["check_in_status"] == 1) {
+                                                echo "<a href='check_out.php?room_id=" . $row["room_id"] . "' class='btn btn-primary'>Check-out</a>";
+                                            }
+                                            ?>
+                                        </td>
                                     </tr>
-                        <?php
+                                <?php
                                 }
+                                
+                                
                                 echo "</tbody></table></div>";
                             } else {
                                 echo "No records found";

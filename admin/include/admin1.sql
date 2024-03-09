@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 04, 2024 at 01:47 PM
+-- Generation Time: Mar 09, 2024 at 12:12 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -37,8 +37,19 @@ CREATE TABLE `booking` (
   `total_price` int(10) NOT NULL,
   `remaining_price` int(10) NOT NULL,
   `payment_status` tinyint(1) NOT NULL,
-  `max_person` int(112) NOT NULL
+  `max_person` int(112) NOT NULL,
+  `advance_payment` int(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+
+--
+-- Dumping data for table `booking`
+--
+
+INSERT INTO `booking` (`booking_id`, `customer_id`, `room_id`, `booking_date`, `check_in`, `check_out`, `total_price`, `remaining_price`, `payment_status`, `max_person`, `advance_payment`) VALUES
+(24, 106, 1, '2024-03-07 18:30:00', '2024-03-15', '2024-03-22', 1500, 1380, 1, 1, 120),
+(25, 107, 2, '2024-03-07 18:30:00', '2024-03-05', '2024-03-06', 18000, 1380, 1, 12, 120),
+(26, 108, 3, '2024-03-08 18:30:00', '2024-03-28', '2024-03-21', 12000, 778, 1, 6, 1222),
+(27, 109, 2, '2024-03-08 18:30:00', '2024-03-28', '2024-03-29', 4500, 0, 1, 3, 0);
 
 -- --------------------------------------------------------
 
@@ -59,10 +70,10 @@ CREATE TABLE `customer` (
 --
 
 INSERT INTO `customer` (`c_id`, `c_name`, `email`, `number`, `add`) VALUES
-(102, 'nenis rudani', 'a@gmail.com', '8849870776', 'rajkot'),
-(103, 'nenis rudani', 'jgajera441@rku.ac.in', '8849870776', 'rajkot'),
-(104, 'jess thapa', 'jenilgajera431@rku.ac.in', '8849870776', 'amreli'),
-(105, 'nenis rudani', 'jenilgajera431@rku.ac.in', '8849870776', 'amreli');
+(106, 'radhesh joshi', 'rjoshi43@rku.ac.in', '31313813913', 'rajkot'),
+(107, 'nenis mul', 'jenilgajera43@gmail.com', '8780689090', 'amreli ,rajkot'),
+(108, 'denish dobariya', 'jenilgajera43@gmail.com', '8849870776', 'mahamad'),
+(109, 'naman patel', 'nmana43@gmail.com', '87806888890', 'junagdha');
 
 -- --------------------------------------------------------
 
@@ -85,11 +96,11 @@ CREATE TABLE `room` (
 --
 
 INSERT INTO `room` (`room_id`, `room_type_id`, `room_no`, `status`, `check_in_status`, `check_out_status`, `deleteStatus`) VALUES
-(1, 2, 'A-101', NULL, 0, 0, 1),
-(2, 2, 'A-102', NULL, 1, 1, 0),
+(1, 2, 'A-101', NULL, 0, 0, 0),
+(2, 2, 'A-102', NULL, 0, 0, 0),
 (3, 3, 'A-103', NULL, 0, 0, 0),
-(4, 4, 'A-104', 1, 0, 0, 0),
-(5, 1, 'B-101', NULL, 0, 1, 0),
+(4, 4, 'A-104', NULL, 0, 0, 0),
+(5, 1, 'B-101', NULL, 0, 0, 0),
 (6, 2, 'B-102', NULL, 0, 0, 1),
 (7, 3, 'B-103', NULL, 0, 0, 0),
 (8, 4, 'B-104', NULL, 0, 0, 1),
@@ -97,8 +108,8 @@ INSERT INTO `room` (`room_id`, `room_type_id`, `room_no`, `status`, `check_in_st
 (10, 2, 'C-102', NULL, 0, 0, 0),
 (11, 3, 'C-103', NULL, 0, 0, 1),
 (12, 4, 'C-104', NULL, 0, 0, 0),
-(13, 4, 'D-101', NULL, 0, 1, 1),
-(14, 5, 'K-699', NULL, 0, 1, 0),
+(13, 4, 'D-101', NULL, 0, 0, 1),
+(14, 5, 'K-699', NULL, 0, 0, 0),
 (15, 5, 'K-799', NULL, 0, 0, 0),
 (16, 5, 'K-899', NULL, 0, 0, 0),
 (17, 6, 'M-333', NULL, 0, 0, 0),
@@ -106,11 +117,12 @@ INSERT INTO `room` (`room_id`, `room_type_id`, `room_no`, `status`, `check_in_st
 (19, 6, 'M-555', NULL, 0, 0, 0),
 (20, 9, 'P-696', NULL, 0, 0, 0),
 (21, 10, 'M-966', NULL, 0, 0, 0),
-(22, 10, 'M-869', NULL, 0, 1, 0),
+(22, 10, 'M-869', NULL, 0, 0, 0),
 (23, 8, 'Z-666', NULL, 0, 0, 0),
 (24, 7, 'X-969', NULL, 0, 0, 0),
 (25, 8, 'Z-111', NULL, 0, 0, 0),
-(26, 6, 'M-135', NULL, 0, 0, 0);
+(26, 6, 'M-135', NULL, 0, 0, 0),
+(30, 5, 'k-201', NULL, 0, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -155,8 +167,17 @@ CREATE TABLE `user` (
   `a_id` int(12) NOT NULL,
   `a_name` varchar(30) NOT NULL,
   `a_email` varchar(20) NOT NULL,
-  `password` int(11) NOT NULL
+  `password` int(11) NOT NULL,
+  `phone` int(15) NOT NULL,
+  `address` varchar(120) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `user`
+--
+
+INSERT INTO `user` (`a_id`, `a_name`, `a_email`, `password`, `phone`, `address`) VALUES
+(1, 'jess', 'jgajera441@rku.ac.in', 123, 643434343, 'rajkot ');
 
 --
 -- Indexes for dumped tables
@@ -203,19 +224,19 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `booking`
 --
 ALTER TABLE `booking`
-  MODIFY `booking_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `booking_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 
 --
 -- AUTO_INCREMENT for table `customer`
 --
 ALTER TABLE `customer`
-  MODIFY `c_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=106;
+  MODIFY `c_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=110;
 
 --
 -- AUTO_INCREMENT for table `room`
 --
 ALTER TABLE `room`
-  MODIFY `room_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+  MODIFY `room_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 
 --
 -- AUTO_INCREMENT for table `room_type`
@@ -227,7 +248,7 @@ ALTER TABLE `room_type`
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `a_id` int(12) NOT NULL AUTO_INCREMENT;
+  MODIFY `a_id` int(12) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- Constraints for dumped tables
