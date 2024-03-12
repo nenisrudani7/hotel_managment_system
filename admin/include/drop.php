@@ -1,4 +1,3 @@
-
 <script>
   $(document).ready(function () {
     $('#roomType').change(function () {
@@ -18,6 +17,8 @@
                     options += '<option value="">No room numbers found</option>';
                 }
                 $('#roomNo').html(options);
+                // Trigger change event for room number to update the price
+                $('#roomNo').change();
             },
             error: function () {
                 console.log('Error fetching room numbers');
@@ -25,10 +26,12 @@
         });
     });
     $('#roomNo').change(function () {
-                var roomNo = $(this).val();
-                var roomPrice = $(this).find(':selected').data('price');
-                $('#price').val(roomPrice);
-            });
+        var roomPrice = $(this).find(':selected').data('price');
+        $('#price').val(roomPrice);
+    });
+
+    // Trigger change event for room type initially to fetch room numbers
+    $('#roomType').change();
 });
 
 </script>
