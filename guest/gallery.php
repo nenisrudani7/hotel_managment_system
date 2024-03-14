@@ -30,117 +30,27 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.3/dist/jquery.validate.min.js"></script>
+    <style>
+    .error{
+    color: red;
+   }
+    </style>
+  
+        
 </head>
 
 <body>
-
-
-<?php include 'navbar1.php' ?>
+ <?php include 'navbar.php'?>
+ <br>
+ <br>
+ <br>
  
-  <br>
-  <br>
-  <!-- ------mode2---------------- -->
-  <div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabe" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <!-- Your login form goes here -->
-
-        <div class="modal-header bg-dark">
-          <h5 class="modal-title text-white" id="exampleModalLabel">Your!</h5>
-          <button type="button" class="btn-close bg-white" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body"><br><br>
-          <center>
-            <h4>My-Booking</h4>
-          </center><br><br>
-          <form id="signupForm" method="post">
-            <div class="mb-3">
-              <label for="name" class="form-label">Name</label>
-              <input type="text" class="form-control" id="name" name="name">
-              <span id="name_err"></span>
-            </div>
-
-          <h4>Step 2:Properity details</h4><br><br>
-     
-          <div class="mb-3"><label for="room-type">Room-type:&nbsp;</label>
-            <select id="type">
-              <option value="Standerd">Standard-Room</option>
-              <option value="Family">Famliy-Room</option>
-              <option value="Delux">Delux-Room</option>
-              <option value="king">King-Room</option>
-              <option value="Oueen">Oueen-Room</option>
-              <option value="Quad">Quad-Room</option>
-            </select></div>
-          <label for="total_p">Total Persion:</label>
-          <input type="number" id="p2" name="p2" required><br><br>
-          <label for="check-in">Check-in Date:&nbsp;&nbsp;</label>
-          <input type="date" id="d1" name="d1" required><br><br>
-  
-          <label for="check-out">Check-out Date</label>
-          <input type="date" id="d2" name="d2" required><br><br>
-         
-
-          
-        <label for="toal">Total amount:$1000 /per-day.</label><br><br>
-        </div>
-      </div>
-    </div>
-  </div>
-  </div>
-
-  <!-- ------mode3---------------- -->
-  <div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <!-- Your login form goes here -->
-
-        <div class="modal-header bg-dark">
-          <h5 class="modal-title text-white" id="exampleModalLabel">Your Profile</h5>
-          <button type="button" class="btn-close bg-white" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          <!-- Your login form -->
-          
-          <form id="signupForm" method="post">
-            <div class="mb-3">
-              <label for="name" class="form-label">Name</label>
-              <input type="text" class="form-control" id="name" name="name">
-              <span id="name_err"></span>
-            </div>
-          
-         
-
-            <!-- Edit button -->
-            <button type="button" id="j1" name="j1" class="btn btn-primary btn-block mb-4">Edit</button>
-        </div>
-      </div>
-    </div>
-  </div>
-  </div>
-
-
-  <!-- ------mode4---------------- -->
-  <div class="modal fade" id="exampleModal3" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <!-- Your login form goes here -->
-
-        <div class="modal-header bg-dark">
-          <h5 class="modal-title text-white" id="exampleModalLabel">Thank you for Sing-in</h5>
-          <button type="button" class="btn-close bg-white" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          
-
-            <!-- Edit button -->
-           <center> <button type="button" id="j1" name="j1" class="btn btn-primary btn-block mb-4">Log-Out</button></center>
-        </div>
-      </div>
-    </div>
-  </div>
-  </div>
-
-    <!-- gallry start -->
+<!-- gallry start -->
     <header class="btn-light text-dark text-center py-5">
       <div class="container">
         <h1>Welcome to Our Gallery</h1>
@@ -215,7 +125,7 @@
           </div>
         </div>
         <!-- -----third row----- -->
-        <h1 class="text-center" style="font-family: 'Montserrat', sans-serif;">Our Intrior</h1>
+        <h1 class="text-center" style="font-family: 'Montserrat', sans-serif;">Our Interior</h1>
         <div class="row my-4">
           <div class="col-lg-4 col-md-12 mb-4 mb-lg-0">
             <div class="bg-image hover-overlay ripple shadow-1-strong rounded" data-ripple-color="light">
@@ -246,11 +156,7 @@
         </div>
       </section>
       <!-- Section: Images -->
-      <?php include '../footer.php'?>
-
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+      <?php include 'footer.php'?>
   </body>
 
 </html>
