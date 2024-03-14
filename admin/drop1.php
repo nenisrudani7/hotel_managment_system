@@ -2,48 +2,28 @@
 $(document).ready(function() {
     // Event handler for room type selection change
     $('#roomType').change(function() {
-        var roomTypeId = $(this).val();
-        var maxPersons = $('#max_person').val(); 
+        var roomTypeId = $(this).val(); // Get the selected room type ID
 
         // AJAX request to fetch room price
         $.ajax({
-            url: 'fetch_room_price.php',
+            url: 'fetch_room_price.php', // URL to fetch the room price data
             type: 'POST',
             data: {
-                roomTypeId: roomTypeId
+                roomTypeId: roomTypeId // Send the selected room type ID to the server
             },
-            dataType: 'json',
-            success: function(response) {
-                if (response && response.price) {
-                    var totalPrice = response.price * maxPersons;
-                    $('#price').text(totalPrice);
-                    var newUrl = 'http://example.com/booking?roomTypeId=' + roomTypeId + '&maxPersons=' + maxPersons + '&totalPrice=' + totalPrice;
-                    $('#bookingUrl').attr('href', newUrl);
+            dataType: 'json', // Expected data type of the response
+            success: function(response) { // Callback function if the AJAX request is successful
+                if (response && response.roomPrice) { // Check if the response contains the room price data
+                    var roomPrice = response.roomPrice; // Extract the room price from the response
+                    $('#roomPrice').text(roomPrice); // Update the price in the UI
                 } else {
-                    $('#price').text('Price not available');
-                    $('#bookingUrl').attr('href', '#');
+                    $('#roomPrice').text('Price not available'); // Display a message if the price data is not available
                 }
             },
-            error: function(jqXHR, textStatus, errorThrown) {
-                console.log('Error fetching room price:', errorThrown);
+            error: function(jqXHR, textStatus, errorThrown) { // Callback function if there is an error with the AJAX request
+                console.log('Error fetching room price:', errorThrown); // Log the error message to the console
             }
         });
-    });
-
-    // Event handler for max persons input keyup
-    $('#max_person').keyup(function() {
-        var maxPersons = $(this).val();
-        var roomPrice = $('#roomType').find(':selected').data('price');
-        if (maxPersons && roomPrice) {
-            var totalPrice = maxPersons * roomPrice;
-            $('#price').text(totalPrice);
-            var roomTypeId = $('#roomType').val();
-            var newUrl = 'http://example.com/booking?roomTypeId=' + roomTypeId + '&maxPersons=' + maxPersons + '&totalPrice=' + totalPrice;
-            $('#bookingUrl').attr('href', newUrl);
-        } else {
-            $('#price').text('');
-            $('#bookingUrl').attr('href', '#');
-        }
     });
 });
 </script>

@@ -135,8 +135,21 @@
                         </div>
                     </div>
                     <div class="container btn-light text-dark py-5">
-                        <input type="submit" value="Submit" name="submit">
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="">
+                                    <label for="roomPrice">Room Price:</label>
+                                    <!-- Use a span tag to display the room price -->
+                                    <h1><span id="roomPrice" class=""></span></h1>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <input type="submit" value="Submit" name="submit" class="btn btn-primary">
+                            </div>
+                        </div>
                     </div>
+
+
                 </form>
             </div>
         </div>
@@ -255,5 +268,7 @@
 <?php
 include('reg-i.php');
 include('include/drop.php');
-include('drop1.php');
+include('drop1.php')
+
+
 ?>
