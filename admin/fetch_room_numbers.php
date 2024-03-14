@@ -18,3 +18,5 @@ if (isset($_POST['roomTypeId'])) {
     echo json_encode(array());
 }
 ?>
+
+

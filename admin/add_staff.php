@@ -33,13 +33,13 @@
                                 <div class="mb-3">
                                     <label for="name" class="form-label">Name</label>
                                     <input type="text" class="form-control" id="name" name="name" required>
-                                    <div class="error-placement"></div> 
+                                    <div class="error-placement"></div>
                                 </div>
 
                                 <div class="mb-3">
                                     <label for="email" class="form-label">Email</label>
                                     <input type="email" class="form-control" id="email" name="email" required>
-                                    <div class="error-placement"></div> 
+                                    <div class="error-placement"></div>
                                 </div>
                                 <div class="mb-3">
                                     <label for="phone" class="form-label">Phone</label>
@@ -49,25 +49,25 @@
                                 <div class="mb-3">
                                     <label for="department" class="form-label">Department</label>
                                     <input type="text" class="form-control" id="department" name="department" required>
-                                    <div class="error-placement"></div> 
+                                    <div class="error-placement"></div>
                                 </div>
                                 <div class="mb-3">
                                     <label for="address" class="form-label">Address</label>
                                     <input type="text" class="form-control" id="address" name="address" required>
-                                    <div class="error-placement"></div> 
+                                    <div class="error-placement"></div>
                                 </div>
                                 <div class="mb-3">
                                     <label for="salary" class="form-label">Salary</label>
                                     <div class="input-group">
                                         <span class="input-group-text">$</span>
                                         <input type="number" class="form-control" id="salary" name="salary" required>
-                                        <div class="error-placement"></div> 
+                                        <div class="error-placement"></div>
                                     </div>
                                 </div>
                                 <div class="mb-3">
                                     <label for="image" class="form-label">Image</label>
-                                    <input type="file" class="form-control" id="image" name="image" accept="image/*">
-                                    <div class="error-placement"></div> 
+                                    <input type="file" class="form-control" id="image" name="image" accept="image/*" required>
+                                    <div class="error-placement"></div>
                                 </div>
                                 <button type="submit" class="btn btn-primary" name="submit">Submit</button>
                             </form>
@@ -88,8 +88,8 @@
     <script>
         $(document).ready(function() {
             $("#add_staff").validate({
-                rules:{
-                    name:{
+                rules: {
+                    name: {
                         required: true
                     },
                     email: {
@@ -147,53 +147,46 @@
         });
     </script>
     <?php
-    include_once('include/conn.php');
+include_once('include/conn.php');
 
-    
-    if (isset($_POST['submit'])) {
-        $name = $_POST['name'];
-        $email = $_POST['email'];
-        $phone = $_POST['phone'];
-        $department = $_POST['department'];
-        $address = $_POST['address'];
-        $salary = $_POST['salary'];
+if (isset($_POST['submit'])) {
+    $name = $_POST['name'];
+    $email = $_POST['email'];
+    $phone = $_POST['phone'];
+    $department = $_POST['department'];
+    $address = $_POST['address'];
+    $salary = $_POST['salary'];
 
-        if (isset($_FILES['image']) && $_FILES['image']['error'] === UPLOAD_ERR_OK) {
-            $image = $_FILES['image']['name'];
-            $targetDir = "admin/profile_picture/";
-            $targetFilePath = $targetDir . basename($_FILES["image"]["name"]);
+    if (isset($_FILES['image']) && $_FILES['image']['error'] === UPLOAD_ERR_OK) {
+        $image = $_FILES['image']['name'];
+        $targetDir = "staff_image/";
+        $targetFilePath = $targetDir . basename($_FILES["image"]["name"]);
 
-         
-            if (move_uploaded_file($_FILES["image"]["tmp_name"], $targetFilePath)) {
-            
-            } else {
-               
-                echo "Sorry, there was an error uploading your file.";
-            }
-        } else {
-            $image = "";
+        // Create the directory if it doesn't exist
+        if (!is_dir($targetDir)) {
+            mkdir($targetDir, 0755, true);
         }
 
-  
-        $email_check_query = "SELECT COUNT(*) AS count FROM staff WHERE email = '$email'";
-        $email_check_result = mysqli_query($conn, $email_check_query);
-        $email_check_data = mysqli_fetch_assoc($email_check_result);
+        if (move_uploaded_file($_FILES["image"]["tmp_name"], $targetFilePath)) {
+            // Image uploaded successfully, continue with database insertion
+            $insert_staff_query = "INSERT INTO staff (name, email, phone, Department, address, salary, image) VALUES ('$name', '$email', '$phone', '$department', '$address', $salary, '$targetFilePath')";
 
-        if ($email_check_data['count'] > 0) {
-            echo "<script>alert('Staff with the same email already exists.')</script>";
-        } else {
-          
-            $insert_staff_query = "INSERT INTO staff (name, email, phone, Department, address, salary, image) VALUES ('$name', '$email', '$phone', '$department', '$address', $salary, '$image')";
-
-      
             if (mysqli_query($conn, $insert_staff_query)) {
                 echo "<script>alert('Staff added successfully.')</script>";
             } else {
                 echo "Error adding staff: " . mysqli_error($conn);
             }
+        } else {
+            // Error uploading image
+            echo "Sorry, there was an error uploading your file.";
         }
+    } else {
+        // No image selected
+        $image = "";
     }
-    ?>
+}
+?>
+
 </body>
 
 </html>

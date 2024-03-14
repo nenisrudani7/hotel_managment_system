@@ -1,26 +1,3 @@
-<?php
-
-session_start();
-
-if (!isset($_SESSION['stulogin']) || $_SESSION['stulogin'] !== true) {
-
-  header("location: signup.php");
-}
-
-$username = $_SESSION['a_name'];
-
-include 'include/conn.php';
-
-$query = "SELECT * FROM user WHERE a_name = '$username'";
-
-$result = $conn->query($query);
-
-if ($result->num_rows > 0) {
-
-  $userData = $result->fetch_assoc();
-
-?>
-
 <!DOCTYPE html>
 <html lang="en" data-bs-theme="dark">
 
@@ -33,7 +10,12 @@ if ($result->num_rows > 0) {
     <script src="https://kit.fontawesome.com/ae360af17e.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="css/style.css" />
     <script src="jquery-3.6.4.min.js"></script>
-    <script src="jquery.validate.js"></script>
+    <!-- jQuery UI Datepicker CSS -->
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <!-- jQuery UI Datepicker JS -->
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <!-- jQuery Validation Plugin -->
+    <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
 
     <style>
         .error {
@@ -68,7 +50,7 @@ if ($result->num_rows > 0) {
             </nav>
 
             <!-- Main Content -->
-            <div class="container-fluid  p-3 my-container">
+            <div class="container-fluid p-3 my-container">
                 <form action="register.php" method="post" enctype="multipart/form-data" id="signupForm">
                     <div class="row">
                         <div class="col-lg-6">
@@ -116,7 +98,7 @@ if ($result->num_rows > 0) {
                                 <div class="panel-body">
                                     <div class="form-group">
                                         <label for="roomType">Room Type:</label>
-                                        <select class="form-select" name="roomType" id="roomType">
+                                        <select class="form-select" name="roomType" id="roomType" required>
                                             <option selected disabled>Select Room Type</option>
                                             <?php
                                             include_once('fetch_room_types.php'); // Include the PHP file to fetch room types
@@ -139,28 +121,21 @@ if ($result->num_rows > 0) {
 
                                     <div class="form-group">
                                         <label for="checkInDate">Check-In Date</label>
-                                        <input type="date" class="form-control" id="checkInDate" name="checkInDate" placeholder="Enter Check-In Date" required>
+                                        <input type="text" class="form-control" id="checkInDate" name="checkInDate" placeholder="Enter Check-In Date" required>
                                     </div>
 
                                     <br>
                                     <div class="form-group">
                                         <label for="checkOutDate">Check-Out Date</label>
-                                        <input type="date" class="form-control" id="checkOutDate" name="checkOutDate" placeholder="Enter Check-Out Date" required>
+                                        <input type="text" class="form-control" id="checkOutDate" name="checkOutDate" placeholder="Enter Check-Out Date" required>
                                     </div>
                                     <br>
-<!-- 
-                                    <div class="form-group">
-                                        <label for="price">Price:</label>
-                                        <h1><span id="price" name="price"></span</h1>
-                                    </div> -->
-
                                 </div>
                             </div>
                         </div>
-
                     </div>
                     <div class="container btn-light text-dark py-5">
-                        <input type="submit" value="Submit" href="#" name="submit">
+                        <input type="submit" value="Submit" name="submit">
                     </div>
                 </form>
             </div>
@@ -177,38 +152,38 @@ if ($result->num_rows > 0) {
 
     <script>
         $(document).ready(function() {
-            // Define custom validation method for address
-            $.validator.addMethod("validAddress", function(value, element) {
+            // Initialize Datepicker for check-in date
+            $("#checkInDate").datepicker({
+                minDate: 0, // Disable past dates
+                dateFormat: 'yy-mm-dd' // Set date format
+            });
 
-                var regex = /^[a-zA-Z0-9,\s-]+$/;
-                return regex.test(value);
-            }, "Please enter a valid address");
+            // Initialize Datepicker for check-out date
+            $("#checkOutDate").datepicker({
+                minDate: 0, // Disable past dates
+                dateFormat: 'yy-mm-dd' // Set date format
+            });
 
+            // Disable past dates for check-out date based on check-in date selection
+            $("#checkInDate").on("change", function() {
+                var selectedDate = $(this).datepicker("getDate");
+                if (selectedDate !== null) {
+                    $("#checkOutDate").datepicker("option", "minDate", selectedDate);
+                }
+            });
 
-            $.validator.addMethod("emailregex", function(value, element) {
-                var regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-                return regex.test(value);
-            }, "Please enter a valid email address");
-
-            $.validator.addMethod("noDigits", function(value, element) {
-                return this.optional(element) || !/\d/.test(value);
-            }, "Digits are not allowed.");
-
-
+            // Validation
             $("#signupForm").validate({
                 rules: {
                     f_name: {
                         required: true,
-                        noDigits: true
                     },
                     l_name: {
                         required: true,
-                        noDigits: true
                     },
                     email: {
                         required: true,
                         email: true,
-                        emailregex: true
                     },
                     number: {
                         required: true,
@@ -216,13 +191,16 @@ if ($result->num_rows > 0) {
                     },
                     add: {
                         required: true,
-                        validAddress: true // Use the custom validation method for address
                     },
                     roomType: {
                         required: true
                     },
                     roomNo: {
                         required: true
+                    },
+                    max_person: {
+                        required: true,
+                        digits: true
                     },
                     checkInDate: {
                         required: true
@@ -234,16 +212,13 @@ if ($result->num_rows > 0) {
                 messages: {
                     f_name: {
                         required: "Please enter your first name",
-                        noDigits: "First name cannot contain digits"
                     },
                     l_name: {
                         required: "Please enter your last name",
-                        noDigits: "Last name cannot contain digits"
                     },
                     email: {
                         required: "Please enter your email address",
                         email: "Please enter a valid email address",
-                        emailregex: "Please enter a valid email address"
                     },
                     number: {
                         required: "Please enter your contact number",
@@ -251,13 +226,16 @@ if ($result->num_rows > 0) {
                     },
                     add: {
                         required: "Please enter your residential address",
-                        validAddress: "Please enter a valid address" // Error message for address validation
                     },
-                    room_type: {
+                    roomType: {
                         required: "Please select a room type"
                     },
                     roomNo: {
                         required: "Please select a room number"
+                    },
+                    max_person: {
+                        required: "Please enter the number of persons",
+                        digits: "Please enter only digits"
                     },
                     checkInDate: {
                         required: "Please enter the check-in date"
@@ -266,6 +244,7 @@ if ($result->num_rows > 0) {
                         required: "Please enter the check-out date"
                     }
                 }
+
             });
         });
     </script>
@@ -273,21 +252,8 @@ if ($result->num_rows > 0) {
 </body>
 
 </html>
-<?php include('include/conn.php');
+<?php
 include('reg-i.php');
 include('include/drop.php');
 include('drop1.php');
-?>
-<script>
-
-</script>
-
-<?php 
-
-} else {
-
-  echo "User data not found.";
-
-}
-
 ?>
