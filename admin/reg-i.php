@@ -15,8 +15,8 @@ if (isset($_POST['submit'])) {
 
     // Step 2: Fetch the room ID and price based on selected room number and type
     $fetch_room_info_query = "SELECT r.room_id, r.status, rt.price FROM room r 
-        JOIN room_type rt ON r.room_type_id = rt.room_type_id 
-        WHERE r.room_type_id = $room_type_id AND r.room_no = '$room_no'";
+    JOIN room_type rt ON r.room_type_id = rt.room_type_id 
+    WHERE r.room_type_id = $room_type_id AND r.room_id = '$room_no'";
     $result = mysqli_query($conn, $fetch_room_info_query);
     if ($result && mysqli_num_rows($result) > 0) {
         $row = mysqli_fetch_assoc($result);
