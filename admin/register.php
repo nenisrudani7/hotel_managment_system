@@ -111,7 +111,9 @@
                                         <select class="form-select" id="roomNo" name="roomNo" required>
                                             <option selected disabled>Select Room No</option>
                                         </select>
-                                    </div><br>
+                                    </div>
+
+                                    <br>
 
                                     <div class="form-group">
                                         <label for="max_person">Max Persons</label>
@@ -166,32 +168,13 @@
     <script>
         $(document).ready(function() {
             // Initialize Datepicker for check-in date
-            $("#checkInDate").datepicker({
-                minDate: 0, // Disable past dates
-                dateFormat: 'yy-mm-dd' // Set date format
-            });
-
-            // Initialize Datepicker for check-out date
-            $("#checkOutDate").datepicker({
-                minDate: 0, // Disable past dates
-                dateFormat: 'yy-mm-dd' // Set date format
-            });
-
-            // Disable past dates for check-out date based on check-in date selection
-            $("#checkInDate").on("change", function() {
-                var selectedDate = $(this).datepicker("getDate");
-                if (selectedDate !== null) {
-                    $("#checkOutDate").datepicker("option", "minDate", selectedDate);
-                }
-            });
-
             // Validation
             $("#signupForm").validate({
                 rules: {
                     f_name: {
                         required: true,
                     },
-                    l_name: {
+                    l_name: {   
                         required: true,
                     },
                     email: {
@@ -268,7 +251,7 @@
 <?php
 include('reg-i.php');
 include('include/drop.php');
-include('drop1.php')
-
-
+include('drop1.php');
+include('drop2.php');
 ?>
+

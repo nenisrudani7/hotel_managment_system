@@ -13,7 +13,7 @@ if (isset($_POST['roomTypeId'])) {
         }
     }
     echo json_encode($roomNumbers);
-} else {
+} else {    
     echo json_encode(array());
 }
 ?>
