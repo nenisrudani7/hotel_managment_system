@@ -125,7 +125,7 @@ if ($result) {
                       <img class='card-img-top' src='img/$image' alt='$room_name'>
                       <div class='card-body text-center'>
                         <h4 class='card-title'>$room_name</h4>
-                        <p class='card-text'>Special Offer: $offer</p> 
+                        <p class='card-text' style='background-color:red;color:white; display:inline-block;'>$offer % Off Today</p> 
                         <p class='card-text' style='color:#5c7893'>₹$price/per day</p>
                         <a href='online_booking.php?id=$room_id' class='btn btn-danger'>Book Now</a>
                       </div>

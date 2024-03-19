@@ -117,6 +117,10 @@
     .error{
     color: red;
   }
+  .modal-backdrop.show {
+    opacity: 0.5; /* Adjust the opacity as needed */
+    background-color: rgba(0, 0, 0, 0.5); /* Adjust the color and transparency as needed */
+  }
   </style>
 </head>
 
@@ -351,72 +355,54 @@
     </div>
     </div>
     <div class="container g-3 mt-6">
-      <div class="row ">
-        <div class="col-md-12  text-center col-lg-4">
-          <div class="card" style="width:25rem">
-            <img class="card-img-top" src="img/chefe1.jpg" alt="ETHAN HOOVER">
-            <div class="card-body text-center">
-              <h4 class="card-title">ETHAN HOOVER</h4>
-              <p class="card-text" style="color:#5c7893"></p>
-              <a href="#" class="btn btn-danger">Read more →</a>
-            </div>
-          </div>
+        <div class="row">
+        <?php
+// Database connection
+include('admin/include/conn.php');
+// Fetch data from the staff table
+$sql = "SELECT * FROM staff";
+$result = $conn->query($sql);
+
+if ($result->num_rows > 0) {
+    // Output data of each row
+    while ($row = $result->fetch_assoc()) {
+        echo '<div class="col-md-12 text-center col-lg-4">
+                <div class="card" style="width:25rem">
+                    <img class="card-img-top" src="admin/' . $row["image"] . '" alt="' . $row["name"] . '">
+                    <div class="card-body text-center">
+                        <h4 class="card-title">' . $row["name"] . '</h4>
+                        <p class="card-text" style="color:#5c7893"></p>
+                        <a href="#" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#staffModal' . $row["staff_id"] . '">Read more →</a>
+                    </div>
+                </div>
+            </div>';
+
+        // Modal markup
+        echo '<div class="modal fade" id="staffModal' . $row["staff_id"] . '" tabindex="-1" aria-labelledby="staffModalLabel' . $row["staff_id"] . '" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="staffModalLabel' . $row["staff_id"] . '">' . $row["name"] . '</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <p>Email: ' . $row["email"] . '</p>
+                            <p>Phone: ' . $row["phone"] . '</p>
+                            <p>Department: ' . $row["Department"] . '</p>
+                            <img src="admin/' . $row["image"] . '" alt="' . $row["name"] . '" style="max-width: 100%;">
+                        </div>
+                    </div>
+                </div>
+            </div>';
+    }
+} else {
+    echo "0 results";
+}
+
+$conn->close();
+?>
+
         </div>
-        <div class="col-md-12 text-center  col-lg-4 ">
-          <div class="card" style="width:25rem">
-            <img class="card-img-top" src="img/chef2.jpg" alt="Family Room">
-            <div class="card-body text-center">
-              <h4 class="card-title">FLOUY CARDOZ</h4>
-              <p class="card-text" style="color:#5c7893"></p>
-              <a href="#" class="btn btn-danger">Read more →</a>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-12 text-center col-lg-4">
-          <div class="card" style="width:25rem">
-            <img class="card-img-top" src="img/chef3.jpg" alt="Delux Room">
-            <div class="card-body text-center">
-              <h4 class="card-title">CRISTINE SMITH</h4>
-              <p class="card-text" style="color:#5c7893"></p>
-              <a href="#" class="btn btn-danger">Read more →</a>
-            </div>
-          </div>
-        </div>
-      </div>
-      <br>
-      <br>
-      <div class="row ">
-        <div class="col-md-6 col-lg-4">
-          <div class="card" style="width:25rem">
-            <img class="card-img-top" src="img/chef4.jpg" alt="Standard Room">
-            <div class="card-body text-center">
-              <h4 class="card-title">MARINA STALKS</h4>
-              <p class="card-text" style="color:#5c7893"></p>
-              <a href="#" class="btn btn-danger">Read more →</a>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-6 col-lg-4 ">
-          <div class="card" style="width:25rem">
-            <img class="card-img-top" src="img/chef5.jpg" alt="Family Room">
-            <div class="card-body text-center">
-              <h4 class="card-title">MEGAN PEARSON</h4>
-              <p class="card-text" style="color:#5c7893"></p>
-              <a href="#" class="btn btn-danger">Read more →</a>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-6 col-lg-4">
-          <div class="card" style="width:25rem">
-            <img class="card-img-top" src="img/chef6.jpg" alt="Delux Room">
-            <div class="card-body text-center">
-              <h4 class="card-title">FARROKH KHAMBATA</h4>
-              <p class="card-text" style="color:#5c7893"></p>
-              <a href="#" class="btn btn-danger">Read more →</a>
-            </div>
-          </div>
-        </div>
-      </div>
     </div>
     <?php include 'footer.php'?>
 </body>

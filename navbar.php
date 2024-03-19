@@ -1,14 +1,11 @@
-
-
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    
     <title>navbar</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <!--external css file-->
@@ -169,7 +166,7 @@
                             <span id="name_err"></span>
                         </div>
 
-                        
+
                         <button type="button" id="j1" name="j1" class="btn btn-primary btn-block mb-4">Edit</button>
                     </form>
 
@@ -319,21 +316,21 @@
                                 <input type="date" id="checkInDate1" name="checkInDate1" class="form-control">
                                 <span id="checkInDate_err" class="text-danger"></span>
                             </div>
-                             <!-- Script for auto date -->
-                        <script>
-                            var d = new Date();
-                            var yr = d.getFullYear();
-                            var month = d.getMonth() + 1;
-                            if (month < 10) {
-                                month = '0' + month;
-                            }
-                            var date = d.getDate();
-                            if (date < 10) {
-                                date = '0' + date;
-                            }
-                            var c_date = yr + "-" + month + "-" + date;
-                            document.getElementById('checkInDate1').value = c_date;
-                        </script>
+                            <!-- Script for auto date -->
+                            <script>
+                                var d = new Date();
+                                var yr = d.getFullYear();
+                                var month = d.getMonth() + 1;
+                                if (month < 10) {
+                                    month = '0' + month;
+                                }
+                                var date = d.getDate();
+                                if (date < 10) {
+                                    date = '0' + date;
+                                }
+                                var c_date = yr + "-" + month + "-" + date;
+                                document.getElementById('checkInDate1').value = c_date;
+                            </script>
                             <div class="mb-3">
                                 <label for="checkOutDate">Check-out Date</label>
                                 <input type="date" id="checkOutDate" name="checkOutDate" class="form-control">
