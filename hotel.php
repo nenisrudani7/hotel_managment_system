@@ -42,49 +42,56 @@
 
   <div class="box2" style="width:100%;">
     <header>
-      <div id="carouselExampleCaptions" class="carousel slide">
-        <div class="carousel-indicators">
-          <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active"
-            aria-current="true" aria-label="Slide 1"></button>
-          <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1"
-            aria-label="Slide 2"></button>
-          <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2"
-            aria-label="Slide 3"></button>
-        </div>
-        <div class="carousel-inner">
-          <div class="carousel-item active">
-            <img src="img/h1.jpg" class="d-block w-100" alt="...">
-            <div class="carousel-caption d-none d-md-block">
-              <h1>Welcome To Hotel</h1>
-              <p>Hotel & Resort</p>
-            </div>
-          </div>
-          <div class="carousel-item">
-            <img src="img/h7.jpg" class="d-block w-100" alt="">
-            <div class="carousel-caption d-none d-md-block">
-              <h3>RELAXING ROOM</h3>
-              <p>Your Room Your Stay</p>
-            </div>
-          </div>
-          <div class="carousel-item">
-            <img src="img/h3.jpg" class="d-block w-100" alt="...">
-            <div class="carousel-caption d-none d-md-block">
-              <h3>Unique Experience</h3>
-              <p>Enjoy with us</p>
-            </div>
-          </div>
-        </div>
-        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions"
-          data-bs-slide="prev">
-          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-          <span class="visually-hidden">Previous</span>
-        </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions"
-          data-bs-slide="next">
-          <span class="carousel-control-next-icon" aria-hidden="true"></span>
-          <span class="visually-hidden">Next</span>
-        </button>
-      </div>
+
+    <?php 
+    include('admin/include/conn.php');
+// Fetch carousel items from the database
+$sql = "SELECT * FROM hotel_main_page";
+$result = mysqli_query($conn, $sql);
+
+// Output the carousel HTML
+?>
+<div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
+    <div class="carousel-indicators">
+        <?php
+        $counter = 0;
+        while ($row = mysqli_fetch_assoc($result)) {
+            $activeClass = ($counter == 0) ? 'active' : '';
+            echo '<button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="' . $counter . '" class="' . $activeClass . '" aria-current="true" aria-label="Slide ' . ($counter + 1) . '"></button>';
+            $counter++;
+        }
+        ?>
+    </div>
+    <div class="carousel-inner">
+        <?php
+        mysqli_data_seek($result, 0); // Reset result pointer to start
+        $counter = 0;
+        while ($row = mysqli_fetch_assoc($result)) {
+            $activeClass = ($counter == 0) ? 'active' : '';
+            echo '<div class="carousel-item ' . $activeClass . '">
+                    <img src="' . $row['image_path'] . '" class="d-block w-100" alt="">
+                    <div class="carousel-caption d-none d-md-block">
+                        <h1>' . $row['caption_heading'] . '</h1>
+                        <p>' . $row['caption_text'] . '</p>
+                    </div>
+                </div>';
+            $counter++;
+        }
+        ?>
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+    </button>
+</div>
+
+<?php
+
+?>
     </header>
     <!--------------------------------- navbar ---------------------------------->
     <?php include 'navbar.php' ?>

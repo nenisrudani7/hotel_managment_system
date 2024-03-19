@@ -3,7 +3,6 @@ include_once('include/conn.php');
 
 if (isset($_POST['roomTypeId'])) {
     $roomTypeId = $_POST['roomTypeId'];
-
     $query = "SELECT * FROM room WHERE room_type_id = $roomTypeId";
     $result = $conn->query($query);
 
@@ -14,7 +13,7 @@ if (isset($_POST['roomTypeId'])) {
         }
     }
     echo json_encode($roomNumbers);
-} else {
+} else {    
     echo json_encode(array());
 }
 ?>
