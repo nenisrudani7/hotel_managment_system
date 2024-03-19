@@ -1,3 +1,19 @@
+<?php
+
+include('admin/include/conn.php');
+// Fetch the gym heading from the database
+$sql_heading = "SELECT heading FROM gym_heading";
+$result_heading = $conn->query($sql_heading);
+$row_heading = $result_heading->fetch_assoc();
+$gym_heading = $row_heading["heading"];
+
+// Fetch gym images from the database
+$sql_images = "SELECT image_path, modal_id FROM gym_images";
+$result_images = $conn->query($sql_images);
+
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -51,109 +67,140 @@
  <br>
  
 <!-- gallry start -->
-    <header class="btn-light text-dark text-center py-5">
-      <div class="container">
-        <h1>Welcome to Our Gallery</h1>
-        <p class="lead">Experience luxury and comfort at our hotel</p>
-      </div>
-    </header>
+    <?php
+
+// SQL query to fetch data from gallery_header table
+$sql = "SELECT * FROM gallery_header";
+$result = $conn->query($sql);
+
+// Check if any rows were returned
+if ($result->num_rows > 0) {
+    // Fetch the data
+    $row = $result->fetch_assoc();
+
+    // Output the HTML structure with fetched data
+    echo '<header class="btn-light text-dark text-center py-5">
+            <div class="container">
+              <h1>' . $row['title'] . '</h1>
+              <p class="lead">' . $row['subtitle'] . '</p>
+            </div>
+          </header>';
+} else {
+    echo "0 results";
+}
+
+?>
 
     <hr>
     <!-- Gallery -->
       <!-- Section: Images -->
       <section class="container-fluid">
-        <h1 class="text-center" style=" font-family: 'Montserrat', sans-serif;">Our Gym</h1>
-        <div class="row">
-          <div class="col-lg-4 col-md-12 mb-4 mb-lg-0">
-            <div class="bg-image hover-overlay ripple shadow-1-strong rounded" data-ripple-color="light">
-              <img src="img/gym1.jpg" class="w-100" />
-              <a href="#!" data-mdb-toggle="modal" data-mdb-target="#exampleModal1">
-                <div class="mask" style="background-color: rgba(251, 251, 251, 0.2);"></div>
-              </a>
-            </div>
-          </div>
-
-          <div class="col-lg-4 mb-4 mb-lg-0">
-            <div class="bg-image hover-overlay ripple shadow-1-strong rounded" data-ripple-color="light">
-              <img src="img/gym2.jpg" class="w-100" />
-              <a href="#!" data-mdb-toggle="modal" data-mdb-target="#exampleModal2">
-                <div class="mask" style="background-color: rgba(251, 251, 251, 0.2);"></div>
-              </a>
-            </div>
-          </div>
-
-          <div class="col-lg-4 mb-4 mb-lg-0">
-            <div class="bg-image hover-overlay ripple shadow-1-strong rounded" data-ripple-color="light">
-              <img src="img/gym3.jpg" class="w-100" />
-              <a href="#!" data-mdb-toggle="modal" data-mdb-target="#exampleModal3">
-                <div class="mask" style="background-color: rgba(251, 251, 251, 0.2);"></div>
-              </a>
-            </div>
-          </div>
+      <h1 class="text-center" style="font-family: 'Montserrat', sans-serif;"><?php echo $gym_heading; ?></h1>
+  <div class="row">
+    <?php
+    // Loop through each gym image
+    while ($row_image = $result_images->fetch_assoc()) {
+      $image_path = $row_image["image_path"];
+      $modal_id = $row_image["modal_id"];
+      ?>
+      <div class="col-lg-4 col-md-12 mb-4 mb-lg-0">
+        <div class="bg-image hover-overlay ripple shadow-1-strong rounded" data-ripple-color="light">
+          <img src="<?php echo $image_path; ?>" class="w-100" />
+          <a href="#!" data-mdb-toggle="modal" data-mdb-target="#<?php echo $modal_id; ?>">
+            <div class="mask" style="background-color: rgba(251, 251, 251, 0.2);"></div>
+          </a>
         </div>
+      </div>
+    <?php } ?>
+  </div>
          <br>
          <br>
 
         <!-- second row -->
-        <h1 class="text-center" style="font-family: 'Montserrat', sans-serif;">Our Rooms</h1>
-        <div class="row my-4">
-          <div class="col-lg-4 col-md-12 mb-4 mb-lg-0">
-            <div class="bg-image hover-overlay ripple shadow-1-strong rounded" data-ripple-color="light">
-              <img src="img/room1.jpg" class="w-100" />
-              <a href="#!" data-mdb-toggle="modal" data-mdb-target="#exampleModal1">
-                <div class="mask" style="background-color: rgba(251, 251, 251, 0.2);"></div>
-              </a>
-            </div>
-          </div>
+        <?php
+// Assuming you have established a database connection
 
-          <div class="col-lg-4 mb-4 mb-lg-0">
-            <div class="bg-image hover-overlay ripple shadow-1-strong rounded" data-ripple-color="light">
-              <img src="img/king-room.jpg" class="w-100" />
-              <a href="#!" data-mdb-toggle="modal" data-mdb-target="#exampleModal2">
-                <div class="mask" style="background-color: rgba(251, 251, 251, 0.2);"></div>
-              </a>
-            </div>
-          </div>
+// Fetch room headings from the database
+$sql_heading = "SELECT heading FROM room_heading"; // Assuming 'room_heading' is your table name
+$result_heading = $conn->query($sql_heading);
+$row_heading = $result_heading->fetch_assoc();
+$room_heading = $row_heading["heading"];
 
-          <div class="col-lg-4 mb-4 mb-lg-0">
-            <div class="bg-image hover-overlay ripple shadow-1-strong rounded" data-ripple-color="light">
-              <img src="img/img_4.jpg" class="w-100" />
-              <a href="#!" data-mdb-toggle="modal" data-mdb-target="#exampleModal3">
-                <div class="mask" style="background-color: rgba(251, 251, 251, 0.2);"></div>
+// Fetch room details from the database
+$sql_rooms = "SELECT * FROM rooms_page_image"; // Assuming 'room_page_image' is your table name
+$result_rooms = $conn->query($sql_rooms);
+
+// Check if there are any rooms available
+if ($result_rooms->num_rows > 0) {
+  ?>
+  <h1 class="text-center" style="font-family: 'Montserrat', sans-serif;">Our Rooms</h1>
+  <div class="row my-4">
+  <?php
+  // Loop through each room
+  while($row_room = $result_rooms->fetch_assoc()) {
+      ?>
+      <div class="col-lg-4 col-md-12 mb-4 mb-lg-0">
+          <div class="bg-image hover-overlay ripple shadow-1-strong rounded" data-ripple-color="light">
+              <img src="<?php echo $row_room["image_path"]; ?>" class="w-100" />
+              <a href="#!" data-mdb-toggle="modal" data-mdb-target="#<?php echo $row_room["modal_id"]; ?>">
+                  <div class="mask" style="background-color: rgba(251, 251, 251, 0.2);"></div>
               </a>
-            </div>
           </div>
-        </div>
+      </div>
+      <?php
+  }
+  ?>
+  </div> <!-- Close the row div -->
+  <?php
+} else {
+  // If no rooms are available
+  echo "No rooms available.";
+}
+?>
+
+
         <!-- -----third row----- -->
-        <h1 class="text-center" style="font-family: 'Montserrat', sans-serif;">Our Interior</h1>
+        <?php
+// Assuming you have already connected to your database
+
+// Fetching headings
+$sql_headings = "SELECT * FROM interior_headings";
+$result_headings = $conn->query($sql_headings);
+
+// Check if there are any headings
+
+if ($result_headings->num_rows > 0) {
+    // Fetching images
+    $sql_images = "SELECT * FROM interior_images";
+    $result_images = $conn->query($sql_images);
+
+    // Output the heading
+    if ($row_heading = $result_headings->fetch_assoc()) {
+?>
+        <h1 class="text-center" style="font-family: 'Montserrat', sans-serif;"><?php echo $row_heading['heading']; ?></h1>
+
         <div class="row my-4">
-          <div class="col-lg-4 col-md-12 mb-4 mb-lg-0">
-            <div class="bg-image hover-overlay ripple shadow-1-strong rounded" data-ripple-color="light">
-              <img src="img/int1.jpg" class="w-100" />
-              <a href="#!" data-mdb-toggle="modal" data-mdb-target="#exampleModal1">
-                <div class="mask" style="background-color: rgba(251, 251, 251, 0.2);"></div>
-              </a>
-            </div>
-          </div>
-
-          <div class="col-lg-4 mb-4 mb-lg-0">
-            <div class="bg-image hover-overlay ripple shadow-1-strong rounded" data-ripple-color="light">
-              <img src="img/int2.jpg" class="w-100" />
-              <a href="#!" data-mdb-toggle="modal" data-mdb-target="#exampleModal2">
-                <div class="mask" style="background-color: rgba(251, 251, 251, 0.2);"></div>
-              </a>
-            </div>
-          </div>
-
-          <div class="col-lg-4 mb-4 mb-lg-0">
-            <div class="bg-image hover-overlay ripple shadow-1-strong rounded" data-ripple-color="light">
-              <img src="img/int3.jpg" class="w-100" />
-              <a href="#!" data-mdb-toggle="modal" data-mdb-target="#exampleModal3">
-                <div class="mask" style="background-color: rgba(251, 251, 251, 0.2);"></div>
-              </a>
-            </div>
-          </div>
+            <?php while ($row_image = $result_images->fetch_assoc()) : ?>
+                <div class="col-lg-4 col-md-12 mb-4 mb-lg-0">
+                    <div class="bg-image hover-overlay ripple shadow-1-strong rounded" data-ripple-color="light">
+                        <img src="<?php echo $row_image["image_path"]; ?>" class="w-100" />
+                        <a href="#!" data-mdb-toggle="modal" data-mdb-target="<?php echo $row_image["modal_target"]; ?>">
+                            <div class="mask" style="background-color: rgba(251, 251, 251, 0.2);"></div>
+                        </a>
+                    </div>
+                </div>
+            <?php endwhile; ?>
         </div>
+<?php
+    } else {
+        echo "No headings found";
+    }
+} else {
+    echo "No data found";
+}
+?>
+
+
       </section>
       <!-- Section: Images -->
       <?php include 'footer.php'?>
