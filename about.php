@@ -177,197 +177,187 @@
 
       ?>
 
-
-
-
-      <!-- ------------------site section---- -->
-      <?php
-
-// SQL query to fetch data from the about_content table
-$sql = "SELECT heading, image_path, video_link, description FROM about_content";
-$result = $conn->query($sql);
-
-// Check if there are rows returned
-if ($result->num_rows > 0) {
-    // Output data of each row
-    while($row = $result->fetch_assoc()) {
-      ?>
-      <br>
-      <br>
-      <br>
       <div class="row">
-        <div class="col text-center" style="text-decoration: underline;">
-          <h1><?php echo "$row['heading'];"?></h1>
-        </div>
-      </div>
-      <div class="site-section mt-5 text-white ">
-        <div class="container">
-          <div class="row align-items-center">
-            <div class="col-md-6 mb-5 mb-md-0">
-              <div class="gallary">
-                <div class="gallary_image_box">
-                  <div class="gallary_image">
-                    <img src="img/h7.jpg" />
+        <?php
 
-                    <a href="https://www.youtube.com/watch?v=4K6Sh1tsAW4&ab_channel=BogdanIorga" target="_blank" class="gallary_btn">Play
-                      Video</a>
-                  </div>
+        $id = 4;
+        $sql = "SELECT id, heading, image_path, video_link, description FROM about_content WHERE id = $id";
+        $result = $conn->query($sql);
+
+        // Check if any rows were returned
+        if ($result->num_rows > 0) {
+          // Output data of each row
+          while ($row = $result->fetch_assoc()) {
+            // HTML structure to display fetched data
+            
+            echo '
+           
+            <div class="col text-center text-black" style="text-decoration: underline;">
+                <h1>' . $row["heading"] . '</h1>
+            </div>
+            <div class="site-section mt-5 text-black">
+                <div class="container">
+                    <div class="row align-items-center">
+                        <div class="col-md-6 mb-5 mb-md-0">
+                            <div class="gallary">
+                                <div class="gallary_image_box">
+                                    <div class="gallary_image">
+                                        <img src="' . $row["image_path"] . '" />
+                                        <a href="' . $row["video_link"] . '" target="_blank" class="gallary_btn">Play Video</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-5 text-grey text-center">
+                            <p class="mb-4">' . $row["description"] . '</p>
+                            <p><a href="' . $row["video_link"] . '" class="popup-vimeo text-up percase text-white " previewlistener="true">Watch Video <i class="fa-solid fa-arrow-right"></i> <span class="icon-arrow-right small"></span></a></p>
+                        </div>
+                    </div>
                 </div>
-              </div>
-            </div>
-            <div class="col-md-5 text-dark  text-center">
-              <p class="mb-4">A hotel is a commercial establishment that provides lodging, meals, and other services to
-                guests, travelers, and tourists. Hotels can range from small family-run businesses to large international
-                chains. Most hotels list a variety of services, such as room service, laundry, and concierge.
-              </p>
-              <p><a href="https://www.youtube.com/watch?v=4K6Sh1tsAW4&ab_channel=BogdanIorga" class="popup-vimeo text-up percase text-dark " previewlistener="true">Watch Video <i class="fa-solid fa-arrow-right"></i> <span class="icon-arrow-right small"></span></a></p>
-            </div>
-          </div>
-        </div>
-      </div>
-      <br>
-      <br>
-      <div class="row">
-        <div class="col text-center text-dark" style="text-decoration: underline;">
-          <h1>HOTEL BAR</h1>
-        </div>
-      </div>
-      <br>
-      <br>
+            </div>';
+          }
+        } else {
+          echo "0 results";
+        }
 
-      <div class="container g-2 p-3">
-        <div class="row">
-          <div class="col-sm-8 text-dark mt-6" style="display:flex;  justify-content: center; text-align: center;">
-            <form style="margin-top: 200px;">
-              <p>A bar is a place in a hotel or other establishment that serves alcoholic and non-alcoholic drinks,
-                as well as light snacks. Bars can range in size and atmosphere, from small, intimate lounges to large,
-                bustling taverns. They are often a popular gathering spot for guests, offering a relaxed and social
-                environment to unwind and mingle. In addition to drinks and snacks, bars may also offer entertainment, such
-                as
-                live music or sports games on TV. Some hotels may have multiple bars with different themes and settings to
-                cater to different preferences and occasions.</p>
-              <p><a href="https://youtu.be/xqKcHz47E5A?si=cg-VdvEehXV5Q1pM" class="popup-vimeo text-uppercase text-dark " previewlistener="true">Watch Video <i class="fa-solid fa-arrow-right"></i> <span class="icon-arrow-right small"></span></a></p>
-            </form>
-          </div>
-          <div class="col-sm-4">
-            <div>
-              <img src="img/pexels-pixabay-33265.jpg" alt="Los Angeles" class="d-block img-fluid">
+        ?>
+        <br>
+        <br>
+        <?php
 
-            </div>
-          </div>
-        </div>
-      </div>
-      <br>
-      <br>
-      <br>
-      <div class="row">
-        <div class="col text-center text-dark" style="text-decoration: underline;">
-          <h1>CAFE</h1>
-        </div>
-      </div>
-      <br>
-      <br>
-      <br>
+        $id = 5;
+        $sql = "SELECT id, heading, image_path, video_link, description FROM about_content WHERE id = $id";
+        $result = $conn->query($sql);
 
-      <div class="container g-2 p-3">
-        <div class="row align-items-center">
-          <div class="col-sm-4">
-            <img src="img/cafe.jpg" alt="cafe" class="d-block w-100 image-fluid ">
-          </div>
-          <div class="col-sm-8 md-8 text-dark text-center">
-            <p class="mb-4 " style="display:flex;  justify-content: center; text-align: center;">A cafe is a small
-              restaurant focusing on caffeinated drinks such as classic drip coffee,
-              cappuccinos, espresso, and tea. The food is typically straightforward, with a selection of sandwiches,
-              pastries, and other baked goods that customers order at the counter and take to their tables.
-            </p>
-            <p><a href="https://youtu.be/NC9KlaxtfLg?si=St6kKWSPUS2u3IoJ" class="popup-vimeo text-uppercase text-dark " previewlistener="true">Watch Video <i class="fa-solid fa-arrow-right"></i> <span class="icon-arrow-right small"></span></a></p>
-          </div>
-        </div>
-      </div>
-      <br>
-      <br>
-      <br>
-      <!-- hotel features------- -->
-      <div class="container">
+        // Check if any rows were returned
+        if ($result->num_rows > 0) {
+          // Output data of the row
+          $row = $result->fetch_assoc();
+          // HTML structure to display fetched data
+          echo '
         <div class="row">
-          <div class="col-md-6 mx-auto text-center mb-5 section-heading">
-            <h1 class="mb-5 text-center text-dark" style="text-decoration: underline; font-family:serif;">Hotel Features</h1>
-          </div>
+            <div class="col text-center text-black" style="text-decoration: underline;">
+                <h1>' . $row["heading"] . '</h1>
+            </div>
         </div>
+        <br>
+        <br>
+        <div class="container g-2 p-3">
+            <div class="row">
+                <div class="col-sm-8 text-grey mt-6" style="display:flex; justify-content: center; text-align: center;">
+                    <form style="margin-top: 200px;">
+                        <p>' . $row["description"] . '</p>
+                        <p><a href="' . $row["video_link"] . '" target="_blank" class="popup-vimeo text-uppercase text-black"
+                                previewlistener="true">Watch Video <i class="fa-solid fa-arrow-right"></i> <span
+                                    class="icon-arrow-right small"></span></a></p>
+                    </form>
+                </div>
+                <div class="col-sm-4">
+                    <div>
+                        <img src="' . $row["image_path"] . '" alt="' . $row["heading"] . '" class="d-block img-fluid">
+                    </div>
+                </div>
+            </div>
+        </div>';
+        } else {
+          echo "0 results";
+        }
+
+        ?>
+        <br>
+        <br>
+        <br>
+        <?php
+
+        $id = 6;
+        $sql = "SELECT id, heading, image_path, video_link, description FROM about_content WHERE id = $id";
+        $result = $conn->query($sql);
+
+        // Check if any rows were returned
+        if ($result->num_rows > 0) {
+          // Output data of the row
+          $row = $result->fetch_assoc();
+          // HTML structure to display fetched data
+          echo '
         <div class="row">
-          <div class="col-sm-6 col-md-4 col-lg-3">
-            <div class="text-center p-4 item">
-              <span class="flaticon-pool display-3 mb-3 d-block text-primary"><i class="fa-solid fa-water-ladder" style="color: #ff1900;"></i></span>
-              <h2 class="h5 text-dark">Swimming Pool</h2>
+            <div class="col text-center text-black" style="text-decoration: underline;">
+                <h1>' . $row["heading"] . '</h1>
             </div>
-          </div>
-          <div class="col-sm-6 col-md-4 col-lg-3">
-            <div class="text-center p-4 item">
-              <span class="flaticon-desk display-3 mb-3 d-block text-primary"><i class="fa-solid fa-wifi" style="color: #ff0000;"></i></span>
-              <h2 class="h5 text-dark">Free Wifi</h2>
-            </div>
-          </div>
-          <div class="col-sm-6 col-md-4 col-lg-3">
-            <div class="text-center p-4 item">
-              <span class="flaticon-exit display-3 mb-3 d-block text-primary"><i class="fa-solid fa-fire-extinguisher" style="color: #ff0000;"></i></span>
-              <h2 class="h5 text-dark">Fire Exit</h2>
-            </div>
-          </div>
-          <div class="col-sm-6 col-md-4 col-lg-3">
-            <div class="text-center p-4 item">
-              <span class="flaticon-parking display-3 mb-3 d-block text-primary"><i class="fa-solid fa-square-parking" style="color: #ff0000;"></i></span>
-              <h2 class="h5 text-dark">Car Parking</h2>
-            </div>
-          </div>
-          <div class="col-sm-6 col-md-4 col-lg-3">
-            <div class="text-center p-4 item">
-              <span class="flaticon-hair-dryer display-3 mb-3 d-block text-primary"><i class="fa-solid fa-wind" style="color: #ff0000;"></i></span>
-              <h2 class="h5 text-dark">Hair Dryer</h2>
-            </div>
-          </div>
-          <div class="col-sm-6 col-md-4 col-lg-3">
-            <div class="text-center p-4 item">
-              <span class="flaticon-minibar display-3 mb-3 d-block text-primary"><i class="fa-solid fa-champagne-glasses" style="color: #ff0000;"></i></span>
-              <h2 class="h5 text-dark">Minibar</h2>
-            </div>
-          </div>
-          <div class="col-sm-6 col-md-4 col-lg-3">
-            <div class="text-center p-4 item">
-              <span class="flaticon-drink display-3 mb-3 d-block text-primary"><i class="fa-solid fa-martini-glass" style="color: #ff0000;"></i></span>
-              <h2 class="h5 text-dark">Drinks</h2>
-            </div>
-          </div>
-          <div class="col-sm-6 col-md-4 col-lg-3">
-            <div class="text-center p-4 item">
-              <span class="flaticon-cab display-3 mb-3 d-block text-primary"><i class="fa-solid fa-mountain-sun" style="color: #ff0000;"></i></span>
-              <h2 class="h5 text-dark">Best View</h2>
-            </div>
-          </div>
         </div>
-      </div>
-      <br>
-      <br>
-      <br>
-      <!-- --------------------------hotel staffs---------------- -->
-      <div class="container">
-        <div class="row">
-          <div class="col-md-6 mx-auto text-center mb-5 section-heading">
-            <h1 class="mb-5 text-center text-dark" style="text-decoration: underline; font-family:serif;">Hotel staffs</h1>
+        <br>
+        <br>
+        <br>
+        <div class="container g-2 p-3">
+            <div class="row align-items-center">
+                <div class="col-sm-4">
+                    <img src="' . $row["image_path"] . '" alt="' . $row["heading"] . '" class="d-block w-100 image-fluid">
+                </div>
+                <div class="col-sm-8 md-8 text-grey text-center">
+                    <p class="mb-4 " style="display:flex; justify-content: center; text-align: center;">' . $row["description"] . '</p>
+                    <p><a href="' . $row["video_link"] . '" target="_blank" class="popup-vimeo text-uppercase text-black" previewlistener="true">Watch Video <i class="fa-solid fa-arrow-right"></i> <span class="icon-arrow-right small"></span></a></p>
+                </div>
+            </div>
+        </div>';
+        } else {
+          echo "0 results";
+        }
+        ?>
+        <br>
+        <br>
+        <br>
+        <!-- hotel features------- -->
+        <div class="container">
+          <div class="row">
+            <div class="col-md-6 mx-auto text-center mb-5 section-heading">
+              <h1 class="mb-5 text-center text-dark" style="text-decoration: underline; font-family:serif;">Hotel Features</h1>
+            </div>
           </div>
-        </div>
-        <div class="container g-3 mt-6">
           <div class="row">
             <?php
-            // Database connection
-            include('admin/include/conn.php');
-            // Fetch data from the staff table
-            $sql = "SELECT * FROM staff";
-            $result = $conn->query($sql);
+            $sql1 = "SELECT * FROM hotelfeatures";
+            $result1 = $conn->query($sql1);
 
-            if ($result->num_rows > 0) {
-              // Output data of each row
-              while ($row = $result->fetch_assoc()) {
-                echo '<div class="col-md-12 text-center col-lg-4">
+            if ($result1->num_rows > 0) {
+              while ($row = mysqli_fetch_assoc($result1)) {
+            ?>
+
+                <div class="col-sm-6 col-md-4 col-lg-3">
+                  <div class="text-center p-4 item">
+                    <span class=<?php echo $row['flaticon_class']; ?> display-3 mb-3 d-block text-primary"><h1><i class="<?php echo $row['i_class'];?>" style="color: #ff1900;"></i></h1></span>
+                    <h2 class="h5 text-dark"><?php echo  $row['feature_name'] ;?></h2>
+                  </div>
+                </div>
+            <?php
+
+              }
+            }
+            ?>
+          </div>
+         
+        </div>
+        <br>
+        <br>
+        <br>
+        <!-- --------------------------hotel staffs---------------- -->
+        <div class="container">
+          <div class="row">
+            <div class="col-md-6 mx-auto text-center mb-5 section-heading">
+              <h1 class="mb-5 text-center text-dark" style="text-decoration: underline; font-family:serif;">Hotel staffs</h1>
+            </div>
+          </div>
+          <div class="container g-3 mt-6">
+            <div class="row">
+              <?php
+              // Database connection
+              include('admin/include/conn.php');
+              // Fetch data from the staff table
+              $sql = "SELECT * FROM staff";
+              $result = $conn->query($sql);
+
+              if ($result->num_rows > 0) {
+                // Output data of each row
+                while ($row = $result->fetch_assoc()) {
+                  echo '<div class="col-md-12 text-center col-lg-4">
                 <div class="card" style="width:25rem">
                     <img class="card-img-top" src="admin/' . $row["image"] . '" alt="' . $row["name"] . '">
                     <div class="card-body text-center">
@@ -378,8 +368,8 @@ if ($result->num_rows > 0) {
                 </div>
             </div>';
 
-                // Modal markup
-                echo '<div class="modal fade" id="staffModal' . $row["staff_id"] . '" tabindex="-1" aria-labelledby="staffModalLabel' . $row["staff_id"] . '" aria-hidden="true">
+                  // Modal markup
+                  echo '<div class="modal fade" id="staffModal' . $row["staff_id"] . '" tabindex="-1" aria-labelledby="staffModalLabel' . $row["staff_id"] . '" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered">
                     <div class="modal-content">
                         <div class="modal-header">
@@ -395,17 +385,17 @@ if ($result->num_rows > 0) {
                     </div>
                 </div>
             </div>';
+                }
+              } else {
+                echo "0 results";
               }
-            } else {
-              echo "0 results";
-            }
 
-            $conn->close();
-            ?>
+              $conn->close();
+              ?>
 
+            </div>
           </div>
-        </div>
-        <?php include 'footer.php' ?>
+          <?php include 'footer.php' ?>
 </body>
 
 </html>
