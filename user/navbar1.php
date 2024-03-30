@@ -15,13 +15,26 @@
         crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.3/dist/jquery.validate.min.js"></script>
   <style>
-    .modal-backdrop {
+    /* .modal-backdrop {
       background-color: transparent !important;
-    }
+    } */
     .error{
       color: red;
     }
   </style>
+  <script>
+    $(document).ready(function() {
+      // Remove modal backdrop when the login modal is shown
+      $('#exampleModal').on('show.bs.modal', function (e) {
+        $('.modal-backdrop').remove();
+      });
+
+      // Remove modal backdrop when the registration modal is shown
+      $('#exampleModal1').on('show.bs.modal', function (e) {
+        $('.modal-backdrop').remove();
+      });
+    });
+  </script>
   <!-- validation of register form -->
   <script>
     $(document).ready(function() {
@@ -184,80 +197,87 @@
   </nav>
 
   <!-- model of ragistration form -->
-  <div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <!-- Your registration form goes here -->
-        <div class="modal-header bg-dark">
-          <h5 class="modal-title text-white" id="exampleModalLabel1">REGISTRATION</h5>
-          <button type="button" class="btn-close bg-white" data-bs-dismiss="" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          <!-- Your registration form -->
-          <form id="signupForm" method="post">
-            <div class="mb-3">
-              <label for="name" class="form-label">Name</label>
-              <input type="text" class="form-control" id="name" name="name">
-              <span id="name_err"></span>
-            </div>
-            <div class="mb-3">
-              <label for="email" class="form-label">Email address</label>
-              <input type="email" class="form-control" id="email" name="email">
-              <span id="email_err"></span>
-            </div>
-            <div class="mb-3">
-              <label for="password" class="form-label">Password</label>
-              <input type="password" class="form-control" id="password1" name="password">
-              <span id="password_err"></span>
-            </div>
-            <div class="mb-3">
-              <label for="confirm_password" class="form-label">Confirm Password</label>
-              <input type="password" class="form-control" id="confirm_password" name="confirm_password">
-              <span id="confirm_password_err"></span>
-            </div>
-            <button type="submit" href="user/hotel1.php" class="btn btn-danger">REGISTRATION</button>
-          </form>
-        </div>
+ <!-- Registration Modal -->
+<div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel1" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header bg-dark">
+        <h5 class="modal-title text-white" id="exampleModalLabel1">REGISTRATION</h5>
+        <button type="button" class="btn-close bg-white" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form id="signupForm" method="post">
+          <!-- Name Field -->
+          <div class="mb-3">
+            <label for="name" class="form-label">Name</label>
+            <input type="text" class="form-control" id="name" name="name" placeholder="Enter your name">
+            <span id="name_err" class="error"></span> <!-- Error message for name field -->
+          </div>
+          <!-- Email Field -->
+          <div class="mb-3">
+            <label for="email" class="form-label">Email address</label>
+            <input type="email" class="form-control" id="email" name="email" placeholder="Enter your email">
+            <span id="email_err" class="error"></span> <!-- Error message for email field -->
+          </div>
+          <!-- Password Field -->
+          <div class="mb-3">
+            <label for="password" class="form-label">Password</label>
+            <input type="password" class="form-control" id="password" name="password" placeholder="Enter your password">
+            <span id="password_err" class="error"></span> <!-- Error message for password field -->
+          </div>
+          <!-- Confirm Password Field -->
+          <div class="mb-3">
+            <label for="confirm_password" class="form-label">Confirm Password</label>
+            <input type="password" class="form-control" id="confirm_password" name="confirm_password" placeholder="Re-enter your password">
+            <span id="confirm_password_err" class="error"></span> <!-- Error message for confirm password field -->
+          </div>
+          <!-- Registration Button -->
+          <button type="submit" class="btn btn-danger">Register</button>
+        </form>
       </div>
     </div>
   </div>
+</div>
+<?php  include('register_insert.php');?>
 
   <!-- --------------------MODEL OF LOGIN-->
-  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <!-- Your login form goes here -->
-
-        <div class="modal-header bg-dark">
-          <h5 class="modal-title text-white" id="exampleModalLabel1">LOG-IN</h5>
-          <button type="button" class="btn-close bg-white" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
+ <!-- Login Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header bg-dark">
+        <h5 class="modal-title text-white" id="exampleModalLabel">LOG-IN</h5>
+        <button type="button" class="btn-close bg-white" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
         <form id="loginForm" method="post">
-                    <div class="mb-3">
-                        <label for="email" class="form-label">Email address</label>
-                        <input type="email" class="form-control" id="email" name="email">
-                        <div id="email_err" class="invalid-feedback"></div>
-                    </div>
-                    <div class="mb-3">
-                        <label for="password" class="form-label">Password</label>
-                        <input type="password" class="form-control" id="password" name="password">
-                        <div id="password_err" class="invalid-feedback"></div>
-                    </div>
-                    <div class="mb-3 form-check">
-                        <input type="checkbox" class="form-check-input" id="rememberMe" name="rememberMe">
-                        <label class="form-check-label" for="rememberMe">Remember me</label>
-                    </div>
-                    <button type="submit" class="btn btn-primary">Login</button>
-                    <p>create account → </p>
-            <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal1">REGISTRATION</button>
-          
-                </form>
-            
-        </div>
+          <!-- Email Field -->
+          <div class="mb-3">
+            <label for="email" class="form-label">Email address</label>
+            <input type="email" class="form-control" id="email" name="email" placeholder="Enter your email">
+            <span id="email_err" class="error"></span> <!-- Error message for email field -->
+          </div>
+          <!-- Password Field -->
+          <div class="mb-3">
+            <label for="password" class="form-label">Password</label>
+            <input type="password" class="form-control" id="password" name="password" placeholder="Enter your password">
+            <span id="password_err" class="error"></span> <!-- Error message for password field -->
+          </div>
+          <!-- Remember Me Checkbox -->
+          <div class="mb-3 form-check">
+            <input type="checkbox" class="form-check-input" id="rememberMe" name="rememberMe">
+            <label class="form-check-label" for="rememberMe">Remember me</label>
+          </div>
+          <!-- Login Button -->
+          <button type="submit" class="btn btn-primary">Login</button>
+          <!-- Registration Link -->
+          <p>Don't have an account? <a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal1">Register</a></p>
+        </form>
       </div>
     </div>
   </div>
+</div>
+
 
 
   <script>
