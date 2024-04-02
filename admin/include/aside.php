@@ -77,6 +77,15 @@
         </a>
       </li>
       <br>
+      <li class="nav-item text-white mx-4">
+        <a href="dynamic/dynamic.php" class="nav-link">
+          <h5>   
+            <i class="fa-solid fa-message"></i>
+            <span class="mx-2 size">Dynamic</span>
+            </h5>
+        </a>
+      </li>
+      <br>
 
 
     </ul>
