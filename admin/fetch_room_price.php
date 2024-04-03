@@ -1,24 +1,25 @@
-<?php
-include_once('include/conn.php'); 
-if (isset($_POST['roomTypeId'])) {
-    $roomTypeId = $_POST['roomTypeId'];
-
-    // Fetch room price based on room type ID
-    $sql = "SELECT price FROM room_type WHERE room_type_id = $roomTypeId";
-    $result = $conn->query($sql);
-
-    if ($result->num_rows > 0) {
-        $row = $result->fetch_assoc();
-        $price = $row['price'];
-
-        // Return the price as JSON
-        echo json_encode(array('price' => $price));
-    } else {
-        // Handle if no price found
-        echo json_encode(array('error' => 'No price found for the selected room type.'));
-    }
-} else {
-    // Handle if room type ID is not provided
-    echo json_encode(array('error' => 'Room type ID is missing.'));
-}
-?>
+<script>
+    $(document).ready(function () {
+        $('#roomType').change(function () {
+            var roomTypeId = $(this).val();
+            $.ajax({
+                url: 'fetch_room_price.php',
+                type: 'post',
+                data: { roomTypeId: roomTypeId },
+                dataType: 'json',
+                success: function (response) {
+                    if (response.length > 0) {
+                        // Assuming only one price is returned for a room type
+                        var roomPrice = response[0].price;
+                        $('#price').text(roomPrice); // Update the text of the price element
+                    } else {
+                        $('#price').text('Price not available');
+                    }
+                },
+                error: function () {
+                    console.log('Error fetching room price');
+                }
+            });
+        });
+    });
+</script>
