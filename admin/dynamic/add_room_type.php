@@ -169,7 +169,7 @@ $offers = $_POST['offers'];
 $description = $_POST['description'];
 $image = $_FILES['image']['name'];
 $file_tmp = $_FILES['image']['tmp_name'];
-$upload_path = "room_pictures/" . $image;
+$upload_path = "../room_pictures/" . $image;
 
 // Check if image directory exists and move uploaded file
 if (is_dir('room_pictures') && move_uploaded_file($file_tmp, $upload_path)) {

@@ -60,7 +60,7 @@ if ($result->num_rows > 0) {
                                         <div class="card-header bg-dark">Room Type</div>
                                         <div class="card-body">
                                             <h1 class="card-title">edit Here</h1>
-                                            <a href="add_room_type.php" class="btn btn-light">Go to Room Type</a>
+                                            <a href="view_room_type.php" class="btn btn-light">Go to Room Type</a>
                                         </div>
                                     </div>
                                 </div>

@@ -60,7 +60,7 @@
           while ($row = mysqli_fetch_assoc($result)) {
             $activeClass = ($counter == 0) ? 'active' : '';
             echo '<div class="carousel-item ' . $activeClass . '">
-                    <img src="admin' . $row['image_path'] . '" class="d-block w-100" alt="">
+                    <img src="admin/' . $row['image_path'] . '" class="d-block w-100" alt="">
                     <div class="carousel-caption d-none d-md-block">
                         <h1>' . $row['caption_heading'] . '</h1>
                         <p>' . $row['caption_text'] . '</p>
