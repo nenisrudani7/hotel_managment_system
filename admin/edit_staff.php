@@ -78,7 +78,7 @@
                         </div>
                         <div class="mb-3">
                             <label for="email" class="form-label">Email</label>
-                            <input type="email" class="form-control" id="email" name="email" value="<?php echo $staffData['email']; ?>">
+                            <input type="email" class="form-control" id="email" name="email" value="<?php echo $staffData['email']; ?> readonly">
                         </div>
                         <div class="mb-3">
                             <label for="phone" class="form-label">Phone</label>

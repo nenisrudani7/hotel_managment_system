@@ -34,53 +34,9 @@
 
 <body>
 
-  <body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-dark fixed-top ">
-      <div class="container">
-        <a class="navbar-brand fw-bold" href="hotel1.php">Fu<span style="color: red;">S</span>ion</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
-          aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <!-- -----navbar -->
-        <div class="collapse navbar-collapse " id="navbarSupportedContent">
-          <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-            <li class="nav-item">
-              <a class="nav-link text-white me-2" href="hotel1.php">HOME</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link text-white me-2" href="room1.php">ROOMS</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link text-white me-2" href="gallery1.php">GALLERY</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link text-white me-2" href="about1.php">ABOUT</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link text-white me-2" href="contact1.php">CONTACT</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link text-white me-2"><button type="button" class="btn btn-danger" data-bs-toggle="modal"
-                  data-bs-target="#exampleModal1">MY-ROOM</button></a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link dropdown-toggle text-white me-2" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><button type="button" class="btn btn-danger" data-bs-toggle="modal">ME</button></a>
-              <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                <a class="nav-link text-white me-2"><button type="button" class="btn btn-danger" data-bs-toggle="modal"
-                  data-bs-target="#exampleModal2">Profile</button></a>
-                
-                <div class="dropdown-divider"></div>
-                <a class="nav-link text-white me-2"><button type="button" class="btn btn-danger" data-bs-toggle="modal"
-                  data-bs-target="#exampleModal3">Log-Out</button></a>
-            </div>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </nav>
 
-  </div>
+<?php include 'navbar1.php' ?>
+ 
   <br>
   <br>
   <!-- ------mode2---------------- -->

@@ -1,25 +1,25 @@
 <?php
-
 session_start();
 
-if (!isset($_SESSION['stulogin']) || $_SESSION['stulogin'] !== true) {
-
+// Check if the user is logged in
+if (!isset ($_SESSION['stulogin']) || $_SESSION['stulogin'] !== true) {
     header("location: signup.php");
+    exit; // Ensure no further code execution after redirection
 }
 
-$username = $_SESSION['a_name'];
-
+// Include database connection
 include 'include/conn.php';
 
+// Fetch user data
+$username = $_SESSION['a_name'];
 $query = "SELECT * FROM user WHERE a_name = '$username'";
-
 $result = $conn->query($query);
 
+// Check if user data exists
 if ($result->num_rows > 0) {
-
     $userData = $result->fetch_assoc();
+    ?>
 
-?>
     <!DOCTYPE html>
     <html lang="en" data-bs-theme="dark">
 
@@ -27,11 +27,12 @@ if ($result->num_rows > 0) {
         <meta charset="UTF-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Bootstrap Admin Dashboard</title>
+        <title>Add Room Type</title>
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/css/bootstrap.min.css" />
         <script src="https://kit.fontawesome.com/ae360af17e.js" crossorigin="anonymous"></script>
         <link rel="stylesheet" href="css/style.css" />
 
+        <!-- Include jQuery and jQuery validation -->
         <script src="jquery-3.6.4.min.js"></script>
         <script src="jquery.validate.js"></script>
 
@@ -44,53 +45,47 @@ if ($result->num_rows > 0) {
 
     <body>
         <div class="wrapper">
-            <?php
-            include('include/aside.php');
-            ?>
+            <?php include ('include/aside.php'); ?>
 
             <div class="main container-fluid">
-                <?php include('include/nav.php') ?>
+                <?php include ('include/nav.php'); ?>
                 <div class="container mt-5">
                     <div class="row justify-content-center">
                         <div class="col-md-6">
                             <div class="card">
                                 <div class="card-header">
-                                    <h4>Add Room Type</h4>
+                                    <i class="fas fa-bed text-white "></i>
+                                    <span class="fa-lg">Add Room Type</span>
                                 </div>
                                 <div class="card-body">
-                                    <form method="post" action="addroom.php" enctype="multipart/form-data">
+                                    <!-- Form for adding room type -->
+                                    <form method="post" action="addroom.php" enctype="multipart/form-data" id="addRoomForm">
                                         <div class="mb-3">
                                             <label for="roomType">Room Type:</label>
-                                            <select class="form-select" name="roomType" id="roomType">
-                                                <option selected disabled>Select Room Type</option>
-                                                <?php
-                                                include_once('fetch_room_types.php'); // Include the PHP file to fetch room types
-                                                ?>
-                                            </select>
+                                            <input type="text" class="form-control" id="roomType" name="roomType" required>
                                         </div>
                                         <div class="mb-3">
-                                            <label for="roomno" class="form-label">room_no</label>
-                                            <input type="text" class="form-control" id="roomno" name="roomno" required>
-                                        </div>
-                                        <div class="mb-3">
-                                            <label for="price" class="form-label">Price</label>
+                                            <label for="price" class="form-label">Price:</label>
                                             <input type="text" class="form-control" id="price" name="price" required>
                                         </div>
                                         <div class="mb-3">
-                                            <label for="offer" class="form-label">Offer</label>
-                                            <input type="text" class="form-control" id="offer" name="offer" required>
+                                            <label for="max_person" class="form-label">Max Person:</label>
+                                            <input type="text" class="form-control" id="max_person" name="max_person"
+                                                required>
                                         </div>
                                         <div class="mb-3">
-                                            <label for="description" class="form-label">Description</label>
-                                            <textarea class="form-control" id="description" name="a_d" required></textarea>
+                                            <label for="offers" class="form-label">Offers:</label>
+                                            <input type="text" class="form-control" id="offers" name="offers" required>
                                         </div>
                                         <div class="mb-3">
-                                            <label for="max_person" class="form-label">Max Person</label>
-                                            <input type="text" class="form-control" id="max_person" name="max_person" required>
+                                            <label for="description" class="form-label">Description:</label>
+                                            <textarea class="form-control" id="description" name="description"
+                                                required></textarea>
                                         </div>
                                         <div class="mb-3">
-                                            <label for="image" class="form-label">Upload Image</label>
-                                            <input type="file" class="form-control" id="image" name="f1" required>
+                                            <label for="image" class="form-label">Upload Image:</label>
+                                            <input type="file" class="form-control" id="image" name="image" required
+                                                accept="image/jpeg,image/jpg,image/jfif">
                                         </div>
                                         <button type="submit" class="btn btn-primary">Submit</button>
                                     </form>
@@ -99,117 +94,96 @@ if ($result->num_rows > 0) {
                         </div>
                     </div>
                 </div>
-
-                <a href="#" class="theme-toggle">
-                    <i class="fa-regular fa-moon"></i>
-                    <i class="fa-regular fa-sun"></i>
-                </a>
             </div>
         </div>
+
+        <!-- Theme toggle button -->
+        <a href="#" class="theme-toggle">
+            <i class="fa-regular fa-moon"></i>
+            <i class="fa-regular fa-sun"></i>
+        </a>
+
+        <!-- Include Bootstrap JS -->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/js/bootstrap.bundle.min.js"></script>
-        <script src="js/script.js"></script>
+
+        <!-- jQuery validation script -->
+        <script>
+            $(document).ready(function () {
+                // Add custom validation method
+                $.validator.addMethod("noDigits", function (value, element) {
+                    return this.optional(element) || !/\d/.test(value);
+                }, "Digits are not allowed.");
+
+                // Add validation rules and messages
+                $('#addRoomForm').validate({
+                    rules: {
+                        roomType: {
+                            required: true,
+                            noDigits: true // Apply custom validation method
+                        },
+                        price: {
+                            required: true,
+                            number: true
+                        },
+                        max_person: {
+                            required: true,
+                            digits: true
+                        },
+                        offers: {
+                            required: true
+                        },
+                        description: {
+                            required: true
+                        },
+                        image: {
+                            required: true,
+                            accept: "image/jpeg,image/jpg,image/jfif"
+                        }
+                    },
+                    messages: {
+                        // Define custom error messages if needed
+                    },
+                    submitHandler: function (form) {
+                        form.submit();
+                    }
+                });
+            });
+
+        </script>
     </body>
 
-    <script>
-        $(document).ready(function() {
-            $.validator.addMethod("noDigits", function(value, element) {
-                return this.optional(element) || !/\d/.test(value);
-            }, "Digits are not allowed.");
-
-            // Add validation rules and error messages to the form
-            $('form').validate({
-                rules: {
-                    rname: {
-                        required: true,
-                        noDigits: true
-                    },
-                    price: {
-                        required: true,
-                        number: true
-                    },
-                    offer: {
-                        required: true
-                    },
-                    max_person: {
-                        required: true,
-                        digits: true // Only allow numeric values
-                    },
-                    a_d: {
-                        required: true
-                    },
-                    f1: {
-                        required: true,
-                        accept: "image/jpeg,image/jpg,image/jfif"
-                    }
-                },
-                messages: {
-                    rname: {
-                        required: "Please enter the room name"
-                    },
-                    price: {
-                        required: "Please enter the price",
-                        number: "Please enter a valid number for the price"
-                    },
-                    offer: {
-                        required: "Please enter the offer"
-                    },
-                    max_person: {
-                        required: "Please enter the maximum number of persons",
-                        digits: "Please enter a valid number"
-                    },
-                    a_d: {
-                        required: "Please enter the description"
-                    },
-                    f1: {
-                        required: "Please upload an image with JPEG, JPG, or JFIG extension",
-                        accept: "Please upload a valid image file with JPEG, JPG, or JFIG extension",
-
-                    }
-                },
-                submitHandler: function(form) {
-
-                    form.submit();
-                }
-            });
-        });
-    </script>
-
     </html>
+
     <?php
+    // Process form submission
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
-        include('include/conn.php');
-
-
-        $room_type = $_POST['roomno'];
+        // Retrieve form data
+        $roomType = $_POST['roomType'];
         $price = $_POST['price'];
-        $offer = $_POST['offer'];
-        $description = $_POST['a_d'];
         $max_person = $_POST['max_person'];
+        $offers = $_POST['offers'];
+        $description = $_POST['description'];
+        $image = $_FILES['image']['name'];
+        $file_tmp = $_FILES['image']['tmp_name'];
+        $upload_path = "room_pictures/" . $image;
 
-        $profile_pic = $_FILES['f1']['name'];
-        $file_tmp = $_FILES['f1']['tmp_name'];
-        $upload_path = "room_pictures/" . $profile_pic;
-
-
+        // Check if image directory exists and move uploaded file
         if (is_dir('room_pictures') && move_uploaded_file($file_tmp, $upload_path)) {
-
-            $sql = "INSERT INTO room_type(room_type, price, offers,max_person, `description`, `image`) 
-                VALUES ('$room_type', '$price', '$offer',$max_person, '$description', '$profile_pic')";
+            // Insert data into room_type table
+            $sql = "INSERT INTO room_type(room_type, price, max_person, offers, `description`, `image`) 
+                    VALUES ('$roomType', '$price', '$max_person', '$offers', '$description', '$image')";
 
             if (mysqli_query($conn, $sql)) {
-    ?>
-                <script>
-                    alert("Data inserted successfully into room_types table");
-                </script>
-<?php
+                // Data inserted successfully
+                echo '<script>alert("Data inserted successfully into room_type table");</script>';
             } else {
+                // Error inserting data
                 echo "Error: " . mysqli_error($conn);
             }
         }
     }
 } else {
-
+    // User data not found
     echo "User data not found.";
 }
-
 ?>

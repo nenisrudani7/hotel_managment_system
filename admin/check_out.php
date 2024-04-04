@@ -1,3 +1,4 @@
+<?php  session_start(); ?>
 <!DOCTYPE html>
 <html lang="en" data-bs-theme="dark">
 
@@ -9,84 +10,138 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/css/bootstrap.min.css" />
     <script src="https://kit.fontawesome.com/ae360af17e.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="css/style.css" />
-
 </head>
+
 <body>
     <div class="wrapper">
-        <?php include('include/aside.php') ?>
+        <?php include 'include/aside.php'?>
         <div class="main">
-            <?php include('include/nav.php') ?>
+            <?php include 'include/nav.php'?>
             <main class="content px-3 py-2">
-                <div class="container mt-5">
-                    <h1 class="mb-4">Check-Out</h1>
-                    <?php
-                    // Include database connection
-                    include_once('include/conn.php');
+               <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header">
+                        Check-out Details
+                    </div>
+                    <div class="card-body">
+                        <?php
+                        
 
-                    // Check if the room_id is provided via GET request
-                    if (isset($_GET['room_id'])) {
-                        $room_id = $_GET['room_id'];
-                        $query = "SELECT c.c_id, c.c_name, c.email, c.number, c.add, 
-            b.booking_id, b.max_person, b.total_price, b.booking_date, b.check_in, b.check_out,b.payment_status,
-            r.room_id, r.room_no, r.status as room_status,
-            rt.room_type
-     FROM customer c
-     JOIN booking b ON c.c_id = b.customer_id
-     JOIN room r ON b.room_id = r.room_id
-     JOIN room_type rt ON r.room_type_id = rt.room_type_id";
-
-                        $result = mysqli_query($conn, $query);
-
-                        if (mysqli_num_rows($result) > 0) {
-                            $booking = mysqli_fetch_assoc($result);
-                    ?>
-                            <form action="process_checkout.php" method="POST">
-                                <div class="mb-3">
-                                    <label for="customer_name" class="form-label">Customer Name:</label>
-                                    <input type="text" class="form-control" id="customer_name" name="customer_name" value="<?php echo $booking['c_name']; ?>" readonly>
-                                </div>
-                                <div class="mb-3">
-                                    <label for="customer_number" class="form-label">Customer Number:</label>
-                                    <input type="text" class="form-control" id="customer_number" name="customer_number" value="<?php echo $booking['number']; ?>" readonly>
-                                </div>
-                                <div class="mb-3">
-                                    <label for="check_in_date" class="form-label">Check-In Date:</label>
-                                    <input type="text" class="form-control" id="check_in_date" name="check_in_date" value="<?php echo $booking['check_in']; ?>" readonly>
-                                </div>
-                                <div class="mb-3">
-                                    <label for="check_out_date" class="form-label">Check-Out Date:</label>
-                                    <input type="text" class="form-control" id="check_out_date" name="check_out_date" value="<?php echo $booking['check_out']; ?>" readonly>
-                                </div>
-                                <div class="mb-3">
-                                    <label for="payment_status" class="form-label">Payment Status:</label>
-                                    <input type="text" class="form-control" id="payment_status" name="payment_status" value="<?php echo $booking['payment_status']; ?>" readonly>
-                                </div>
-
-                                <!-- Add remaining payment status field if needed -->
-                                <div class="col-6"><button type="submit" class="btn btn-primary">Check-Out</button><br>
-                                <a href="manage_room.php" class="btn btn-seco ndary mt-3">Cancel</a>
-
-                            </div>
-                            </form>
-                    <?php
-                        } else {
-                            echo "<div class='alert alert-warning' role='alert'>
-                        No active booking found for this room.
-                    </div>";
+                        if (!isset($_SESSION['stulogin']) || $_SESSION['stulogin'] !== true) {
+                            header("location: signup.php");
+                            exit;
                         }
-                    } else {
-                        echo "<div class='alert alert-danger' role='alert'>
-                    Room ID not provided.
-                </div>";
-                    }
 
-                    ?>
+                        include 'include/conn.php';
+
+                        $username = $_SESSION['a_name'];
+
+                        $query = "SELECT * FROM user WHERE a_name = '$username'";
+
+                        $result = $conn->query($query);
+
+                        if ($result->num_rows > 0) {
+
+                            $userData = $result->fetch_assoc();
+
+                            if (isset($_GET['room_id'])) {
+                                $room_id = $_GET['room_id'];
+
+                                // Fetch room details along with booking information and customer details
+                                $query = "SELECT r.room_id, r.room_no, rt.room_type, r.check_in_status, r.check_out_status, r.status, 
+                                        b.check_in, b.check_out, b.advance_payment, b.remaining_price,c.c_name 
+                                
+                                        FROM room r
+                                        JOIN room_type rt ON r.room_type_id = rt.room_type_id
+                                        LEFT JOIN booking b ON r.room_id = b.room_id
+                                        LEFT JOIN customer c ON b.customer_id = c.c_id
+                                        WHERE r.room_id = '$room_id'";
+
+                                $result = mysqli_query($conn, $query);
+
+                                if ($result && mysqli_num_rows($result) > 0) {
+                                    $row = mysqli_fetch_assoc($result);
+                                    ?>
+                                    <h5 class="card-title">Room Number: <?php echo $row["room_no"]; ?></h5>
+                                    <p class="card-text">Room Type: <?php echo $row["room_type"]; ?></p>
+                                    <p class="card-text">Check-In Date: <?php echo $row["check_in"]; ?></p>
+                                    <p class="card-text">Customer Name: <?php echo $row["c_name"]; ?></p>
+                                    <p class="card-text">Advance Payment: <?php echo $row["advance_payment"]; ?></p>
+                                    <p class="card-text">Remaining Payment: <?php echo $row["remaining_price"]; ?></p>
+
+                                    <?php
+                                }
+
+                                // Remaining payment form processing
+                                if ($_SERVER["REQUEST_METHOD"] == "POST") {
+                                    $remaining_payment = $_POST['remaining_payment'];
+
+                                    // Check if remaining payment is equal to the total price
+                                    if ($remaining_payment == $row["remaining_price"]) {
+                                        // Proceed with database updates
+
+                                        // Update payment status to 'Done' in the booking table
+                                        $update_booking_query = "UPDATE booking SET payment_status = 1 WHERE room_id = '$room_id'";
+                                        if (mysqli_query($conn, $update_booking_query)) {
+                                            ?><script>
+                                                alert('Payment status updated!');
+                                            </script>
+                                            <?php
+                                        } else {
+                                            echo "Error updating payment status: " . mysqli_error($conn);
+                                        }
+
+                                        // Update room status in the room table
+                                        $update_room_query = "UPDATE room SET check_in_status = 0, check_out_status = 0, status = null WHERE room_id = '$room_id'";
+                                        if (mysqli_query($conn, $update_room_query)) {
+                                            ?>
+                                            <script>alert('Room check-in and check-out status updated!');</script>
+                                            <?php
+                                        } else {
+                                            echo "Error updating room status: " . mysqli_error($conn);
+                                        }
+                                    } else {
+                                        ?>
+                                                <script>alert('Error: Remaining payment does not match the total price.');</script>
+                                        <?php
+                                    }
+                                }
+                                ?>
+
+                                <!-- Form for collecting remaining payment -->
+                                <form action="#" method="post">
+                                    <div class="mb-3">
+                                        <label for="remaining_payment" class="form-label">Enter Remaining Payment</label>
+                                        <input type="number" class="form-control" id="remaining_payment" name="remaining_payment" required>
+                                    </div>
+                                    <button type="submit" class="btn btn-primary">Submit Remaining Payment</button>
+                                </form>
+
+                                <?php
+                            } else {
+                                echo "No records found for the provided room ID.";
+                            }
+                        } else {
+                            echo "Room ID is not provided.";
+                        }
+                        ?>
+
+                    </div>
                 </div>
+            </div>
+        </div>
+    </div>
             </main>
         </div>
     </div>
+    <a href="#" class="theme-toggle">
+        <i class="fa-regular fa-moon"></i>
+        <i class="fa-regular fa-sun"></i>
+    </a>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/script.js"></script>
 </body>
 
 </html>
-
-<?php

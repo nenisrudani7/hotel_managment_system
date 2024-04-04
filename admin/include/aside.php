@@ -28,7 +28,7 @@
       <li class="nav-item text-white mx-4">
         <a href="manage.php" class="nav-link">
           <h5>
-            <i class="fa-light fa-house"></i>
+          <i class="fas fa-cogs text-white fa-lg"></i>
             <span class="mx-2 size">Manage Rooms</span>
           </h5>
         </a>
@@ -37,15 +37,23 @@
       <li class="nav-item text-white mx-4">
         <a href="addroom.php" class="nav-link">
           <h5>
-            <i class="fa-light fa-house"></i>
+          <i class="fas fa-bed text-white "></i>
             <span class="mx-2 size">Add Rooms</span>
+          </h5>
+        </a>
+      </li><br>
+      <li class="nav-item text-white mx-4">
+        <a href="add_room_no.php" class="nav-link">
+          <h5>
+          <i class="fas fa-door-open text-white"></i>
+            <span class="mx-2 size">Add room_no</span>
           </h5>
         </a>
       </li><br>
       <li class="nav-item text-white mx-4">
         <a href="view.php" class="nav-link">
           <h5>
-            <i class="fa-light fa-house"></i>
+          <i class="fas fa-eye text-white"></i>
             <span class="mx-2 size">view booking</span>
           </h5>
         </a>
@@ -65,6 +73,15 @@
           <h5>   
             <i class="fa-solid fa-message"></i>
             <span class="mx-2 size">Feed back</span>
+            </h5>
+        </a>
+      </li>
+      <br>
+      <li class="nav-item text-white mx-4">
+        <a href="dynamic/dynamic.php" class="nav-link">
+          <h5>   
+            <i class="fa-solid fa-message"></i>
+            <span class="mx-2 size">Dynamic</span>
             </h5>
         </a>
       </li>

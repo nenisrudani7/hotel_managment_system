@@ -67,7 +67,7 @@
                             <div class="card-body">
                                 <h5 class="card-title"><?php echo $room['room_type']; ?></h5>
                                 <p class="card-text">Price: ₹<?php echo $room['price']; ?></p>
-                                <p class="card-text">Special Offer: <?php echo $room['offers']; ?></p>
+                                <p class="card-text">Off Today: <?php echo $room['offers']; ?></p>
                             </div>
                         </div>
                     </div>
@@ -244,7 +244,7 @@
                         if (maxPersons && !isNaN(maxPersons)) {
                             var totalPrice = price * parseInt(maxPersons);
                             // Apply fixed offer discount
-                            var offerDiscount = 50; // Example: Fixed discount of ₹50
+                            var offerDiscount = 0; // Example: Fixed discount of ₹50
                             totalPrice -= offerDiscount;
 
                             $('#totalPrice').text('₹' + totalPrice.toFixed(2));

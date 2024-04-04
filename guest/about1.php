@@ -219,7 +219,7 @@
             as
             live music or sports games on TV. Some hotels may have multiple bars with different themes and settings to
             cater to different preferences and occasions.</p>
-          <p><a href="https://youtu.be/xqKcHz47E5A?si=cg-VdvEehXV5Q1pM" target="_blank" class="popup-vimeo text-uppercase text-white "
+          <p><a href="https://youtu.be/xqKcHz47E5A?si=cg-VdvEehXV5Q1pM" target="_blank" class="popup-vimeo text-uppercase text-black "
               previewlistener="true">Watch Video <i class="fa-solid fa-arrow-right"></i> <span
                 class="icon-arrow-right small"></span></a></p>
         </form>

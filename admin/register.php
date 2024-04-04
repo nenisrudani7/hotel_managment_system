@@ -2,6 +2,7 @@
 <html lang="en">
 
 <head>
+<<<<<<< HEAD
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -17,6 +18,22 @@
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.3/dist/jquery.validate.min.js"></script>
+=======
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bootstrap Admin Dashboard</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/css/bootstrap.min.css" />
+    <script src="https://kit.fontawesome.com/ae360af17e.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="css/style.css" />
+    <script src="jquery-3.6.4.min.js"></script>
+    <!-- jQuery UI Datepicker CSS -->
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <!-- jQuery UI Datepicker JS -->
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <!-- jQuery Validation Plugin -->
+    <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
+>>>>>>> 35c862946ef22068e25511f3b50674f6850ae98b
 
 </head>
 
@@ -27,7 +44,116 @@
 
         <div class="spinner-grow spinner-grow-sm text-white me-4"></div>
 
+<<<<<<< HEAD
         <div class="spinner-grow spinner-grow-sm text-white me-4"></div>
+=======
+            <!-- Main Content -->
+            <div class="container-fluid p-3 my-container">
+                <form action="register.php" method="post" enctype="multipart/form-data" id="signupForm">
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="response"></div>
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <h1>Customer Details:</h1>
+                                </div>
+                                <div class="panel-body">
+                                    <div class="panel-body">
+                                        <div class="form-group">
+                                            <label for="firstName">First Name</label>
+                                            <input type="text" class="form-control" id="firstName" name="f_name" placeholder="Enter First Name" required>
+                                            <span id="name_err" class="text-danger"></span>
+                                        </div>
+                                        <br>
+                                        <div class="form-group">
+                                            <label for="lastName">Last Name</label>
+                                            <input type="text" class="form-control" id="lastName" name="l_name" placeholder="Enter Last Name" required>
+                                        </div>
+                                        <br>
+                                        <div class="form-group">
+                                            <label for="email">Email Address</label>
+                                            <input type="email" class="form-control" id="email" name="email" placeholder="Enter Email Address" required>
+                                        </div>
+                                        <br>
+                                        <div class="form-group">
+                                            <label for="contactNumber">Contact Number</label>
+                                            <input type="tel" class="form-control" id="contactNumber" name="number" placeholder="Enter Contact Number" required>
+                                        </div>
+                                        <br>
+                                        <div class="form-group">
+                                            <label for="address">Residential Address</label>
+                                            <input type="text" class="form-control" id="address" name="add" placeholder="Enter Residential Address" required>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="panel panel-default">
+                                <div class="panel-heading ">
+                                    <h1>Room Information:</h1>
+                                </div>
+                                <div class="panel-body">
+                                    <div class="form-group">
+                                        <label for="roomType">Room Type:</label>
+                                        <select class="form-select" name="roomType" id="roomType" required>
+                                            <option selected disabled>Select Room Type</option>
+                                            <?php
+                                            include_once('fetch_room_types.php'); // Include the PHP file to fetch room types
+                                            ?>
+                                        </select>
+                                    </div>
+                                    <br>
+                                    <div class="form-group">
+                                        <label for="roomNo">Room No</label>
+                                        <select class="form-select" id="roomNo" name="roomNo" required>
+                                            <option selected disabled>Select Room No</option>
+                                        </select>
+                                    </div>
+
+                                    <br>
+
+                                    <div class="form-group">
+                                        <label for="max_person">Max Persons</label>
+                                        <input type="number" class="form-control" id="max_person" name="max_person" placeholder="Enter the number of persons" required>
+                                    </div>
+                                    <br>
+
+                                    <div class="form-group">
+                                        <label for="checkInDate">Check-In Date</label>
+                                        <input type="text" class="form-control" id="checkInDate" name="checkInDate" placeholder="Enter Check-In Date" required>
+                                    </div>
+
+                                    <br>
+                                    <div class="form-group">
+                                        <label for="checkOutDate">Check-Out Date</label>
+                                        <input type="text" class="form-control" id="checkOutDate" name="checkOutDate" placeholder="Enter Check-Out Date" required>
+                                    </div>
+                                    <br>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="container btn-light text-dark py-5">
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="">
+                                    <label for="roomPrice">Room Price:</label>
+                                    <!-- Use a span tag to display the room price -->
+                                    <h1><span id="roomPrice" class=""></span></h1>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <input type="submit" value="Submit" name="submit" class="btn btn-primary">
+                            </div>
+                        </div>
+                    </div>
+
+
+                </form>
+            </div>
+        </div>
+>>>>>>> 35c862946ef22068e25511f3b50674f6850ae98b
     </div>
     <!--------------------------------- navbar ---------------------------------->
     <?php include 'navbar.php' ?>
@@ -281,6 +407,7 @@
 
     <script>
         $(document).ready(function() {
+<<<<<<< HEAD
             // Define custom validation method for address
             $.validator.addMethod("validAddress", function(value, element) {
 
@@ -300,19 +427,21 @@
 
 
             $("#booking").validate({
+=======
+            // Initialize Datepicker for check-in date
+            // Validation
+            $("#signupForm").validate({
+>>>>>>> 35c862946ef22068e25511f3b50674f6850ae98b
                 rules: {
                     f_name: {
                         required: true,
-                        noDigits: true
                     },
-                    l_name: {
+                    l_name: {   
                         required: true,
-                        noDigits: true
                     },
                     email: {
                         required: true,
                         email: true,
-                        emailregex: true
                     },
                     number: {
                         required: true,
@@ -320,13 +449,16 @@
                     },
                     add: {
                         required: true,
-                        validAddress: true // Use the custom validation method for address
                     },
                     roomType: {
                         required: true
                     },
                     roomNo: {
                         required: true
+                    },
+                    max_person: {
+                        required: true,
+                        digits: true
                     },
                     checkInDate: {
                         required: true
@@ -338,16 +470,13 @@
                 messages: {
                     f_name: {
                         required: "Please enter your first name",
-                        noDigits: "First name cannot contain digits"
                     },
                     l_name: {
                         required: "Please enter your last name",
-                        noDigits: "Last name cannot contain digits"
                     },
                     email: {
                         required: "Please enter your email address",
                         email: "Please enter a valid email address",
-                        emailregex: "Please enter a valid email address"
                     },
                     number: {
                         required: "Please enter your contact number",
@@ -355,13 +484,16 @@
                     },
                     add: {
                         required: "Please enter your residential address",
-                        validAddress: "Please enter a valid address" // Error message for address validation
                     },
-                    room_type: {
+                    roomType: {
                         required: "Please select a room type"
                     },
                     roomNo: {
                         required: "Please select a room number"
+                    },
+                    max_person: {
+                        required: "Please enter the number of persons",
+                        digits: "Please enter only digits"
                     },
                     checkInDate: {
                         required: "Please enter the check-in date"
@@ -370,6 +502,7 @@
                         required: "Please enter the check-out date"
                     }
                 }
+
             });
         });
     </script>
@@ -378,7 +511,17 @@
 </body>
 
 </html>
+<<<<<<< HEAD
 
 <?php
 include('online_booking_insert_data.php');
 ?>
+=======
+<?php
+include('reg-i.php');
+include('include/drop.php');
+include('drop1.php');
+include('drop2.php');
+?>
+
+>>>>>>> 35c862946ef22068e25511f3b50674f6850ae98b

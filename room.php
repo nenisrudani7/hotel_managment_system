@@ -26,22 +26,36 @@
 
 </head>
 <body>
+  <?php
+  include("admin/include/conn.php");
+// SQL query to fetch data from the carousel_items table
+$sql = "SELECT image_path, caption_heading, caption_text FROM room_page"; // Change the condition according to your requirement
+$result = $conn->query($sql);
+
+// Check if any rows were returned
+if ($result->num_rows > 0) {
+    // Fetch the data
+    $row = $result->fetch_assoc();
     
-    <div id="carouselExampleCaptions" class="carousel slide">
-        <div class="carousel-indicators">
-        </div>
-        <div class="carousel-inner">
-          <div class="carousel-item active">
-            <img src="img/h7.jpg" class="d-block w-100" alt="...">
-            <div class="carousel-caption d-none d-md-block">
-              <h1>HOTEL ROOMS</h1>
-              <p>LUXURIOUS ROOMS</p>
+    // Output the fetched values within HTML structure
+    echo '<div id="carouselExampleCaptions" class="carousel slide">
+            <div class="carousel-indicators">
             </div>
-          </div>
-        </div>
-       
-        
-      </div>
+            <div class="carousel-inner">
+              <div class="carousel-item active">
+                <img src="' . $row["image_path"] . '" class="d-block w-100" alt="...">
+                <div class="carousel-caption d-none d-md-block">
+                  <h1>' . $row["caption_heading"] . '</h1>
+                  <p>' . $row["caption_text"] . '</p>
+                </div>
+              </div>
+            </div>
+          </div>';
+} else {
+    echo "0 results";
+}
+
+?>
 
       <!-- -------------------navbar--------------------->
       <?php include 'navbar.php';?>
