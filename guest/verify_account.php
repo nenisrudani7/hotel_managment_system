@@ -1,5 +1,5 @@
 <?php
-include_once("include/conn.php");
+include_once("../admin/include/conn.php");
 session_start();
 $em = $_REQUEST['em'];
 $token = $_REQUEST['token'];
@@ -18,7 +18,7 @@ if ($count == 1) {
 
             $_SESSION['success'] = "Account is already activated";
         } else {
-            $updt = "update retailer set `status`='Active' where email='$em' and token='$token'";
+            $updt = "update register set `status`='Active' where email='$em' and token='$token'";
             if (mysqli_query($conn, $updt)) {
                 $_SESSION['success'] = "Activation activated successfully";
             } else {
