@@ -243,14 +243,14 @@
             $mail->isSMTP(); // Set mailer to use SMTP
             $mail->Host = 'smtp.gmail.com'; // Specify main and backup SMTP servers
             $mail->SMTPAuth = true; // Enable SMTP authentication
-            $mail->Username = 'rnv1924@gmail.com'; // SMTP username
-            $mail->Password = 'jypu twxl chxa bsjq'; // SMTP password
+            $mail->Username = 'jnjcreators@gmail.com'; // SMTP username
+            $mail->Password = 'hvnz cfkl atwt pmin'; // SMTP password
             $mail->SMTPSecure = 'ssl'; // Enable TLS encryption, `ssl` also accepted
             $mail->Port = 465; // TCP port to connect to
             // $mail->SMTPDebug = 2;
-
+         
             // Recipients
-            $mail->setFrom('rnv1924@gmail.com', 'RNV'); // Sender's email address and name
+            $mail->setFrom('jnjcreators@gmail.com', 'JNJ'); // Sender's email address and name
             $mail->addAddress($email, $r_name); // Recipient's email address and name
 
             // Attachments

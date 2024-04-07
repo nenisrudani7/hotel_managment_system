@@ -27,7 +27,7 @@ if ($count == 1) {
         }
 ?>
         <script>
-            window.location.href = "register.php";
+            window.location.href = "http://localhost/hotel_managment_system/guest/hotel1.php";
         </script>
 <?php
     }
