@@ -1,30 +1,3 @@
-<<<<<<< HEAD
-<script>
-    $(document).ready(function () {
-        $('#roomType').change(function () {
-            var roomTypeId = $(this).val();
-            $.ajax({
-                url: 'fetch_room_price.php',
-                type: 'post',
-                data: { roomTypeId: roomTypeId },
-                dataType: 'json',
-                success: function (response) {
-                    if (response.length > 0) {
-                        // Assuming only one price is returned for a room type
-                        var roomPrice = response[0].price;
-                        $('#price').text(roomPrice); // Update the text of the price element
-                    } else {
-                        $('#price').text('Price not available');
-                    }
-                },
-                error: function () {
-                    console.log('Error fetching room price');
-                }
-            });
-        });
-    });
-</script>
-=======
 <?php
 include_once('include/conn.php');
 
@@ -50,4 +23,3 @@ if (isset($_POST['roomTypeId'])) {
     echo json_encode(array()); // Return empty array if roomTypeId is not set
 }
 ?>
->>>>>>> 35c862946ef22068e25511f3b50674f6850ae98b

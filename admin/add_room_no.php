@@ -1,23 +1,9 @@
 <?php
-session_start();
-
-// Check if the user is logged in
-if (!isset($_SESSION['stulogin']) || $_SESSION['stulogin'] !== true) {
-    header("location: signup.php");
-    exit; // Ensure no further code execution after redirection
-}
 
 // Include database connection
 include 'include/conn.php';
 
-// Fetch user data
-$username = $_SESSION['a_name'];
-$query = "SELECT * FROM user WHERE a_name = '$username'";
-$result = $conn->query($query);
 
-// Check if user data exists
-if ($result->num_rows > 0) {
-    $userData = $result->fetch_assoc();
 
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // Retrieve form data
@@ -106,10 +92,5 @@ if ($result->num_rows > 0) {
 </body>
 
 </html>
-
-<?php
-} else {
-    // User data not found
-    echo "User data not found.";
-}
-?>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/script.js"></script>

@@ -1,19 +1,4 @@
 <script>
-<<<<<<< HEAD
-$(document).ready(function () {
-    $('#roomType').change(function () {
-        var roomTypeId = $(this).val();
-        $.ajax({
-            url: 'fetch_room_price.php', // Update the URL to point to the PHP script for fetching room prices
-            type: 'post',
-            data: { roomTypeId: roomTypeId }, // Send room type ID instead of room number
-            dataType: 'json',
-            success: function (response) {
-                $('#price').val(response.price);
-            },
-            error: function () {
-                console.log('Error fetching room price');
-=======
 $(document).ready(function() {
     // Event handler for room type selection change
     $('#roomType').change(function() {
@@ -37,7 +22,6 @@ $(document).ready(function() {
             },
             error: function(jqXHR, textStatus, errorThrown) { // Callback function if there is an error with the AJAX request
                 console.log('Error fetching room price:', errorThrown); // Log the error message to the console
->>>>>>> 35c862946ef22068e25511f3b50674f6850ae98b
             }
         });
     });
