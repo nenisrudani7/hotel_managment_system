@@ -1,10 +1,4 @@
 <?php
-session_start();
-// Check if the user is logged in
-if (!isset($_SESSION['stulogin']) || $_SESSION['stulogin'] !== true) {
-    header("location: signup.php");
-    exit;
-}
 
 include 'include/conn.php';
 

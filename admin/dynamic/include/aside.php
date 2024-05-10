@@ -69,16 +69,24 @@
                         </li>
                         <br>
                         <li class="nav-item text-white mx-4">
-                            <a href="../complain.html" class="nav-link">
+                            <a href="../feedback.php" class="nav-link">
                                 <h5>
                                     <i class="fa-solid fa-message"></i>
                                     <span class="mx-2 size">Feed back</span>
                                 </h5>
                             </a>
                         </li>
+                        <br><li class="nav-item text-white mx-4">
+        <a href="../user_profile.php" class="nav-link">
+          <h5>   
+            <i class="fas fa-cogs text-white fa-lg"></i>
+            <span class="mx-2 size">user profile</span>
+            </h5>
+        </a>
+      </li>
                         <br>
                         <li class="nav-item text-white mx-4">
-                            <a href="../dynamic/dynamic.php" class="nav-link">
+                            <a href="dynamic.php" class="nav-link">
                                 <h5>
                                     <i class="fa-solid fa-message"></i>
                                     <span class="mx-2 size">Dynamic</span>

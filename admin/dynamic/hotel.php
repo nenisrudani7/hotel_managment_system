@@ -1,26 +1,14 @@
 <?php
 session_start();
-
-// Check if the user is not logged in, redirect to login page
-if (!isset ($_SESSION['stulogin']) || $_SESSION['stulogin'] !== true) {
-    header("location: signup.php");
-    exit; // Stop further execution
-}
-
-$username = $_SESSION['a_name'];
-
 include '../include/conn.php';
-
-$query = "SELECT * FROM user WHERE a_name = '$username'";
-
-$result = $conn->query($query);
-
-if ($result->num_rows > 0) {
-    $userData = $result->fetch_assoc();
-    ?>
-    <!DOCTYPE html>
-    <html lang="en" data-bs-theme="dark">
-
+if(!isset($_SESSION["admin_uname"])){
+?>
+ <script>
+        window.location.href ="http://localhost/hotel_managment_system1/gust/hotel1.php";
+</script>
+<?php
+}
+?>
     <head>
         <meta charset="UTF-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -77,15 +65,7 @@ if ($result->num_rows > 0) {
                                 </div>
 
                                 <!-- What People Say Card -->
-                                <div class="col-sm-12 col-md-6 col-lg-3 mb-3">
-                                    <div class="card text-white bg-secondary">
-                                        <div class="card-header bg-dark">What People Say</div>
-                                        <div class="card-body">
-                                            <h1 class="card-title">edit Here</h1>
-                                            <a href="what_people_say.php" class="btn btn-light">Go to What People Say</a>
-                                        </div>
-                                    </div>
-                                </div>
+                               
                             </div>
                         </div>
 
@@ -106,9 +86,3 @@ if ($result->num_rows > 0) {
     </body>
 
     </html>
-
-    <?php
-} else {
-    echo "User data not found.";
-}
-?>

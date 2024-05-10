@@ -1,24 +1,15 @@
 <?php
 session_start();
-
-// Check if the user is not logged in, redirect to login page
-if (!isset ($_SESSION['stulogin']) || $_SESSION['stulogin'] !== true) {
-    header("location: signup.php");
-    exit; // Stop further execution
-}    
-
-$username = $_SESSION['a_name'];
-
 include '../include/conn.php';
+if(!isset($_SESSION["admin_uname"])){
+?>
+ <script>
+        window.location.href ="http://localhost/hotel_managment_system1/gust/hotel1.php";
+</script>
 
-$query = "SELECT * FROM user WHERE a_name = '$username'";
-
-$result = $conn->query($query);
-
-if ($result->num_rows > 0) {
-    $userData = $result->fetch_assoc();
-    ?>
-    
+<?php
+}
+?>
     <?php
     
     
@@ -38,7 +29,7 @@ if ($result->num_rows > 0) {
             $check = getimagesize($_FILES["image"]["tmp_name"]);
             if ($check !== false) {
                 // Check file size
-                if ($_FILES["image"]["size"] > 500000) {
+                if ($_FILES["image"]["size"] > 500000000000) {
                     echo "Sorry, your file is too large.";
                 } else {
                     // Allow certain file formats
@@ -53,7 +44,11 @@ if ($result->num_rows > 0) {
                             if (!mysqli_query($conn, $sql)) {
                                 echo "Error updating image path: " . mysqli_error($conn);
                             } else {
-                                echo "New image uploaded successfully";
+                                ?>
+                                <script>
+                                    window.location.href="http://localhost/hotel_managment_system1/admin/dynamic/hotel_php_carousle.php";
+                                </script>
+                                <?php
                             }
                         } else {
                             echo "Sorry, there was an error uploading your file.";
@@ -92,8 +87,7 @@ if ($result->num_rows > 0) {
         // Fetch the image path
         $image_path = $row['image_path'];
     } else {
-        echo "No ID provided.";
-        exit; // Exit script if no ID provided
+        
     }
     ?>
     
@@ -164,8 +158,3 @@ if ($result->num_rows > 0) {
 
     </html>
 
-    <?php
-} else {
-    echo "User data not found.";
-}    
-?>

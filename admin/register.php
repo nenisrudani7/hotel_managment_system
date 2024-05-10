@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" data-bs-theme="dark">
 
+
 <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -17,6 +18,7 @@
     <!-- jQuery Validation Plugin -->
     <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
 
+
     <style>
         .error {
             color: red;
@@ -24,7 +26,9 @@
     </style>
 </head>
 
+
 <body>
+
 
     <div class="wrapper">
         <?php include('include/aside.php'); ?>
@@ -48,6 +52,7 @@
                     </ul>
                 </div>
             </nav>
+
 
             <!-- Main Content -->
             <div class="container-fluid p-3 my-container">
@@ -106,20 +111,6 @@
                                         </select>
                                     </div>
                                     <br>
-                                    <div class="form-group">
-                                        <label for="roomNo">Room No</label>
-                                        <select class="form-select" id="roomNo" name="roomNo" required>
-                                            <option selected disabled>Select Room No</option>
-                                        </select>
-                                    </div>
-
-                                    <br>
-
-                                    <div class="form-group">
-                                        <label for="max_person">Max Persons</label>
-                                        <input type="number" class="form-control" id="max_person" name="max_person" placeholder="Enter the number of persons" required>
-                                    </div>
-                                    <br>
 
                                     <div class="form-group">
                                         <label for="checkInDate">Check-In Date</label>
@@ -132,6 +123,22 @@
                                         <input type="text" class="form-control" id="checkOutDate" name="checkOutDate" placeholder="Enter Check-Out Date" required>
                                     </div>
                                     <br>
+                                    <div class="form-group">
+                                        <label for="roomNo">Room No</label>
+                                        <select class="form-select" id="roomNo" name="roomNo" required>
+                                            <option selected disabled>Select Room No</option>
+                                        </select>
+                                    </div>
+
+
+                                    <br>
+
+
+                                    <div class="form-group">
+                                        <label for="max_person">Max Persons</label>
+                                        <input type="number" class="form-control" id="max_person" name="max_person" placeholder="Enter the number of persons" required>
+                                    </div>
+                                    <br>
                                 </div>
                             </div>
                         </div>
@@ -140,9 +147,9 @@
                         <div class="row">
                             <div class="col-lg-6">
                                 <div class="">
-                                    <label for="roomPrice">Room Price:</label>
+                                    <label for="roomPrice" style="color:white">Room Price:</label>
                                     <!-- Use a span tag to display the room price -->
-                                    <h1><span id="roomPrice" class=""></span></h1>
+                                    <h1><span id="roomPrice" style="color:white" class=""></span></h1>
                                 </div>
                             </div>
                             <div class="col-lg-6">
@@ -152,18 +159,23 @@
                     </div>
 
 
+
+
                 </form>
             </div>
         </div>
     </div>
+
 
     <a href="#" class="theme-toggle">
         <i class="fa-regular fa-moon"></i>
         <i class="fa-regular fa-sun"></i>
     </a>
 
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/js/bootstrap.bundle.min.js"></script>
     <script src="js/script.js"></script>
+
 
     <script>
         $(document).ready(function() {
@@ -174,7 +186,7 @@
                     f_name: {
                         required: true,
                     },
-                    l_name: {   
+                    l_name: {
                         required: true,
                     },
                     email: {
@@ -241,11 +253,64 @@
                     }
                 }
 
+
             });
         });
     </script>
 
+
+    <script>
+        $(document).ready(function() {
+            // Initialize Datepicker for check-in date
+            $("#checkInDate").datepicker({
+                dateFormat: 'yy-mm-dd',
+                minDate: 0,
+                onSelect: function(selectedDate) {
+                    $("#checkOutDate").datepicker("option", "minDate", selectedDate);
+                    fetchAvailableRooms();
+                }
+            });
+
+
+            // Initialize Datepicker for check-out date
+            $("#checkOutDate").datepicker({
+                dateFormat: 'yy-mm-dd',
+                minDate: 0,
+                onSelect: function(selectedDate) {
+                    $("#checkInDate").datepicker("option", "maxDate", selectedDate);
+                    fetchAvailableRooms();
+                }
+            });
+
+
+            // Function to fetch available rooms based on selected dates and room type
+            function fetchAvailableRooms() {
+                var checkInDate = $("#checkInDate").val();
+                var checkOutDate = $("#checkOutDate").val();
+                var roomTypeId = $("#roomType").val(); // Get selected room type ID
+                $.ajax({
+                    url: "fetch_available_rooms.php", // Provide the URL to fetch available rooms
+                    type: "POST",
+                    data: {
+                        checkInDate: checkInDate,
+                        checkOutDate: checkOutDate,
+                        roomTypeId: roomTypeId // Include room type ID in the data
+                    },
+                    success: function(response) {
+                        $("#roomNo").html(response); // Update room number select options
+                    }
+                });
+            }
+
+
+            // Validate the form
+            $("#signupForm").validate({
+                // Validation rules and messages...
+            });
+        });
+    </script>
 </body>
+
 
 </html>
 <?php
@@ -254,4 +319,14 @@ include('include/drop.php');
 include('drop1.php');
 include('drop2.php');
 ?>
+
+
+
+
+
+
+
+
+
+
 

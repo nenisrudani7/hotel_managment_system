@@ -1,23 +1,15 @@
 <?php
 session_start();
-
-// Check if the user is not logged in, redirect to login page
-if (!isset ($_SESSION['stulogin']) || $_SESSION['stulogin'] !== true) {
-    header("location: signup.php");
-    exit; // Stop further execution
-}
-
-$username = $_SESSION['a_name'];
-
 include '../include/conn.php';
+if(!isset($_SESSION["admin_uname"])){
+?>
+ <script>
+        window.location.href ="http://localhost/hotel_managment_system1/gust/hotel1.php";
+</script>
 
-$query = "SELECT * FROM user WHERE a_name = '$username'";
-
-$result = $conn->query($query);
-
-if ($result->num_rows > 0) {
-    $userData = $result->fetch_assoc();
-    ?>
+<?php
+}
+?>
     <!DOCTYPE html>
     <html lang="en" data-bs-theme="dark">
 
@@ -120,8 +112,4 @@ if ($result->num_rows > 0) {
 
     </html>
 
-    <?php
-} else {
-    echo "User data not found.";
-}
-?>
+    

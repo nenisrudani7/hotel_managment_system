@@ -1,9 +1,10 @@
 <?php
 include_once('include/conn.php');
 
+
 // Check if the form is submitted
 if (isset($_POST['submit'])) {
-    // Step 1: Insert customer information into the customer table
+    // Step 1: Retrieve form data
     $f_name = $_POST['f_name'];
     $l_name = $_POST['l_name'];
     $email = $_POST['email'];
@@ -13,45 +14,66 @@ if (isset($_POST['submit'])) {
     $room_no = $_POST['roomNo'];
     $max_person = $_POST['max_person']; // Get the max_person entered by the user
 
-    // Step 2: Fetch the room ID and price based on selected room number and type
-    $fetch_room_info_query = "SELECT r.room_id, r.status, rt.price FROM room r 
-    JOIN room_type rt ON r.room_type_id = rt.room_type_id 
-    WHERE r.room_type_id = $room_type_id AND r.room_id = '$room_no'";
+
+    // Step 2: Fetch the room price based on the selected room type
+    $fetch_room_info_query = "SELECT rt.price, rt.offers, r.room_id
+    FROM room_type rt
+    JOIN room r ON rt.room_type_id = r.room_type_id
+    WHERE rt.room_type_id = $room_type_id AND r.room_no = '$room_no'";
+
+
+    // Step 3: Execute the query to fetch room information
     $result = mysqli_query($conn, $fetch_room_info_query);
+
+
     if ($result && mysqli_num_rows($result) > 0) {
         $row = mysqli_fetch_assoc($result);
-        $room_id = $row['room_id']; // Get the room ID
-        $room_status = $row['status']; // Get the room status
         $price = $row['price']; // Get the price
+        $room_id = $row['room_id']; // Get the room ID
+        $offers = $row['offers']; // Get the offers
 
-        // Check if the room is already booked
-        if ($room_status == 1) {
-            echo "<script>alert('The selected room is already booked. Please choose another room.');</script>";
+
+        // Step 4: Apply offer logic to adjust the total price
+        if (!empty($offers)) {
+            // Convert offers string into an array of offer values
+            $offer_values = explode(",", $offers);
+            $max_discount = max($offer_values); // Get the maximum discount value
+            $discounted_price = $price - ($price * ($max_discount / 100)); // Calculate discounted price
+            $total_price = $discounted_price * $max_person; // Adjust total price with the discounted price
         } else {
-            // Calculate the total price based on the price per person and the number of persons
-            $total_price = $price * $max_person;
+            $total_price = $price * $max_person; // If no offers, use the base price
+        }
 
-            // Insert customer information into the customer table
-            $insert_customer_query = "INSERT INTO customer (c_name, email, number, `add`) VALUES ('$f_name $l_name', '$email', '$number', '$add')";
+
+        // Step 5: Check if the email already exists in the customer table
+        $check_customer_query = "SELECT * FROM customer WHERE email = '$email'";
+        $check_result = mysqli_query($conn, $check_customer_query);
+
+
+        if ($check_result && mysqli_num_rows($check_result) > 40) {
+            echo "<script>alert('Customer with this email already exists.');</script>";
+        } else {
+            // Step 6: Insert customer information into the customer table
+            $insert_customer_query = "INSERT INTO customer (c_name, email, number, `add`)
+                VALUES ('$f_name $l_name', '$email', '$number', '$add')";
+           
             if (mysqli_query($conn, $insert_customer_query)) {
                 $customer_id = mysqli_insert_id($conn); // Get the ID of the newly inserted customer
 
-                // Update the status of the booked room in the room table to 1
-                $update_room_query = "UPDATE room SET status = 1 WHERE room_id = $room_id";
-                if (mysqli_query($conn, $update_room_query)) {
-                    // Insert booking information into the booking table
-                    $booking_date = date('Y-m-d'); // Assuming booking date is current date
-                    $check_in_date = $_POST['checkInDate'];
-                    $check_out_date = $_POST['checkOutDate'];
-                    $insert_booking_query = "INSERT INTO booking (customer_id, room_id, booking_date, check_in, check_out, max_person, total_price) 
-                        VALUES ($customer_id, $room_id, '$booking_date', '$check_in_date', '$check_out_date', $max_person, $total_price)";
-                    if (mysqli_query($conn, $insert_booking_query)) {
-                        echo "<script>alert('Booking information inserted successfully.');</script>";
-                    } else {
-                        echo "Error inserting booking information: " . mysqli_error($conn);
-                    }
+
+                // Step 7: Insert booking information into the booking table
+                $booking_date = date('Y-m-d'); // Assuming booking date is current date
+                $check_in_date = $_POST['checkInDate'];
+                $check_out_date = $_POST['checkOutDate'];
+
+
+                $insert_booking_query = "INSERT INTO booking (customer_id, room_id, booking_date, check_in, check_out, total_price, max_person)
+                VALUES ($customer_id, $room_id, '$booking_date', '$check_in_date', '$check_out_date', $total_price, $max_person)";
+               
+                if (mysqli_query($conn, $insert_booking_query)) {
+                    echo "<script>alert('Booking information inserted successfully.');</script>";
                 } else {
-                    echo "Error updating room status: " . mysqli_error($conn);
+                    echo "Error inserting booking information: " . mysqli_error($conn);
                 }
             } else {
                 echo "Error inserting customer: " . mysqli_error($conn);
@@ -60,84 +82,11 @@ if (isset($_POST['submit'])) {
     } else {
         echo "Error fetching room details: " . mysqli_error($conn);
     }
-
-    mysqli_close($conn); // Close the database connection
 }
 ?>
 
 
 
-<script>
-    $(document).ready(function() {
-        // Define custom validation method for address
-        $.validator.addMethod("validAddress", function(value, element) {
-            var regex = /^[a-zA-Z0-9,\s-]+$/;
-            return regex.test(value);
-        }, "Please enter a valid address");
 
-        $.validator.addMethod("emailregex", function(value, element) {
-            var regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            return regex.test(value);
-        }, "Please enter a valid email address");
 
-        $.validator.addMethod("noDigits", function(value, element) {
-            return this.optional(element) || !/\d/.test(value);
-        }, "Digits are not allowed.");
 
-        // Apply validation to the form
-        $("#add_staff").validate({
-            rules: {
-                name: {
-                    required: true
-                },
-                email: {
-                    required: true,
-                    email: true,
-                    emailregex: true
-                },
-                phone: {
-                    required: true,
-                    digits: true
-                },
-                address: {
-                    required: true,
-                    validAddress: true
-                },
-                salary: {
-                    required: true,
-                    number: true
-                },
-                image: {
-                    required: true,
-                    extension: "jpg|jpeg|png"
-                }
-            },
-            messages: {
-                name: {
-                    required: "Please enter your name"
-                },
-                email: {
-                    required: "Please enter your email address",
-                    email: "Please enter a valid email address",
-                    emailregex: "Please enter a valid email address"
-                },
-                phone: {
-                    required: "Please enter your phone number",
-                    digits: "Please enter only digits"
-                },
-                address: {
-                    required: "Please enter your address",
-                    validAddress: "Please enter a valid address"
-                },
-                salary: {
-                    required: "Please enter the salary",
-                    number: "Please enter a valid number"
-                },
-                image: {
-                    required: "Please select an image file",
-                    extension: "Please upload an image file of type: JPG, JPEG, PNG"
-                }
-            }
-        });
-    });
-</script>

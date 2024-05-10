@@ -1,15 +1,12 @@
 <?php
 session_start();
-
-// Check if the user is not logged in, redirect to login page
-if (!isset ($_SESSION['stulogin']) || $_SESSION['stulogin'] !== true) {
-    header("location: signup.php");
-    exit; // Stop further execution
-}
-
-$username = $_SESSION['a_name'];
-
 include '../include/conn.php';
+
+// Redirect to login page if admin is not logged in
+if (!isset($_SESSION["admin_uname"])) {
+    header("Location: http://localhost/hotel_managment_system1/gust/hotel1.php");
+    exit;
+}
 
 // Check if ID parameter is set in the URL
 if (isset($_GET['id'])) {
@@ -47,7 +44,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     if ($update_result) {
         // Redirect to the display page after successful update
-        header("location: display_hotel_features.php");
+        header("Location:hotel_features.php");
         exit;
     } else {
         echo "Error updating feature: " . mysqli_error($conn);
@@ -77,7 +74,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <div class="container-fluid text-center p-3 my-container">
                     <div class="container mt-5">
                         <h2>Edit Hotel Feature</h2>
-                        <form method="POST">
+                        <form method="POST" action="edit_feature.php?id=<?php echo $feature_id; ?>">
                             <div class="mb-3">
                                 <label for="feature_name" class="form-label">Feature Name</label>
                                 <input type="text" class="form-control" id="feature_name" name="feature_name" value="<?php echo $feature['feature_name']; ?>" required>
@@ -102,7 +99,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="js/script.js"></script>
+    <script src="../js/script.js"></script>
 </body>
 
 </html>

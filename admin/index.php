@@ -1,23 +1,4 @@
-<?php
-session_start();
 
-// Check if the user is not logged in, redirect to login page
-if (!isset($_SESSION['stulogin']) || $_SESSION['stulogin'] !== true) {
-  header("location: signup.php");
-  exit; // Stop further execution
-}
-
-$username = $_SESSION['a_name'];
-
-include 'include/conn.php';
-
-$query = "SELECT * FROM user WHERE a_name = '$username'";
-
-$result = $conn->query($query);
-
-if ($result->num_rows > 0) {
-  $userData = $result->fetch_assoc();
-?>
   <!DOCTYPE html>
   <html lang="en" data-bs-theme="dark">
 
@@ -100,7 +81,7 @@ if ($result->num_rows > 0) {
                 <div class="card text-white bg-secondary">
                   <div class="card-header bg-dark">Staff</div>
                   <div class="card-body">
-                    <h1 class="card-title">50</h1>
+                    <h1 class="card-title"><?php include('counter/staff_count.php'); ?></h1>
                   </div>
                 </div>
               </div>
@@ -118,9 +99,6 @@ if ($result->num_rows > 0) {
   </body>
 
   </html>
-
-<?php
-} else {
-  echo "User data not found.";
-}
-?>
+  <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">
+              Book Now
+            </button>

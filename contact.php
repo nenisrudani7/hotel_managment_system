@@ -1,3 +1,4 @@
+<?php session_start();?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -118,7 +119,7 @@
 
 <body>
   <!-- -------------------navbar--------------------->
-<?php include 'navbar.php'?>
+  <?php include 'navbar.php' ?>
   <div id="carouselExampleCaptions" class="carousel slide">
     <div class="carousel-indicators">
     </div>
@@ -135,43 +136,143 @@
 
   </div>
 
-  
+
   <!-- --------------------------contact us form----------------------- -->
   <br>
-  <form class="p-5 my-5 w-100" id="form">
+  <form class="p-5 my-5 w-100" id="form" method="post" action="contact.php">
     <div class="mb-3">
-      <input type="text" class="form-control" id="fn" aria-describedby="emailHelp" name="fn"
-        placeholder="Your Name">
+      <input type="text" class="form-control" id="fn" aria-describedby="emailHelp" name="fn" placeholder="Your Name">
       <span id="fn_err"></span>
     </div>
     <div class="mb-3">
-      <input type="email" class="form-control" id="em" aria-describedby="emailHelp" name="em"
-        placeholder="Your Email">
+      <input type="email" class="form-control" id="em" value="<?php echo ($_SESSION['user_uname']) ? $_SESSION['user_uname'] : ''; ?>" aria-describedby="emailHelp" name="em" placeholder="Your Email" readonly>
       <span id="em_err"></span>
     </div>
     <div class="mb-3">
-      <input type="text" class="form-control" id="sub" aria-describedby="emailHelp" name="sub"
-        placeholder="Subject">
+      <input type="text" class="form-control" id="sub" aria-describedby="emailHelp" name="sub" placeholder="Subject">
       <span id="sub_err"></span>
     </div>
     <div class="mb-3">
       <textarea class="form-control" id="desc" rows="3" name="desc" placeholder="Descepration"></textarea>
       <span id="desc_err"></span>
     </div>
-    <button type="submit" class="btn btn-danger" name="">Send Message</button>
+    <button type="submit" class="btn btn-danger" name="btn">Send Message</button>
   </form>
-  <!-- ------------------footer---------------------- -->
-  <?php include 'footer.php'?>
-  <!-- Bootstrap JS -->
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.1.3/js/bootstrap.bundle.min.js">
-  </script>
-  <style>
-    .error {
-      color: red;
+  <!-- insert data in feedback table -->
+  <?php
+include('admin/include/conn.php');
+
+// Check if the form was submitted
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $name = $_POST['fn'];
+    $email = $_POST['em'];
+    $subject = $_POST['sub'];
+    $description = $_POST['desc'];
+
+    // Check if the email already exists in the feedback table
+    $checkQuery = "SELECT COUNT(*) FROM feedback WHERE email = ?";
+    $checkStmt = $conn->prepare($checkQuery);
+    $checkStmt->bind_param("s", $email);
+    $checkStmt->execute();
+    $checkStmt->bind_result($count);
+    $checkStmt->fetch();
+    $checkStmt->close();
+
+    if ($count > 0) {
+        // Email already exists in the feedback table
+        echo '<script>alert("Error: This email has already been submitted.");</script>';
+    } else {
+        // Email does not exist, proceed with inserting the feedback
+        $sql = "INSERT INTO feedback (name, email, subject, description) VALUES (?, ?, ?, ?)";
+        $stmt = $conn->prepare($sql);
+
+        if ($stmt) {
+            $stmt->bind_param("ssss", $name, $email, $subject, $description);
+
+            if ($stmt->execute()) {
+                // Data inserted successfully
+                echo '<script>alert("Thank you! Your feedback has been submitted.");</script>';
+            } else {
+                // Error in executing the statement
+                echo "Error: " . $stmt->error;
+            }
+
+            $stmt->close();
+        } else {
+            // Error in preparing the statement
+            echo "Error: " . $conn->error;
+        }
     }
-  </style>
-  
+    $conn->close();
+} else {
+    // Redirect if accessed directly (optional)
 
+    exit();
+}
+?>
+<!-- ------------------footer---------------------- -->
+<?php include 'footer.php'; ?>
+<!-- Bootstrap JS -->
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/5.1.3/js/bootstrap.bundle.min.js"></script>
+<style>
+    .error {
+        color: red;
+    }
+</style>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js"></script>
+
+<script>
+    $(document).ready(function () {
+        $("#form").validate({
+            rules: {
+                fn: {
+                    required: true,
+                    minlength: 2,
+                    maxlength: 50
+                },
+                em: {
+                    required: true,
+                    email: true
+                },
+                sub: {
+                    required: true,
+                    minlength: 2,
+                    maxlength: 100
+                },
+                desc: {
+                    required: true,
+                    minlength: 10,
+                    maxlength: 500
+                }
+            },
+            messages: {
+                fn: {
+                    required: "Please enter your name",
+                    minlength: "Name must be at least 2 characters",
+                    maxlength: "Name cannot exceed 50 characters"
+                },
+                em: {
+                    required: "Please enter your email",
+                    email: "Please enter a valid email address"
+                },
+                sub: {
+                    required: "Please enter a subject",
+                    minlength: "Subject must be at least 2 characters",
+                    maxlength: "Subject cannot exceed 100 characters"
+                },
+                desc: {
+                    required: "Please enter a description",
+                    minlength: "Description must be at least 10 characters",
+                    maxlength: "Description cannot exceed 500 characters"
+                }
+            },
+            errorPlacement: function (error, element) {
+                var id = element.attr("id") + "_err";
+                $("#" + id).html(error);
+            }
+        });
+    });
+</script>
 </body>
-
 </html>
