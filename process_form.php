@@ -29,7 +29,7 @@ if (isset($_POST['submit'])) {
     if ($result && mysqli_num_rows($result) > 0) {
         $row = mysqli_fetch_assoc($result);
         $price = $row['price']; // Get the price
-        $room_id = $row['room_id']; // Get the room ID
+        $room_id = $row['   ']; // Get the room ID
         $offers = $row['offers']; // Get the offers
 
 

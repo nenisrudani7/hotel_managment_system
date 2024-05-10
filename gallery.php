@@ -105,7 +105,7 @@ if ($result->num_rows > 0) {
       ?>
       <div class="col-lg-4 col-md-12 mb-4 mb-lg-0">
         <div class="bg-image hover-overlay ripple shadow-1-strong rounded" data-ripple-color="light">
-          <img src="<?php echo $image_path; ?>" class="w-100" />
+          <img src="admin/img/../<?php echo $image_path; ?>" class="w-100" />
           <a href="#!" data-mdb-toggle="modal" data-mdb-target="#<?php echo $modal_id; ?>">
             <div class="mask" style="background-color: rgba(251, 251, 251, 0.2);"></div>
           </a>

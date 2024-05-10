@@ -1,3 +1,4 @@
+<?php session_start(); ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -7,20 +8,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My hotel</title>
     <!--bootstrap 5 css link-->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <!--external css file-->
-    <link href="style.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
-    <!-- for icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.3/dist/jquery.validate.min.js"></script>
+
 
 </head>
 
 <body>
+
     <!-- loading pages -->
     <div class="box ">
         <div class="spinner-grow spinner-grow-sm text-white me-4"></div>
@@ -71,6 +64,9 @@
                             </div>
                         </div>
                     </div>
+                    <!-- /razorrr pay api -->
+                    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+
 
                     <!-- Booking form -->
                     <div class="container-fluid p-3 my-container">
@@ -97,7 +93,7 @@
                                                 <br>
                                                 <div class="form-group">
                                                     <label for="email">Email Address</label>
-                                                    <input type="email" class="form-control" id="email" name="email" placeholder="Enter Email Address" required>
+                                                    <input type="email" class="form-control" id="email" name="email" value="<?php echo ($_SESSION['user_uname']) ? $_SESSION['user_uname'] : ''; ?>" placeholder="Enter Email Address" readonly required>
                                                 </div>
                                                 <br>
                                                 <div class="form-group">
@@ -127,7 +123,7 @@
                                             </div>
                                             <br>
                                             <!-- Room No dropdown -->
-                                            <div class="form-group">
+                                            <!-- <div class="form-group">
                                                 <label for="roomNo">Room No</label>
                                                 <select class="form-select" id="roomNo" name="roomNo" required>
                                                     <option selected disabled>Select Room No</option>
@@ -144,50 +140,42 @@
                                                     ?>
                                                 </select>
                                             </div>
+                                            <br> -->
+                                            <div class="form-group">
+                                                <label for="checkInDate">Check-In Date</label>
+                                                <input type="text" class="form-control" id="checkInDate" name="checkInDate" placeholder="Enter Check-In Date" required>
+                                            </div>
+
+                                            <br>
+                                            <div class="form-group">
+                                                <label for="checkOutDates">Check-Out Date</label>
+                                                <input type="text" class="form-control" id="checkOutDates" name="checkOutDates" placeholder="Enter Check-Out Date" required>
+                                            </div>
+                                            <br>
+                                            <div class="form-group">
+                                                <label for="roomNo">Room No</label>
+                                                <select class="form-select" id="roomNo" name="roomNo" required>
+                                                    <option selected disabled>Select Room No</option>
+                                                </select>
+                                            </div>
                                             <br>
                                             <div class="form-group">
                                                 <label for="max_person">Max Persons</label>
                                                 <input type="number" class="form-control" id="max_person" name="max_person" placeholder="Enter the number of persons" required>
                                             </div>
-                                            <br>
-                                            <div class="row">
-                                                <div class="col-6">
-                                                    <div class="form-group">
-                                                        <label for="checkInDate">Check-In Date</label>
-                                                        <input type="date" class="form-control" id="checkInDate" name="checkInDate" placeholder="Enter Check-In Date" required>
-                                                    </div>
-                                                </div>
-                                                <div class="col-6">
-                                                    <div class="form-group">
-                                                        <label for="checkOutDate">Check-Out Date</label>
-                                                        <input type="date" class="form-control" id="checkOutDate" name="checkOutDate" placeholder="Enter Check-Out Date" required>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <br>
-                                            <h2>Payment System</h2>
-                                            <div class="form-group">
-                                                <label for="amount">Amount:</label>
-                                                <input type="text" class="form-control" id="amount" name="amount">
-                                            </div>  
                                         </div>
                                     </div>
                                 </div>
                             </div>
                             <div class="container btn-light text-dark py-5">
                                 <div class="row">
-                                    <div class="col-md-6">
-                                        <h1><input type="submit" class="col-xxl-12" value="submit" href="#" name="submit"></h1>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
+                                    <div class="col-lg-12">
+                                        <div class="col-lg-6">
+                                            <button id="payNowButton" class="btn btn-primary mt-3">Pay Now</button>
+                                        </div>
+                                        <div class="form-group col-6">
                                             <label for="price">Price:</label>
                                             <h1><span id="price" name="price">₹<?php echo $room['price']; ?></span></h1>
-                                        </div>
-                                        <br>
-                                        <div class="form-group">
-                                            <label for="totalPrice">Total Price:</label>
-                                            <h1><span id="totalPrice" name="totalPrice">₹0.00</span></h1>
                                         </div>
                                     </div>
                                 </div>
@@ -196,68 +184,13 @@
                         </form>
 
                     </div>
+
                 </div>
             </div>
 
-            <!-- jQuery -->
-            <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-            <script>
-                $(document).ready(function() {
-                    // Fetch price and calculate total price on page load
-                    var roomTypeId = $('#roomType').val();
-                    fetchPrice(roomTypeId);
-
-                    // Function to fetch price based on room type ID
-                    function fetchPrice(roomTypeId) {
-                        $.ajax({
-                            url: 'online_booking.php',
-                            method: 'GET',
-                            data: {
-                                id: roomTypeId
-                            },
-                            success: function(response) {
-                                var data = JSON.parse(response);
-                                if (!data.error) {
-                                    var price = parseFloat(data.price);
-                                    $('#price').text('₹' + price.toFixed(2));
-                                    calculateTotalPrice(price);
-                                } else {
-                                    $('#price').text('Price not found');
-                                }
-                            },
-                            error: function() {
-                                $('#price').text('Error fetching price');
-                            }
-                        });
-                    }
-
-                    // Event listener for room type select
-                    $('#roomType').change(function() {
-                        var roomTypeId = $(this).val();
-                        fetchPrice(roomTypeId);
-                    });
-
-                    // Function to calculate total price
-                    // Function to calculate total price with offer discount
-                    function calculateTotalPrice(price, offer) {
-                        var maxPersons = $('#max_person').val();
-                        if (maxPersons && !isNaN(maxPersons)) {
-                            var totalPrice = price * parseInt(maxPersons);
-                            // Apply fixed offer discount
-                            var offerDiscount = 0; // Example: Fixed discount of ₹50
-                            totalPrice -= offerDiscount;
-
-                            $('#totalPrice').text('₹' + totalPrice.toFixed(2));
-                        }
-                    }
+            <!-- razorpay model -->
 
 
-                    // Event listener for max persons input
-                    $('#max_person').keyup(function() {
-                        calculateTotalPrice(parseFloat($('#price').text().substring(1))); // Calculate total price
-                    });
-                });
-            </script>
     <?php
         } else {
             echo "Room not found.";
@@ -299,86 +232,219 @@
             }, "Digits are not allowed.");
 
 
-            $("#booking").validate({
-                rules: {
-                    f_name: {
-                        required: true,
-                        noDigits: true
+            $(document).ready(function() {
+                // Define the form validation rules using jQuery Validate plugin
+                $("#booking").validate({
+                    rules: {
+                        f_name: {
+                            required: true,
+                            noDigits: true
+                        },
+                        l_name: {
+                            required: true,
+                            noDigits: true
+                        },
+                        email: {
+                            required: true,
+                            email: true,
+                            emailregex: true
+                        },
+                        number: {
+                            required: true,
+                            digits: true
+                        },
+                        add: {
+                            required: true,
+                            validAddress: true
+                        },
+                        roomType: {
+                            required: true
+                        },
+                        roomNo: {
+                            required: true
+                        },
+                        checkInDate: {
+                            required: true
+                        },
+                        checkOutDates: {
+                            required: true
+                        },
+                        max_person: {
+                            required: true,
+                            digits: true
+                        }
                     },
-                    l_name: {
-                        required: true,
-                        noDigits: true
+                    messages: {
+                        // Define custom error messages for each rule
+                        f_name: {
+                            required: "Please enter your first name",
+                            noDigits: "First name cannot contain digits"
+                        },
+                        l_name: {
+                            required: "Please enter your last name",
+                            noDigits: "Last name cannot contain digits"
+                        },
+                        email: {
+                            required: "Please enter your email address",
+                            email: "Please enter a valid email address"
+                        },
+                        number: {
+                            required: "Please enter your contact number",
+                            digits: "Please enter only digits"
+                        },
+                        add: {
+                            required: "Please enter your residential address",
+                            validAddress: "Please enter a valid address"
+                        },
+                        roomType: {
+                            required: "Please select a room type"
+                        },
+                        roomNo: {
+                            required: "Please select a room number"
+                        },
+                        checkInDate: {
+                            required: "Please enter the check-in date"
+                        },
+                        checkOutDates: {
+                            required: "Please enter the check-out date"
+                        },
+                        max_person: {
+                            required: "Please enter the number of persons",
+                            digits: "Please enter a valid number"
+                        }
                     },
-                    email: {
-                        required: true,
-                        email: true,
-                        emailregex: true
-                    },
-                    number: {
-                        required: true,
-                        digits: true
-                    },
-                    add: {
-                        required: true,
-                        validAddress: true // Use the custom validation method for address
-                    },
-                    roomType: {
-                        required: true
-                    },
-                    roomNo: {
-                        required: true
-                    },
-                    checkInDate: {
-                        required: true
-                    },
-                    checkOutDate: {
-                        required: true
+                    // Handler for form submission
+                    submitHandler: function(form, event) {
+                        event.preventDefault(); // Prevent default form submission
+                        initiatePayment(); // Call initiatePayment function when form is valid
+                        return false; // Prevent form submission until payment success
                     }
+                });
+
+                // Function to initiate Razorpay payment
+                function initiatePayment() {
+    var form = $('#booking');
+
+    // Retrieve room details including price and offer percentage
+    var roomPrice = <?php echo $room['price']; ?>;
+    var offerPercentage = <?php echo $room['offers']; ?>;
+
+    // Validate and parse the number of persons input
+    var numberOfPersons = parseInt($('#max_person').val());
+
+    // Validate if numberOfPersons is a valid number
+    if (isNaN(numberOfPersons) || numberOfPersons <= 0) {
+        alert('Please enter a valid number of persons.');
+        return;
+    }
+
+    // Calculate the discounted price
+    var discountedPrice = roomPrice - (roomPrice * (offerPercentage / 100));
+
+    // Calculate total price based on the number of persons and discounted price
+    var totalPrice = discountedPrice * numberOfPersons;
+
+    // Update displayed price on the form
+    $('#priceDisplay').text('₹' + totalPrice);
+
+    // Convert totalPrice to paise (Razorpay expects amount in smallest currency unit)
+    var amount = totalPrice * 100;
+
+    // Razorpay checkout options
+    var options = {
+        key: 'rzp_test_Zdl1fc8tBJdYLP', // Replace with your Razorpay key
+        amount: amount,
+        currency: 'INR',
+        name: 'JNJ HOTEL',
+        description: 'Room Booking Payment',
+        image: 'https://buffer.com/library/content/images/size/w1200/2023/10/free-images.jpg', // URL of your logo
+        handler: function(response) {
+            // On successful payment, submit the form to process booking
+            $.ajax({
+                url: 'insert_data.php', // URL to handle booking data insertion
+                type: 'POST',
+                data: form.serialize(), // Serialize form data
+                success: function(data) {
+                    console.log(data); // Log response from the server
+                    // Redirect to booking confirmation page
+                    window.location.href = "mybooking.php";
                 },
-                messages: {
-                    f_name: {
-                        required: "Please enter your first name",
-                        noDigits: "First name cannot contain digits"
-                    },
-                    l_name: {
-                        required: "Please enter your last name",
-                        noDigits: "Last name cannot contain digits"
-                    },
-                    email: {
-                        required: "Please enter your email address",
-                        email: "Please enter a valid email address",
-                        emailregex: "Please enter a valid email address"
-                    },
-                    number: {
-                        required: "Please enter your contact number",
-                        digits: "Please enter only digits"
-                    },
-                    add: {
-                        required: "Please enter your residential address",
-                        validAddress: "Please enter a valid address" // Error message for address validation
-                    },
-                    room_type: {
-                        required: "Please select a room type"
-                    },
-                    roomNo: {
-                        required: "Please select a room number"
-                    },
-                    checkInDate: {
-                        required: "Please enter the check-in date"
-                    },
-                    checkOutDate: {
-                        required: "Please enter the check-out date"
-                    }
+                error: function(xhr, status, error) {
+                    console.error(xhr.responseText); // Log error message
+                    // Handle error condition if needed
                 }
             });
+        },
+        prefill: {
+            name: $('#firstName').val() + ' ' + $('#lastName').val(),
+            email: $('#email').val(),
+            contact: $('#contactNumber').val()
+        }
+    };
+
+    // Create Razorpay instance and open checkout modal
+    var rzp = new Razorpay(options);
+    rzp.open(); // Open Razorpay checkout modal
+}
+
+
+            });
+
         });
     </script>
 
+    <script>
+        $(document).ready(function() {
+            // Initialize Datepicker for check-in date
+            $("#checkInDate").datepicker({
+                dateFormat: 'yy-mm-dd',
+                minDate: 0,
+                onSelect: function(selectedDate) {
+                    $("#checkOutDates").datepicker("option", "minDate", selectedDate);
+                    fetchAvailableRooms();
+                }
+            });
 
+
+            // Initialize Datepicker for check-out date
+            $("#checkOutDates").datepicker({
+                dateFormat: 'yy-mm-dd',
+                minDate: 0,
+                onSelect: function(selectedDate) {
+                    $("#checkInDate").datepicker("option", "maxDate", selectedDate);
+                    fetchAvailableRooms();
+                }
+            });
+
+
+            // Function to fetch available rooms based on selected dates and room type
+            function fetchAvailableRooms() {
+                var checkInDate = $("#checkInDate").val();
+                var checkOutDates = $("#checkOutDates").val();
+                var roomTypeId = $("#roomType").val(); // Get selected room type ID
+                $.ajax({
+                    url: "fetch_available_rooms.php", // Provide the URL to fetch available rooms
+                    type: "POST",
+                    data: {
+                        checkInDate: checkInDate,
+                        checkOutDates: checkOutDates,
+                        roomTypeId: roomTypeId // Include room type ID in the data
+                    },
+                    success: function(response) {
+                        $("#roomNo").html(response); // Update room number select options
+                    }
+                });
+            }
+
+        });
+    </script>
 </body>
 
 </html>
 
 <?php
 include('online_booking_insert_data.php');
+include('drop.php');
+include('drop1.php');
+include('drop2.php');
 ?>

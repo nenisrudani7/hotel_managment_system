@@ -66,74 +66,59 @@ if ($result->num_rows > 0) {
   <h1 class="text-center" style="text-decoration: underline; font-family:serif;">Our Rooms</h1>
   <br>
   <br>
+ 
   <div class="container g-3 mt-6">
-    <div class="row ">
-      <div class="col-lg-4 mb-4 mb-lg-0  text-center ">
-        <div class="card" >
-          <img class="card-img-top" src="img/h2.jpg" alt="Standard Room">
-          <div class="card-body text-center">
-            <h4 class="card-title">Standard Room</h4>
-            <p class="card-text" style="color:#5c7893">₹1000/per day</p>
-            <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">BOOK NOW</button>
-          </div>
-        </div>
-      </div>
-      <div class="col-lg-4 mb-4 mb-lg-0 text-center  col-lg-4 ">
-        <div class="card" >
-          <img class="card-img-top" src="img/h7.jpg" alt="Family Room">
-          <div class="card-body text-center">
-            <h4 class="card-title">Family Room</h4>
-            <p class="card-text" style="color:#5c7893">₹1500/per day</p>
-             <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">BOOK NOW</button>
-          </div>
-        </div>
-      </div>
-      <div class="col-lg-4 mb-4 mb-lg-0 text-center col-lg-4">
-        <div class="card" >
-          <img class="card-img-top" src="img/delux_room.jpg" alt="Delux Room">
-          <div class="card-body text-center">
-            <h4 class="card-title">Delux Room</h4>
-            <p class="card-text" style="color:#5c7893">₹2000/per day</p>
-             <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">BOOK NOW</button>
-          </div>
-        </div>
-      </div>
-    </div>
-    <br>
-    <br>
-    <div class="row ">
-      <div class="col-lg-4 mb-4 mb-lg-0">
-        <div class="card">
-          <img class="card-img-top" src="img/king-room.jpg" alt="Standard Room">
-          <div class="card-body text-center">
-            <h4 class="card-title">king Room</h4>
-            <p class="card-text" style="color:#5c7893">₹1999/per day</p>
-             <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">BOOK NOW</button>
-          </div>
-        </div>
-      </div>
-      <div class="col-lg-4 mb-4 mb-lg-0 ">
-        <div class="card">
-          <img class="card-img-top" src="img/queen-room.jpg" alt="Family Room">
-          <div class="card-body text-center">
-            <h4 class="card-title">Queen Room</h4>
-            <p class="card-text" style="color:#5c7893">₹1999/per day</p>
-             <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">BOOK NOW</button>
-          </div>
-        </div>
-      </div>
-      <div class="col-lg-4 mb-4 mb-lg-0">
-        <div class="card" >
-          <img class="card-img-top" src="img/quadroom.jpg" alt="Delux Room">
-          <div class="card-body text-center">
-            <h4 class="card-title">Quad Room</h4>
-            <p class="card-text" style="color:#5c7893">₹2000/per day</p>
-             <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">BOOK NOW</button>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+
+<div class="row row-cols-1 row-cols-md-3 g-4">
+  <?php
+  // Include database connection
+  include_once ('admin/include/conn.php');
+
+  // SQL query to fetch data from the room_type table
+  $query = "SELECT * FROM room_type";
+
+  // Execute the query
+  $result = mysqli_query($conn, $query);
+
+  // Check if the query executed successfully
+  if ($result) {
+    // Check if there are any rows returned
+    if (mysqli_num_rows($result) > 0) {
+      // Loop through each row of data
+      while ($row = mysqli_fetch_assoc($result)) {
+        $room_id = $row['room_type_id']; // Assuming 'id' is the primary key column name in your database
+        $room_name = $row['room_type'];
+        $price = $row['price'];
+        $offer = $row['offers'];
+        $image = $row['image'];
+
+        // Output the HTML for the card
+        echo "<div class='col'>
+              <div class='card h-100'>
+                <img class='card-img-top' src='img/$image' alt='$room_name'>
+                <div class='card-body text-center'>
+                  <h4 class='card-title'>$room_name</h4>
+                  <p class='card-text' style='background-color:red;color:white; display:inline-block;'>$offer % Off Today</p> 
+                  <p class='card-text' style='color:#5c7893'>₹$price/per day</p>
+                  <a href='five_star_review.php?id=$room_id' class='btn btn-primary'>Review</a>
+                  <a href='online_booking.php?id=$room_id' class='btn btn-danger'>Book Now</a>
+                </div>
+              </div>
+            </div>";
+      }
+    } else {
+      echo "No records found";
+    }
+  } else {
+    echo "Error: " . mysqli_error($conn);
+  }
+
+
+  ?>
+</div>
+
+</div>
+
   
   <?php include 'footer.php'?>
 </body>
