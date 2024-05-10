@@ -1,6 +1,6 @@
 <?php 
 include 'include/conn.php';
-$sql = "SELECT COUNT(*) AS null_status_rooms FROM room WHERE status IS NULL";
+$sql = "SELECT COUNT(*) AS null_status_rooms FROM staff" ;
 $result = $conn->query($sql);
 
 if ($result) {
