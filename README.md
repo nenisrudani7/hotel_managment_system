@@ -54,8 +54,9 @@ https://hmsbyjnj.000webhostapp.com/gust/hotel1.php
 
 2. **Set up the database**
 ```sh
-  go to "https://github.com/nenisrudani7/hotel_managment_system/blob/Master/admin/include/admin1.sql" and download admin1.sql file.
-  then go to xampp control panel and create admin1 database and import admin1.sql file.
+
+"https://github.com/nenisrudani7/hotel_managment_system/blob/Master/admin/include/admin1.sql"
+#go to this url  and download admin1.sql file.then go to xampp control panel and create admin1 database and import admin1.sql file.
 
 ```
     
